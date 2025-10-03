@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
@@ -10,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Meeting;
 
 /**
  * Adds a meeting to an existing person in the address book.
@@ -32,22 +31,18 @@ public class AddMeetingCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Meeting: %2$s, Venue: %3$s, When: %4$s";
 
     private final Index index;
-    private final String meeting;
-    private final String venue;
-    private final String when;
+    private final Meeting meeting;
 
-    public AddMeetingCommand(Index index, String meeting, String venue, String when) {
-        requireAllNonNull(index, meeting, venue, when);
+    public AddMeetingCommand(Index index, Meeting meeting) {
+        requireAllNonNull(index, meeting);
 
         this.index = index;
         this.meeting = meeting;
-        this.venue = venue;
-        this.when = when;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), meeting, venue, when));
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), meeting));
     }
 
     @Override
@@ -62,9 +57,7 @@ public class AddMeetingCommand extends Command {
 
         AddMeetingCommand e = (AddMeetingCommand) other;
         return index.equals(e.index)
-                && meeting.equals(e.meeting)
-                && venue.equals(e.venue)
-                && when.equals(e.when);
+                && meeting.equals(e.meeting);
     }
 }
 

@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Meeting;
 
 /**
  * Parses input arguments and creates a new {@code AddMeetingCommand} object
@@ -35,6 +36,6 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         String venue = argMultimap.getValue(PREFIX_VENUE).orElse("");
         String when = argMultimap.getValue(PREFIX_WHEN).orElse("");
 
-        return new AddMeetingCommand(index, meeting, venue, when);
+        return new AddMeetingCommand(index, new Meeting(meeting, venue, when));
     }
 }
