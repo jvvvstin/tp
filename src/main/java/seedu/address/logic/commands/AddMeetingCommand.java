@@ -4,11 +4,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.person.Person;
 
 /**
  * Adds a meeting to an existing person in the address book.
@@ -28,7 +34,8 @@ public class AddMeetingCommand extends Command {
             + PREFIX_VENUE + "AMK Hub "
             + PREFIX_WHEN + "2025-11-01 1600";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Meeting: %2$s";
+    public static final String MESSAGE_ADD_MEETING_SUCCESS = "Added meeting to Person: %1$s";
+    public static final String MESSAGE_ADD_MEETING_FAILURE = "Failed to add meeting to Person: %1$s";
 
     private final Index index;
     private final Meeting meeting;
@@ -42,7 +49,27 @@ public class AddMeetingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), meeting));
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        List<Meeting> editedMeetings = new ArrayList<>(personToEdit.getMeetings());
+        editedMeetings.add(meeting);
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), editedMeetings);
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    private String generateSuccessMessage(Person personToEdit) {
+        String message = !(meeting.meetingName.isEmpty() || meeting.venue.isEmpty() || meeting.when.isEmpty()) ?
+                MESSAGE_ADD_MEETING_SUCCESS : MESSAGE_ADD_MEETING_FAILURE;
+        return String.format(message, Messages.format(personToEdit));
     }
 
     @Override
