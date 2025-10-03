@@ -1,13 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WHEN_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WHEN_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
