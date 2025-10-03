@@ -27,6 +27,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -94,13 +95,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addMeeting() throws Exception {
-        final String meeting = "Some meeting";
+        final String meetingName = "Some meeting";
         final String venue = "Some venue";
         final String datetime = "Some datetime";
+        final Meeting meeting = new Meeting(meetingName, venue, datetime);
         AddMeetingCommand command = (AddMeetingCommand) parser.parseCommand(AddMeetingCommand.COMMAND_WORD
-                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MEETING + meeting
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MEETING + meetingName
                 + " " + PREFIX_VENUE + venue + " " + PREFIX_WHEN + datetime);
-        assertEquals(new AddMeetingCommand(INDEX_FIRST_PERSON, meeting, venue, datetime), command);
+        assertEquals(new AddMeetingCommand(INDEX_FIRST_PERSON, meeting), command);
     }
 
     @Test

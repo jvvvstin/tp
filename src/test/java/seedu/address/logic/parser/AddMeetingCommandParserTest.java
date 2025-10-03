@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMeetingCommand;
+import seedu.address.model.person.Meeting;
 
 public class AddMeetingCommandParserTest {
     private AddMeetingCommandParser parser = new AddMeetingCommandParser();
@@ -24,12 +25,12 @@ public class AddMeetingCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_MEETING + nonEmptyMeeting + " " + PREFIX_VENUE
                 + nonEmptyVenue + " " + PREFIX_WHEN + nonEmptyWhen;
-        AddMeetingCommand expectedCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, nonEmptyMeeting, nonEmptyVenue,
-                nonEmptyWhen);
+        AddMeetingCommand expectedCommand = new AddMeetingCommand(INDEX_FIRST_PERSON,
+                new Meeting(nonEmptyMeeting, nonEmptyVenue, nonEmptyWhen));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         userInput = targetIndex.getOneBased() + " " + PREFIX_MEETING + " " + PREFIX_VENUE + " " + PREFIX_WHEN;
-        expectedCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, "", "", "");
+        expectedCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, new Meeting("", "", ""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

@@ -28,7 +28,7 @@ public class AddMeetingCommand extends Command {
             + PREFIX_VENUE + "AMK Hub "
             + PREFIX_WHEN + "2025-11-01 1600";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Meeting: %2$s, Venue: %3$s, When: %4$s";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Meeting: %2$s";
 
     private final Index index;
     private final Meeting meeting;
