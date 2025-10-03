@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -27,11 +29,42 @@ public class AddMeetingCommand extends Command {
             + PREFIX_VENUE + "AMK Hub "
             + PREFIX_WHEN + "2025-11-01 1600";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Add Meeting command not implemented yet";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Meeting: %2$s, Venue: %3$s, When: %4$s";
+
+    private final Index index;
+    private final String meeting;
+    private final String venue;
+    private final String when;
+
+    public AddMeetingCommand(Index index, String meeting, String venue, String when) {
+        requireAllNonNull(index, meeting, venue, when);
+
+        this.index = index;
+        this.meeting = meeting;
+        this.venue = venue;
+        this.when = when;
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), meeting, venue, when));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddMeetingCommand)) {
+            return false;
+        }
+
+        AddMeetingCommand e = (AddMeetingCommand) other;
+        return index.equals(e.index)
+                && meeting.equals(e.meeting)
+                && venue.equals(e.venue)
+                && when.equals(e.when);
     }
 }
 
