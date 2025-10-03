@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.meeting;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 

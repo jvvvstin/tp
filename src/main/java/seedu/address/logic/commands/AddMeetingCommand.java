@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Meeting;
+import seedu.address.model.meeting.Meeting;
 
 /**
  * Adds a meeting to an existing person in the address book.

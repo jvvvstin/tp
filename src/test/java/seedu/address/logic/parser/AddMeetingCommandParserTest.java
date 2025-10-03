@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMeetingCommand;
-import seedu.address.model.person.Meeting;
+import seedu.address.model.meeting.Meeting;
 
 public class AddMeetingCommandParserTest {
     private AddMeetingCommandParser parser = new AddMeetingCommandParser();
