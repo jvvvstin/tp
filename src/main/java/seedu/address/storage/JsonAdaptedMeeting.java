@@ -35,17 +35,17 @@ public class JsonAdaptedMeeting {
         this.when = source.when;
     }
 
-    @JsonValue
+    @JsonProperty("meetingName")
     public String getMeetingName() {
         return this.meetingName;
     }
 
-    @JsonValue
+    @JsonProperty("venue")
     public String getVenue() {
         return this.venue;
     }
 
-    @JsonValue
+    @JsonProperty("when")
     public String getWhen() {
         return this.when;
     }

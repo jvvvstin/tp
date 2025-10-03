@@ -26,7 +26,7 @@ public class AddMeetingCommand extends Command {
             + "by the index number used in the last person listing. "
             + "A new meeting would be added to the person's list of current meetings.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_MEETING + "MEETING\n"
+            + PREFIX_MEETING + "MEETING "
             + PREFIX_VENUE + "VENUE "
             + PREFIX_WHEN + "WHEN\n"
             + "Example: " + COMMAND_WORD + " 1 "
