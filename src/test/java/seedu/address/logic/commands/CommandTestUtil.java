@@ -34,6 +34,12 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_MEETING_AMY = "Financial sharing";
+    public static final String VALID_MEETING_BOB = "Analyse Bob's finances";
+    public static final String VALID_VENUE_AMY = "AMK Hub Starbucks";
+    public static final String VALID_VENUE_BOB = "NUS Coffee Bean & Tea Leaf";
+    public static final String VALID_WHEN_AMY = "2025-11-11";
+    public static final String VALID_WHEN_BOB = "2025-12-12";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

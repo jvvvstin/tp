@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -91,7 +94,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addMeeting() throws Exception {
-        assertTrue(parser.parseCommand(AddMeetingCommand.COMMAND_WORD) instanceof AddMeetingCommand);
+        final String meeting = "Some meeting";
+        final String venue = "Some venue";
+        final String datetime = "Some datetime";
+        AddMeetingCommand command = (AddMeetingCommand) parser.parseCommand(AddMeetingCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MEETING + meeting
+                + " " + PREFIX_VENUE + venue + " " + PREFIX_WHEN + datetime);
+        assertEquals(new AddMeetingCommand(INDEX_FIRST_PERSON, meeting, venue, datetime), command);
     }
 
     @Test
