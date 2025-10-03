@@ -95,8 +95,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withMeetings(List<Meeting> meetings) {
-        this.meetings = new ArrayList<>(meetings);
+    public PersonBuilder withMeetings(Meeting ... meetings) {
+        this.meetings = List.of(meetings);
         return this;
     }
 
