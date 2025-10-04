@@ -43,6 +43,11 @@ public class AddMeetingCommand extends Command {
     private final Index index;
     private final Meeting meeting;
 
+    /**
+     * Creates an AddMeetingCommand to add a {@code Meeting}
+     * @param index of the person in the filtered person list to edit
+     * @param meeting details of the meeting to be added
+     */
     public AddMeetingCommand(Index index, Meeting meeting) {
         requireAllNonNull(index, meeting);
 
@@ -82,8 +87,8 @@ public class AddMeetingCommand extends Command {
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(meeting.meetingName.isBlank() || meeting.venue.isBlank() || meeting.when.isBlank()) ?
-                MESSAGE_ADD_MEETING_SUCCESS : MESSAGE_ADD_MEETING_FAILURE;
+        String message = !(meeting.meetingName.isBlank() || meeting.venue.isBlank() || meeting.when.isBlank())
+                ? MESSAGE_ADD_MEETING_SUCCESS : MESSAGE_ADD_MEETING_FAILURE;
         return String.format(message, Messages.format(personToEdit));
     }
 

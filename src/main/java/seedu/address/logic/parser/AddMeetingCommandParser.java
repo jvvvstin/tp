@@ -29,7 +29,8 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE),
+                    ive);
         }
 
         String meeting = argMultimap.getValue(PREFIX_MEETING).orElse("");

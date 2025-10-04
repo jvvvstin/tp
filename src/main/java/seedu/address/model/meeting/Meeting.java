@@ -4,11 +4,20 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a Meeting in the address book.
+ */
 public class Meeting {
     public final String meetingName;
     public final String venue;
     public final String when;
 
+    /**
+     * Constructs a {@code Meeting}
+     * @param meetingName name of the meeting
+     * @param venue venue of the meeting
+     * @param when date and time of the meeting
+     */
     public Meeting(String meetingName, String venue, String when) {
         requireAllNonNull(meetingName, venue, when);
         this.meetingName = meetingName;
@@ -18,7 +27,7 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return String.format("%s at %s (%s)",  meetingName, venue, when);
+        return String.format("%s at %s (%s)", meetingName, venue, when);
     }
 
     @Override
