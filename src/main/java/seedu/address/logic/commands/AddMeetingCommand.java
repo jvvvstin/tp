@@ -36,6 +36,9 @@ public class AddMeetingCommand extends Command {
 
     public static final String MESSAGE_ADD_MEETING_SUCCESS = "Added meeting to Person: %1$s";
     public static final String MESSAGE_ADD_MEETING_FAILURE = "Failed to add meeting to Person: %1$s";
+    public static final String MESSAGE_BLANK_MEETING_NAME = "Name of meeting is missing";
+    public static final String MESSAGE_BLANK_VENUE = "Venue of meeting is missing";
+    public static final String MESSAGE_BLANK_DATETIME = "Date and time of meeting is missing";
 
     private final Index index;
     private final Meeting meeting;
@@ -55,6 +58,18 @@ public class AddMeetingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        if (meeting.meetingName.isBlank()) {
+            throw new CommandException(MESSAGE_BLANK_MEETING_NAME);
+        }
+
+        if (meeting.venue.isBlank()) {
+            throw new CommandException(MESSAGE_BLANK_VENUE);
+        }
+
+        if (meeting.when.isBlank()) {
+            throw new CommandException(MESSAGE_BLANK_DATETIME);
+        }
+
         Person personToEdit = lastShownList.get(index.getZeroBased());
         List<Meeting> editedMeetings = new ArrayList<>(personToEdit.getMeetings());
         editedMeetings.add(meeting);
@@ -67,7 +82,7 @@ public class AddMeetingCommand extends Command {
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(meeting.meetingName.isEmpty() || meeting.venue.isEmpty() || meeting.when.isEmpty()) ?
+        String message = !(meeting.meetingName.isBlank() || meeting.venue.isBlank() || meeting.when.isBlank()) ?
                 MESSAGE_ADD_MEETING_SUCCESS : MESSAGE_ADD_MEETING_FAILURE;
         return String.format(message, Messages.format(personToEdit));
     }
