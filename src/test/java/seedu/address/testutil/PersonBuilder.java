@@ -95,6 +95,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code meetings} into a {@code List<Meeting>} and set it to the {@code Person} that we are building.
+     */
     public PersonBuilder withMeetings(Meeting ... meetings) {
         this.meetings = List.of(meetings);
         return this;
