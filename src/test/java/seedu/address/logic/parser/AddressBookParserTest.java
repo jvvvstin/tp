@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -23,6 +27,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -86,6 +91,18 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addMeeting() throws Exception {
+        final String meetingName = "Some meeting";
+        final String venue = "Some venue";
+        final String datetime = "Some datetime";
+        final Meeting meeting = new Meeting(meetingName, venue, datetime);
+        AddMeetingCommand command = (AddMeetingCommand) parser.parseCommand(AddMeetingCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MEETING + meetingName
+                + " " + PREFIX_VENUE + venue + " " + PREFIX_WHEN + datetime);
+        assertEquals(new AddMeetingCommand(INDEX_FIRST_PERSON, meeting), command);
     }
 
     @Test

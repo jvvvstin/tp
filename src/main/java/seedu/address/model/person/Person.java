@@ -2,12 +2,15 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +27,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final List<Meeting> meetings = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Meeting> meetings) {
+        requireAllNonNull(name, phone, email, address, tags, meetings);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.meetings.addAll(meetings);
     }
 
     public Name getName() {
@@ -59,6 +64,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public List<Meeting> getMeetings() {
+        return Collections.unmodifiableList(meetings);
     }
 
     /**
@@ -94,7 +103,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && meetings.equals(otherPerson.meetings);
     }
 
     @Override

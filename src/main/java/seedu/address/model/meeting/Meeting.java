@@ -1,0 +1,46 @@
+package seedu.address.model.meeting;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
+
+/**
+ * Represents a Meeting in the address book.
+ */
+public class Meeting {
+    public final String meetingName;
+    public final String venue;
+    public final String when;
+
+    /**
+     * Constructs a {@code Meeting}
+     * @param meetingName name of the meeting
+     * @param venue venue of the meeting
+     * @param when date and time of the meeting
+     */
+    public Meeting(String meetingName, String venue, String when) {
+        requireAllNonNull(meetingName, venue, when);
+        this.meetingName = meetingName;
+        this.venue = venue;
+        this.when = when;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s at %s (%s)", meetingName, venue, when);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || other instanceof Meeting
+                && meetingName.equals(((Meeting) other).meetingName)
+                && venue.equals(((Meeting) other).venue)
+                && when.equals(((Meeting) other).when);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(meetingName, venue, when);
+    }
+}
