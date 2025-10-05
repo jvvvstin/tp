@@ -17,14 +17,23 @@ public class DeleteMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "deletemeeting";
 
+    public static final String MESSAGE_FORMAT = "Parameters:\n"
+            + "INDEX (must be a positive integer)\n"
+            + PREFIX_MEETING_INDEX + "MEETING_INDEX (must be a positive integer)\n";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Deletes the meeting for the person identified by the index number used in the displayed person list"
             + " and the index number of the meeting in the person's meeting list. \n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_MEETING_INDEX + "MEETING_INDEX (must be a positive integer)\n"
+            + MESSAGE_FORMAT
             + "Example: " + COMMAND_WORD + " 1" + PREFIX_MEETING_INDEX + "1";
 
     public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "The meeting index provided is invalid";
+    public static final String MESSAGE_INVALID_BLANK = "Please provide arguments after the command word.\n"
+            + MESSAGE_FORMAT;
+    public static final String MESSAGE_INVALID_BLANK_MEETING_INDEX = "Please provide the meeting index.\n"
+            + MESSAGE_FORMAT;
+    public static final String MESSAGE_INVALID_BLANK_PERSON_INDEX = "Please provide the person index.\n"
+            + MESSAGE_FORMAT;
     public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Deleted meeting from Person: %1$s";
 
     private final Index personIndex;

@@ -21,7 +21,18 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
     @Override
     public DeleteMeetingCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        // Checks if args is empty
+        if (args.trim().isEmpty()) {
+            throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK);
+        }
+
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEETING_INDEX);
+
+        // Checks if person Index is blank
+        if (argumentMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX);
+        }
 
         // Checks if personIndex is valid
         Index personIndex;
@@ -32,8 +43,14 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
                     ive);
         }
 
-        // Checks if meetingIndex is valid
         String meetingIndexString = argumentMultimap.getValue(PREFIX_MEETING_INDEX).orElse("");
+
+        //Checks if meeting Index is blank
+        if (meetingIndexString.isEmpty()) {
+            throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_MEETING_INDEX);
+        }
+
+        // Checks if meetingIndex is valid
         Index meetingIndex;
         try {
             meetingIndex = ParserUtil.parseIndex(meetingIndexString);
