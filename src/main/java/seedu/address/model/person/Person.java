@@ -83,6 +83,10 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    public void removeMeeting(int index) {
+        meetings.remove(index);
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

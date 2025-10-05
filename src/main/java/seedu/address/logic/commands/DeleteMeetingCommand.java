@@ -8,12 +8,21 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
 import seedu.address.model.Model;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 
 public class DeleteMeetingCommand extends Command {
+
     public static final String COMMAND_WORD = "deletemeeting";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + "Deletes the meeting for the person identified by the index number used in the displayed person list"
+            + " and the index number of the meeting in the person's meeting list. \n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + PREFIX_MEETING_INDEX + "MEETING_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1" + PREFIX_MEETING_INDEX + "1";
 
     public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "The meeting index provided is invalid";
     public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Deleted meeting from Person: %1$s";
@@ -43,13 +52,10 @@ public class DeleteMeetingCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
         }
 
-        editedMeetings.remove(meetingIndex.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), editedMeetings);
-        model.setPerson(editedPerson, personToEdit);
+        personToEdit.removeMeeting(meetingIndex.getZeroBased());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, Messages.format(personToEdit)));
     }
 
     @Override
