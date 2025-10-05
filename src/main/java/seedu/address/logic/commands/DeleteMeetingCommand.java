@@ -13,6 +13,7 @@ import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 
 public class DeleteMeetingCommand extends Command {
+    public static final String COMMAND_WORD = "deletemeeting";
 
     public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "The meeting index provided is invalid";
     public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Deleted meeting from Person: %1$s";
