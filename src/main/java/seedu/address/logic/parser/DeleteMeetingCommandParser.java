@@ -38,7 +38,7 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
         Index personIndex;
         try {
             personIndex = ParserUtil.parseIndex(argumentMultimap.getPreamble());
-        } catch (IllegalArgumentException ive) {
+        } catch (ParseException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE),
                     ive);
         }
@@ -54,7 +54,7 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
         Index meetingIndex;
         try {
             meetingIndex = ParserUtil.parseIndex(meetingIndexString);
-        } catch (IllegalArgumentException ive) {
+        } catch (ParseException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE),
                     ive);
         }
