@@ -83,8 +83,16 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * Removes a meeting from the person's meeting list.
+     * @param index The index of the meeting to be removed.
+     */
     public void removeMeeting(int index) {
         meetings.remove(index);
+    }
+
+    public int getMeetingCount() {
+        return meetings.size();
     }
 
     /**

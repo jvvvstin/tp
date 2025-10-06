@@ -76,6 +76,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Deletes the meeting at index {@code meetingToDelete} from the given person's list of meetings.
+     * {@code target} must exist in the address book.
+     * The index must be valid.
+     */
+    void deleteMeetingFromPerson(Person target, int meetingToDelete);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
