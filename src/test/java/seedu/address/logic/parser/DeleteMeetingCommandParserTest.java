@@ -14,7 +14,7 @@ public class DeleteMeetingCommandParserTest {
     private DeleteMeetingCommandParser parser = new DeleteMeetingCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsDeleteMeetingCommand() {
         assertParseSuccess(parser, "1 i=1", new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING));
     }
 

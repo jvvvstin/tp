@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -20,6 +22,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -103,6 +106,15 @@ public class AddressBookParserTest {
                 + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MEETING + meetingName
                 + " " + PREFIX_VENUE + venue + " " + PREFIX_WHEN + datetime);
         assertEquals(new AddMeetingCommand(INDEX_FIRST_PERSON, meeting), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMeeting() throws Exception {
+        DeleteMeetingCommand command = (DeleteMeetingCommand) parser.parseCommand(
+                DeleteMeetingCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_MEETING_INDEX + INDEX_FIRST_MEETING.getOneBased());
+        assertEquals(new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING), command);
     }
 
     @Test
