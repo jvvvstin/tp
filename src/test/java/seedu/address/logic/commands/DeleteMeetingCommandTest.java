@@ -29,12 +29,19 @@ import seedu.address.testutil.PersonBuilder;
 public class DeleteMeetingCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Meeting firstMeetingStub = new Meeting("Some meeting 1", "Some venue 1", "Some datetime 1");
-    private Meeting secondMeetingStub2 = new Meeting("Some meeting 2", "Some venue 2", "Some datetime 2");
+    private Meeting firstMeetingStub = new Meeting(
+            "Some meeting 1",
+            "Some venue 1",
+            "Some datetime 1");
+    private Meeting secondMeetingStub2 = new Meeting(
+            "Some meeting 2",
+            "Some venue 2",
+            "Some datetime 2");
 
     @BeforeEach
     public void setUp() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
                 .withMeetings(firstMeetingStub, secondMeetingStub2)
                 .build();
@@ -45,7 +52,8 @@ public class DeleteMeetingCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING);
+        DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_MEETING);
 
         String expectedMessage = String.format(DeleteMeetingCommand.MESSAGE_DELETE_MEETING_SUCCESS,
                 Messages.format(firstPerson));
@@ -75,14 +83,18 @@ public class DeleteMeetingCommandTest {
 
     @Test
     public void equals() {
-        DeleteMeetingCommand deleteFirstCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING);
-        DeleteMeetingCommand deleteSecondCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_SECOND_MEETING);
+        DeleteMeetingCommand deleteFirstCommand = new DeleteMeetingCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_MEETING);
+        DeleteMeetingCommand deleteSecondCommand = new DeleteMeetingCommand(
+                INDEX_FIRST_PERSON, INDEX_SECOND_MEETING);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteMeetingCommand deleteFirstMeetingCommandCopy = new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING);
+        DeleteMeetingCommand deleteFirstMeetingCommandCopy = new DeleteMeetingCommand(
+                INDEX_FIRST_PERSON,
+                INDEX_FIRST_MEETING);
         assertTrue(deleteFirstCommand.equals(deleteFirstMeetingCommandCopy));
 
         // different types -> returns false

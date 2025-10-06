@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 
 /**

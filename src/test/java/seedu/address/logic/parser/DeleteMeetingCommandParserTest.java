@@ -30,12 +30,16 @@ public class DeleteMeetingCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMeetingCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidPersonIndexArgs_throwsParseException() {
-        assertParseFailure(parser, "a i=1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a i=1", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMeetingCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -45,6 +49,8 @@ public class DeleteMeetingCommandParserTest {
 
     @Test
     public void parse_invalidMeetingIndexArgs_throwsParseException() {
-        assertParseFailure(parser, "1 i=b", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 i=b", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMeetingCommand.MESSAGE_USAGE));
     }
 }
