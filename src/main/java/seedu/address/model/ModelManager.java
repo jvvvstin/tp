@@ -111,6 +111,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void deleteMeetingFromPerson(Person target, int meetingToDelete) {
+        target.removeMeeting(meetingToDelete);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

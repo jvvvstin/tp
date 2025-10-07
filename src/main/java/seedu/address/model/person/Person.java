@@ -84,6 +84,18 @@ public class Person {
     }
 
     /**
+     * Removes a meeting from the person's meeting list.
+     * @param index The index of the meeting to be removed.
+     */
+    public void removeMeeting(int index) {
+        meetings.remove(index);
+    }
+
+    public int getMeetingCount() {
+        return meetings.size();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
