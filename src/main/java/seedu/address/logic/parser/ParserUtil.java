@@ -127,7 +127,7 @@ public class ParserUtil {
 
             if (!extractParameter) {
                 end = text.indexOf(")", i);
-                end = end != -1 ? end  + 1 : textLength;
+                end = end != -1 ? end + 1 : textLength;
             }
 
             assert end != -1 : "Issue with splitParametersAndLabels: end value is -1";

@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import seedu.address.logic.parser.ParserUtil;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.ParserUtil;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
