@@ -2,6 +2,11 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.parseParametersAndLabels;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a Person's email in the address book.
@@ -29,7 +34,8 @@ public class Email {
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
-    public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+    public static final String EMAIL_VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+    public static final String LABEL_VALIDATION_REGEX = "\\(" + ALPHANUMERIC_NO_UNDERSCORE + "\\)";
 
     public final String value;
 
@@ -46,9 +52,71 @@ public class Email {
 
     /**
      * Returns if a given string is a valid email.
+     *
+     * @param test The {@code String email} test if it is valid.
+     * @return A boolean indicating if the email is valid or not.
      */
     public static boolean isValidEmail(String test) {
-        return test.matches(VALIDATION_REGEX);
+        List<String> paramsAndLabels = parseParametersAndLabels(test);
+
+        if (!isEmailsAndLabelsSizeValid(paramsAndLabels)) {
+            return false;
+        }
+
+        return isEmailsAndLabelsValid(paramsAndLabels);
+    }
+
+    /**
+     * Check if the size of the parameters and labels of an Email is valid.
+     *
+     * @param list The {@code List<String>} of the parameters and labels of an Email.
+     * @return A boolean indicating if the size of the parameters and labels of an Email is valid.
+     */
+    private static boolean isEmailsAndLabelsSizeValid(List<String> list) {
+        if (list.isEmpty() || (list.size() >= 2 && list.size() % 2 == 1)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * <p>
+     * Check if the parameters and labels of an Email is valid.
+     * Emails and labels must be distinct they cannot be repeated.
+     * For it to be valid we accept:
+     * </p><br><p>
+     * 1) If there is only one email we accept either: EMAIL or EMAIL (LABEL)
+     * </p><p>
+     * 2) If there is more than one email every email most be accompanied by a label like: EMAIL1 (LABEL1)
+     * EMAIL2 (LABEL2) ...
+     * </p>
+     * @param list The {@code List<String>} of the parameters and labels of an Email.
+     * @return A boolean indicating if the size of the parameters and labels of an Email is valid.
+     */
+    private static boolean isEmailsAndLabelsValid(List<String> list) {
+        boolean checkEmail = true;
+
+        Set<String> set = new HashSet<>();
+
+        for (String currString : list) {
+            if (set.contains(currString)) {
+                return false;
+            }
+
+            if (checkEmail && !currString.matches(EMAIL_VALIDATION_REGEX)) {
+                return false;
+            }
+
+            if (!checkEmail && !currString.matches(LABEL_VALIDATION_REGEX)) {
+                return false;
+            }
+
+            set.add(currString);
+            checkEmail = !checkEmail;
+        }
+
+        return true;
     }
 
     @Override

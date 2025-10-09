@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -93,6 +95,51 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String text} into an {@code List<String>} of parameters and labels.
+     * For example: some parameter (label) some parameter2 (label2).
+     *
+     * @param text The text that we are trying to split into parameters and labels.
+     * @return A list of parameters and labels.
+     */
+    public static List<String> parseParametersAndLabels(String text) {
+        List<String> parametersAndLabels = new ArrayList<>();
+        int textLength = text.length();
+        boolean extractParameter = true;
+        int i = 0;
+
+        while (i < textLength) {
+            while (text.charAt(i) == ' ') {
+                i++;
+
+                if (i >= textLength) {
+                    break;
+                }
+            }
+
+            int end = 0;
+            if (extractParameter) {
+                end = text.indexOf(" ", i);
+                end = end != -1 ? end : textLength;
+            }
+
+            if (!extractParameter) {
+                end = text.indexOf(")", i);
+                end = end != -1 ? end + 1 : textLength;
+            }
+
+            assert end != -1 : "Issue with splitParametersAndLabels: end value is -1";
+            assert i <= end : "Issue with splitParametersAndLabels: end value < i";
+
+            String currString = text.substring(i, end);
+            parametersAndLabels.add(currString);
+            i = end + 1;
+            extractParameter = !extractParameter;
+        }
+
+        return parametersAndLabels;
     }
 
     /**
