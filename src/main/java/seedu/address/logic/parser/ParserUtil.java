@@ -113,18 +113,22 @@ public class ParserUtil {
         while (i < textLength) {
             while (text.charAt(i) == ' ') {
                 i++;
+
+                if (i >= textLength) {
+                    break;
+                }
             }
 
             int end = 0;
             if (extractParameter) {
                 end = text.indexOf(" ", i);
+                end = end != -1 ? end : textLength;
             }
 
             if (!extractParameter) {
-                end = text.indexOf(")", i) + 1;
+                end = text.indexOf(")", i);
+                end = end != -1 ? end  + 1 : textLength;
             }
-
-            end = end != -1 ? end : textLength;
 
             assert end != -1 : "Issue with splitParametersAndLabels: end value is -1";
             assert i <= end : "Issue with splitParametersAndLabels: end value < i";
