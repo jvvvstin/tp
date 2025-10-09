@@ -2,8 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.parseParametersAndLabels;
 
-import seedu.address.logic.parser.ParserUtil;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class Email {
      * @return A boolean indicating if the email is valid or not.
      */
     public static boolean isValidEmail(String test) {
-        List<String> paramsAndLabels = ParserUtil.parseParametersAndLabels(test);
+        List<String> paramsAndLabels = parseParametersAndLabels(test);
 
         if (!isEmailsAndLabelsSizeValid(paramsAndLabels)) {
             return false;
