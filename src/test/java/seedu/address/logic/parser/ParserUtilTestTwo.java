@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Contains unit tests for methods in ParserUtil class
  */
-public class ParserUtilTest2 {
+public class ParserUtilTestTwo {
     @Test
     public void parseParametersAndLabels_emptyString_returnEmptyList() {
         assertEquals(new ArrayList<>(), ParserUtil.parseParametersAndLabels(""));
