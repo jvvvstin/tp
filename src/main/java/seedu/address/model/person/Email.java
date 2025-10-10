@@ -67,20 +67,6 @@ public class Email {
     }
 
     /**
-     * Check if the size of the parameters and labels of an Email is valid.
-     *
-     * @param list The {@code List<String>} of the parameters and labels of an Email.
-     * @return A boolean indicating if the size of the parameters and labels of an Email is valid.
-     */
-    private static boolean isEmailsAndLabelsSizeValid(List<String> list) {
-        if (list.isEmpty() || (list.size() >= 2 && list.size() % 2 == 1)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * <p>
      * Check if the parameters and labels of an Email is valid.
      * Emails and labels must be distinct they cannot be repeated.
