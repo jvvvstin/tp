@@ -102,31 +102,36 @@ public class ParserUtil {
      * For example: some parameter (label) some parameter2 (label2).
      *
      * @param text The text that we are trying to split into parameters and labels.
-     * @return A list of parameters and labels.
+     * @return A list of parameters and labels or empty list if incorrect format.
      */
     public static List<String> parseParametersAndLabels(String text) {
+        text = text.trim();
         List<String> parametersAndLabels = new ArrayList<>();
         int textLength = text.length();
         boolean extractParameter = true;
         int i = 0;
 
         while (i < textLength) {
-            while (text.charAt(i) == ' ') {
-                i++;
-
-                if (i >= textLength) {
-                    break;
-                }
-            }
-
             int end = 0;
             if (extractParameter) {
-                end = text.indexOf(" ", i);
-                end = end != -1 ? end : textLength;
+                end = text.indexOf("(", i);
+
+                // Check if is valid by checking the spaces
+                if (end != -1 && (end - 2 < i || text.charAt(end - 1) != ' '
+                        || text.charAt(end - 2) == ' ')) {
+                    return new ArrayList<>();
+                }
+
+                end = end != -1 ? end - 1 : textLength;
             }
 
             if (!extractParameter) {
                 end = text.indexOf(")", i);
+
+                if (end != -1 && end != textLength - 1 && (end + 2 >= textLength
+                        || text.charAt(end + 1) != ' ' || text.charAt(end + 2) == ' ')) {
+                    return new ArrayList<>();
+                }
                 end = end != -1 ? end + 1 : textLength;
             }
 
@@ -137,6 +142,11 @@ public class ParserUtil {
             parametersAndLabels.add(currString);
             i = end + 1;
             extractParameter = !extractParameter;
+        }
+
+        if (parametersAndLabels.isEmpty() || (parametersAndLabels.size() >= 2
+                && parametersAndLabels.size() % 2 == 1)) {
+            return new ArrayList<>();
         }
 
         return parametersAndLabels;

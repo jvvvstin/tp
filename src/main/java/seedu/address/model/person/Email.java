@@ -59,7 +59,7 @@ public class Email {
     public static boolean isValidEmail(String test) {
         List<String> paramsAndLabels = parseParametersAndLabels(test);
 
-        if (!isEmailsAndLabelsSizeValid(paramsAndLabels)) {
+        if (paramsAndLabels.isEmpty()) {
             return false;
         }
 
