@@ -4,8 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for methods in ParserUtil class
+ */
 public class ParserUtilTest2 {
     @Test
     public void parseParametersAndLabels_emptyString_returnEmptyList() {
