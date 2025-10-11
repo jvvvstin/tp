@@ -2,7 +2,11 @@ package seedu.address.model.meeting;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
+
+import seedu.address.logic.parser.DateTimeParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Meeting in the address book.
@@ -10,7 +14,7 @@ import java.util.Objects;
 public class Meeting {
     public final String meetingName;
     public final String venue;
-    public final String when;
+    public final LocalDateTime when;
 
     /**
      * Constructs a {@code Meeting}
@@ -18,7 +22,14 @@ public class Meeting {
      * @param venue venue of the meeting
      * @param when date and time of the meeting
      */
-    public Meeting(String meetingName, String venue, String when) {
+    public Meeting(String meetingName, String venue, String when) throws ParseException {
+        requireAllNonNull(meetingName, venue, when);
+        this.meetingName = meetingName;
+        this.venue = venue;
+        this.when = DateTimeParser.parseDateTime(when);
+    }
+
+    public Meeting(String meetingName, String venue, LocalDateTime when) throws ParseException {
         requireAllNonNull(meetingName, venue, when);
         this.meetingName = meetingName;
         this.venue = venue;
@@ -27,7 +38,7 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return String.format("%s at %s (%s)", meetingName, venue, when);
+        return String.format("%s at %s (%s)", meetingName, venue, DateTimeParser.format(when));
     }
 
     @Override

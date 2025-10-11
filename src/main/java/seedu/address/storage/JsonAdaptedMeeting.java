@@ -1,9 +1,13 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.DateTimeParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Meeting;
 
 /**
@@ -12,14 +16,14 @@ import seedu.address.model.meeting.Meeting;
 public class JsonAdaptedMeeting {
     public final String meetingName;
     public final String venue;
-    public final String when;
+    public final LocalDateTime when;
 
     /**
      * Constructs a {@code JsonAdaptedMeeting} with the given {@code meetingName}, {@code venue}, and {@code when}.
      */
     @JsonCreator
     public JsonAdaptedMeeting(@JsonProperty("meetingName") String meetingName, @JsonProperty("venue") String venue,
-                              @JsonProperty("when") String when) {
+                              @JsonProperty("when") LocalDateTime when) {
         this.meetingName = meetingName;
         this.venue = venue;
         this.when = when;
@@ -45,7 +49,7 @@ public class JsonAdaptedMeeting {
     }
 
     @JsonProperty("when")
-    public String getWhen() {
+    public LocalDateTime getWhen() {
         return this.when;
     }
 
