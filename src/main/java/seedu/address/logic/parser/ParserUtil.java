@@ -113,6 +113,7 @@ public class ParserUtil {
 
         while (i < textLength) {
             int end = 0;
+
             if (extractParameter) {
                 end = text.indexOf("(", i);
 
@@ -121,9 +122,7 @@ public class ParserUtil {
                 }
 
                 end = end != -1 ? end - 1 : textLength;
-            }
-
-            if (!extractParameter) {
+            } else {
                 end = text.indexOf(")", i);
 
                 if (hasLabelSpacingIssue(end, text, textLength)) {
