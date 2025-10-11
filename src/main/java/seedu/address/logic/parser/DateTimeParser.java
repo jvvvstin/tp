@@ -46,8 +46,8 @@ public class DateTimeParser {
         for (DateTimeFormatter formatter : ALLOWED_FORMATTERS) {
             try {
                 return LocalDateTime.parse(dateTime, formatter);
-            }  catch (DateTimeParseException ignored) {
-
+            } catch (DateTimeParseException ignored) {
+                // This exception is expected and can be safely ignored
             }
         }
         throw new ParseException(MESSAGE_INVALID_DATETIME_FORMAT);

@@ -29,6 +29,12 @@ public class Meeting {
         this.when = DateTimeParser.parseDateTime(when);
     }
 
+    /**
+     * Constructs a {@code Meeting}
+     * @param meetingName name of the meeting
+     * @param venue venue of the meeting
+     * @param when date and time of the meeting in {@code String} format
+     */
     public Meeting(String meetingName, String venue, LocalDateTime when) throws ParseException {
         requireAllNonNull(meetingName, venue, when);
         this.meetingName = meetingName;

@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.DateTimeParser;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Meeting;
 
 /**
  * Jackson-friendly version of {@link Meeting}.
  */
 public class JsonAdaptedMeeting {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meeting's %s field is missing!";
+
     public final String meetingName;
     public final String venue;
     public final LocalDateTime when;
@@ -38,27 +38,22 @@ public class JsonAdaptedMeeting {
         this.when = source.when;
     }
 
-    @JsonProperty("meetingName")
-    public String getMeetingName() {
-        return this.meetingName;
-    }
-
-    @JsonProperty("venue")
-    public String getVenue() {
-        return this.venue;
-    }
-
-    @JsonProperty("when")
-    public LocalDateTime getWhen() {
-        return this.when;
-    }
-
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Meeting} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Meeting toModelType() throws IllegalValueException {
+        if (this.meetingName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Meeting.class.getSimpleName()));
+        }
+        if (this.venue == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Meeting.class.getSimpleName()));
+        }
+        if (this.when == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
+        }
         return new Meeting(this.meetingName, this.venue, this.when);
     }
 }
