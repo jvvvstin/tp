@@ -20,6 +20,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingName;
+import seedu.address.model.meeting.Venue;
+import seedu.address.model.meeting.When;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -33,12 +36,16 @@ public class AddMeetingCommandTest {
 
     @Test
     public void execute_addMeetingUnfilteredList_success() throws ParseException {
+        MeetingName meetingName = new MeetingName(MEETING_NAME_STUB);
+        Venue venue = new Venue(MEETING_VENUE_STUB);
+        When when = new When(MEETING_WHEN_STUB);
+
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withMeetings(
-                new Meeting(MEETING_NAME_STUB, MEETING_VENUE_STUB, MEETING_WHEN_STUB)).build();
+                new Meeting(meetingName, venue, when)).build();
 
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON,
-                new Meeting(MEETING_NAME_STUB, MEETING_VENUE_STUB, MEETING_WHEN_STUB));
+                new Meeting(meetingName, venue, when));
 
         String expectedMessage = String.format(AddMeetingCommand.MESSAGE_ADD_MEETING_SUCCESS,
                 Messages.format(editedPerson));
@@ -53,12 +60,16 @@ public class AddMeetingCommandTest {
     public void execute_filteredList_success() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
+        MeetingName meetingName = new MeetingName(MEETING_NAME_STUB);
+        Venue venue = new Venue(MEETING_VENUE_STUB);
+        When when = new When(MEETING_WHEN_STUB);
+
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withMeetings(new Meeting(MEETING_NAME_STUB, MEETING_VENUE_STUB, MEETING_WHEN_STUB)).build();
+                .withMeetings(new Meeting(meetingName, venue, when)).build();
 
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON,
-                new Meeting(MEETING_NAME_STUB, MEETING_VENUE_STUB, MEETING_WHEN_STUB));
+                new Meeting(meetingName, venue, when));
 
         String expectedMessage = String.format(AddMeetingCommand.MESSAGE_ADD_MEETING_SUCCESS,
                 Messages.format(editedPerson));
@@ -72,8 +83,13 @@ public class AddMeetingCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() throws ParseException {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+
+        MeetingName meetingName = new MeetingName(MEETING_NAME_STUB);
+        Venue venue = new Venue(MEETING_VENUE_STUB);
+        When when = new When(MEETING_WHEN_STUB);
+
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(outOfBoundIndex,
-                new Meeting(MEETING_NAME_STUB, MEETING_VENUE_STUB, MEETING_WHEN_STUB));
+                new Meeting(meetingName, venue, when));
 
         assertCommandFailure(addMeetingCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -85,27 +101,25 @@ public class AddMeetingCommandTest {
 
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
+        MeetingName meetingName = new MeetingName(MEETING_NAME_STUB);
+        Venue venue = new Venue(MEETING_VENUE_STUB);
+        When when = new When(MEETING_WHEN_STUB);
+
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(outOfBoundIndex,
-                new Meeting(MEETING_NAME_STUB, MEETING_VENUE_STUB, MEETING_WHEN_STUB));
+                new Meeting(meetingName, venue, when));
 
         assertCommandFailure(addMeetingCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_invalidMeetingFilteredList_failure() throws ParseException {
-        Meeting meeting = new Meeting("", MEETING_VENUE_STUB, MEETING_WHEN_STUB);
-        AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, meeting);
-        assertCommandFailure(addMeetingCommand, model, MESSAGE_BLANK_MEETING_NAME);
-
-        meeting = new Meeting(MEETING_NAME_STUB, "", MEETING_WHEN_STUB);
-        addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, meeting);
-        assertCommandFailure(addMeetingCommand, model, MESSAGE_BLANK_VENUE);
-    }
-
-    @Test
     public void equals() throws ParseException {
-        Meeting meeting = new Meeting(MEETING_NAME_STUB, MEETING_VENUE_STUB, MEETING_WHEN_STUB);
-        Meeting anotherMeeting = new Meeting(MEETING_NAME_STUB_2, MEETING_VENUE_STUB, MEETING_WHEN_STUB);
+        MeetingName meetingName = new MeetingName(MEETING_NAME_STUB);
+        Venue venue = new Venue(MEETING_VENUE_STUB);
+        When when = new When(MEETING_WHEN_STUB);
+        MeetingName diffMeetingName = new MeetingName(MEETING_NAME_STUB_2);
+
+        Meeting meeting = new Meeting(meetingName, venue, when);
+        Meeting anotherMeeting = new Meeting(diffMeetingName, venue, when);
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, meeting);
         assertTrue(addMeetingCommand.equals(addMeetingCommand));
 

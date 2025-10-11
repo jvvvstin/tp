@@ -35,34 +35,22 @@ public class DateTimeParserTest {
     );
 
     @Test
-    public void parseDateTime_parseValidDateTime_success() {
+    public void parseDateTime_parseValidDateTime_success() throws ParseException {
         LocalDateTime expectedDateTime;
         LocalDateTime actualDateTime;
 
-        try {
-            expectedDateTime = LocalDateTime.parse(DATETIME_STUB_1);
-            actualDateTime = DateTimeParser.parseDateTime(VALID_DATETIME_FORMAT_1);
-            assertEquals(expectedDateTime, actualDateTime);
-        } catch (ParseException ignored) {
-            // This exception is expected and can be safely ignored
-        }
+        expectedDateTime = LocalDateTime.parse(DATETIME_STUB_1);
+        actualDateTime = DateTimeParser.parseDateTime(VALID_DATETIME_FORMAT_1);
+        assertEquals(expectedDateTime, actualDateTime);
 
-        try {
-            expectedDateTime = LocalDateTime.parse(DATETIME_STUB_2);
-            actualDateTime = DateTimeParser.parseDateTime(VALID_DATETIME_FORMAT_2);
-            assertEquals(expectedDateTime, actualDateTime);
-        } catch (ParseException ignored) {
-            // This exception is expected and can be safely ignored
-        }
+        expectedDateTime = LocalDateTime.parse(DATETIME_STUB_2);
+        actualDateTime = DateTimeParser.parseDateTime(VALID_DATETIME_FORMAT_2);
+        assertEquals(expectedDateTime, actualDateTime);
 
         for (String validDatetimeFormat : VALID_DATETIME_FORMATS) {
-            try {
-                expectedDateTime = LocalDateTime.parse(DATETIME_STUB_2);
-                actualDateTime = DateTimeParser.parseDateTime(validDatetimeFormat);
-                assertEquals(expectedDateTime, actualDateTime);
-            } catch (ParseException ignored) {
-                // This exception is expected and can be safely ignored
-            }
+            expectedDateTime = LocalDateTime.parse(DATETIME_STUB_2);
+            actualDateTime = DateTimeParser.parseDateTime(validDatetimeFormat);
+            assertEquals(expectedDateTime, actualDateTime);
         }
     }
 
