@@ -89,7 +89,7 @@ public class ParserUtilSecondTest {
 
     @Test
     public void parseParametersAndLabels_missingSpaces5_returnEmptyList() {
-        String input = "T(L a b e l 1)";
+        String input = "TEST PARAMETER 1 (L a b e l 1) T(L a b e l 2)";
         assertEquals(new ArrayList<>(), ParserUtil.parseParametersAndLabels(input));
     }
 
@@ -107,7 +107,7 @@ public class ParserUtilSecondTest {
 
     @Test
     public void parseParametersAndLabels_incorrectFormat3_returnEmptyList() {
-        String input = "TEST PARAMETER 1 (L a b e l 1) TEST PARAMETER 2 (L a b e l 2)a";
+        String input = "TEST PARAMETER 1 (L a b e l 1)TEST PARAMETER 2";
         assertEquals(new ArrayList<>(), ParserUtil.parseParametersAndLabels(input));
     }
 }
