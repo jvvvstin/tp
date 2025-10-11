@@ -48,7 +48,8 @@ public class JsonAdaptedMeeting {
      */
     public Meeting toModelType() throws IllegalValueException {
         if (this.meetingName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MeetingName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MeetingName.class.getSimpleName()));
         }
         if (!MeetingName.isValidMeetingName(this.meetingName)) {
             throw new IllegalValueException(MeetingName.MESSAGE_CONSTRAINTS);

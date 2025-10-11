@@ -87,8 +87,8 @@ public class AddMeetingCommand extends Command {
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(meeting.meetingName.meetingName.isBlank() || meeting.venue.value.isBlank() ||
-                meeting.when.value == null)
+        String message = !(meeting.meetingName.meetingName.isBlank() || meeting.venue.value.isBlank()
+                || meeting.when.value == null)
                 ? MESSAGE_ADD_MEETING_SUCCESS : MESSAGE_ADD_MEETING_FAILURE;
         return String.format(message, Messages.format(personToEdit));
     }
