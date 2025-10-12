@@ -29,40 +29,17 @@ public class NameTest {
 
     @Test
     public void isValidName_blankName_throwsParseException() {
-        String blankName = "";
-        assertThrows(ParseException.class, () -> Name.isValidName(blankName));
+        assertThrows(ParseException.class, () -> Name.isValidName("")); // empty string
+        assertThrows(ParseException.class, () -> Name.isValidName(" ")); // spaces only
+    }
 
-        // Check that the exception message is as expected
+    @Test
+    public void isValidName_blankName_throwsBlankNameParseException() {
         try {
+            String blankName = "";
             Name.isValidName(blankName);
         } catch (ParseException e) {
-            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_NO_BLANK_NAME);
-        }
-    }
-
-    @Test
-    public void isValidName_noAlphabetCharacter_throwsParseException() {
-        String spacesOnly = " ";
-        assertThrows(ParseException.class, () -> Name.isValidName(spacesOnly));
-
-        // Check that the exception message is as expected
-        try {
-            Name.isValidName(spacesOnly);
-        } catch (ParseException e) {
-            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHABET);
-        }
-    }
-
-    @Test
-    public void isValidName_noAlphabetCharacter_throwsParseException() {
-        String spacesOnly = " ";
-        assertThrows(ParseException.class, () -> Name.isValidName(spacesOnly));
-
-        // Check that the exception message is as expected
-        try {
-            Name.isValidName(spacesOnly);
-        } catch (ParseException e) {
-            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHABET);
+            assertEquals(Name.MESSAGE_CONSTRAINTS_NO_BLANK_NAME, e.getMessage());
         }
     }
 
@@ -70,12 +47,15 @@ public class NameTest {
     public void isValidName_onlyNonValidCharacter_throwsParseException() {
         String nonValidCharacter = "^";
         assertThrows(ParseException.class, () -> Name.isValidName(nonValidCharacter));
+    }
 
-        // Check that the exception message is as expected
+    @Test
+    public void isValidName_onlyNonValidCharacter_throwsAtLeastOneAlphanumericParseException() {
         try {
+            String nonValidCharacter = "^";
             Name.isValidName(nonValidCharacter);
         } catch (ParseException e) {
-            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS);
+            assertEquals(Name.MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHANUMERIC, e.getMessage());
         }
     }
 
@@ -83,9 +63,12 @@ public class NameTest {
     public void isValidName_containsNonValidCharacter_throwsParseException() {
         String containsNonValidCharacter = "bobby^";
         assertThrows(ParseException.class, () -> Name.isValidName(containsNonValidCharacter));
+    }
 
-        // Check that the exception message is as expected
+    @Test
+    public void isValidName_containsNonValidCharacter_throwsMessageConstraintsParseException() {
         try {
+            String containsNonValidCharacter = "bobby^";
             Name.isValidName(containsNonValidCharacter);
         } catch (ParseException e) {
             assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS);
@@ -94,11 +77,18 @@ public class NameTest {
 
     @Test
     public void isValidName_startsWithNonAlphabet_throwsParseException() {
-        String startsWithNonAlphabet = "-bobby";
-        assertThrows(ParseException.class, () -> Name.isValidName(startsWithNonAlphabet));
+        assertThrows(ParseException.class, () -> Name.isValidName("-bob")); // hyphen
+        assertThrows(ParseException.class, () -> Name.isValidName(" bob")); // space
+        assertThrows(ParseException.class, () -> Name.isValidName("/bob")); // slash
+        assertThrows(ParseException.class, () -> Name.isValidName("'bob")); // apostrophe
+        assertThrows(ParseException.class, () -> Name.isValidName(".bob")); // period
+        assertThrows(ParseException.class, () -> Name.isValidName("’bob")); // curly apostrophe
+    }
 
-        // Check that the exception message is as expected
+    @Test
+    public void isValidName_startsWithNonAlphabet_throwsInvalidStartEndParseException() {
         try {
+            String startsWithNonAlphabet = "-bobby";
             Name.isValidName(startsWithNonAlphabet);
         } catch (ParseException e) {
             assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_INVALID_START_END);
@@ -107,11 +97,18 @@ public class NameTest {
 
     @Test
     public void isValidName_endsWithNonAlphabet_throwsParseException() {
-        String endsWithNonAlphabet = "bobby ";
-        assertThrows(ParseException.class, () -> Name.isValidName(endsWithNonAlphabet));
+        assertThrows(ParseException.class, () -> Name.isValidName("bob-")); // hyphen
+        assertThrows(ParseException.class, () -> Name.isValidName("bob ")); // space
+        assertThrows(ParseException.class, () -> Name.isValidName("bob/")); // slash
+        assertThrows(ParseException.class, () -> Name.isValidName("bob'")); // apostrophe
+        assertThrows(ParseException.class, () -> Name.isValidName("bob.")); // period
+        assertThrows(ParseException.class, () -> Name.isValidName("bob’")); // curly apostrophe
+    }
 
-        // Check that the exception message is as expected
+    @Test
+    public void isValidName_endsWithNonAlphabet_throwsInvalidStartEndParseException() {
         try {
+            String endsWithNonAlphabet = "bobby ";
             Name.isValidName(endsWithNonAlphabet);
         } catch (ParseException e) {
             assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_INVALID_START_END);
@@ -120,11 +117,18 @@ public class NameTest {
 
     @Test
     public void isValidName_consecutiveSpecialCharacter_throwsParseException() {
-        String consecutiveSpecialCharacter = "bob----------by";
-        assertThrows(ParseException.class, () -> Name.isValidName(consecutiveSpecialCharacter));
+        assertThrows(ParseException.class, () -> Name.isValidName("bob--by")); // hyphen
+        assertThrows(ParseException.class, () -> Name.isValidName("bob  by")); // space
+        assertThrows(ParseException.class, () -> Name.isValidName("bob//by")); // slash
+        assertThrows(ParseException.class, () -> Name.isValidName("bob''by")); // apostrophe
+        assertThrows(ParseException.class, () -> Name.isValidName("bob...by")); // period
+        assertThrows(ParseException.class, () -> Name.isValidName("bob’’by")); // curly apostrophe
+    }
 
-        // Check that the exception message is as expected
+    @Test
+    public void isValidName_consecutiveSpecialCharacter_throwsNoConsecutiveParseException() {
         try {
+            String consecutiveSpecialCharacter = "bob----------by";
             Name.isValidName(consecutiveSpecialCharacter);
         } catch (ParseException e) {
             assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_NO_CONSECUTIVE_SPECIAL_CHAR);
@@ -140,6 +144,16 @@ public class NameTest {
             assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
             assertTrue(Name.isValidName("Capital Tan")); // with capital letters
             assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+            assertTrue(Name.isValidName("Jean-Luc Picard")); // hyphens
+            assertTrue(Name.isValidName("O'Connor")); // apostrophes
+            assertTrue(Name.isValidName("Dr. John A. Smith")); // periods
+            assertTrue(Name.isValidName("Anna/Marie")); // slashes
+            assertTrue(Name.isValidName("José Ángel")); // accented characters
+            assertTrue(Name.isValidName("D'Artagnan-Smith Jr.")); // mixed special characters
+            assertTrue(Name.isValidName("Łukasz Żółć")); // non-ASCII alphabets
+            assertTrue(Name.isValidName("A")); // single character
+            assertTrue(Name.isValidName("7")); // single digit
+            assertTrue(Name.isValidName("Élise-Marie O’Neill/Smith Jr.")); // multiple valid special characters
         } catch (ParseException e) {
             // This block should not be reached
         }

@@ -13,7 +13,7 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS_NO_BLANK_NAME =
             "Names should not be blank\n";
-    public static final String MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHABET =
+    public static final String MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHANUMERIC =
             "Names should contain at least one alphabetic character\n";
     public static final String MESSAGE_CONSTRAINTS =
             "Names can only contain alphanumeric characters, spaces, hyphens, apostrophes, accented characters,"
@@ -27,7 +27,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX_AT_LEAST_ONE_ALPHABET = ".*\\p{L}+.*";
+    public static final String VALIDATION_REGEX_AT_LEAST_ONE_ALPHANUMERIC = "(?=.*(\\p{L}|\\d)).*";
     public static final String VALIDATION_REGEX_NAME_CONSTRAINTS = "^[\\p{L}\\p{M}0-9 \\-'’./]+$";
     public static final String VALIDATION_REGEX_NO_SPECIAL_CHAR_START = "^[ \\-'’./].*$";
     public static final String VALIDATION_REGEX_NO_SPECIAL_CHAR_END = "^.*[ \\-'’./]$";
@@ -63,8 +63,8 @@ public class Name {
         }
 
         // Checks if the name contains at least one alphabetic character
-        if (!test.matches(VALIDATION_REGEX_AT_LEAST_ONE_ALPHABET)) {
-            throw new ParseException(MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHABET);
+        if (!test.matches(VALIDATION_REGEX_AT_LEAST_ONE_ALPHANUMERIC)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHANUMERIC);
         }
 
         // If the name does not satisfy the basic constraints
