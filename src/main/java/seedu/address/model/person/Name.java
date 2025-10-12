@@ -19,9 +19,10 @@ public class Name {
             "Names can only contain alphanumeric characters, spaces, hyphens, apostrophes, accented characters,"
                     + " periods, digits and slashes\n";
     public static final String MESSAGE_CONSTRAINTS_INVALID_START_END =
-            "Names should not start or end with a space, hyphen, apostrophe, accented character, period or slash\n";
+            "Names should not start or end with a hyphen, apostrophe, accented character, period or slash\n";
     public static final String MESSAGE_CONSTRAINTS_NO_CONSECUTIVE_SPECIAL_CHAR =
-            "Names should not contain consecutive spaces, hyphens, apostrophes, accented characters, periods or slashes\n";
+            "Names should not contain consecutive spaces, hyphens, apostrophes, accented characters,"
+                    + "periods or slashes\n";
 
     /*
      * The first character of the address must not be a whitespace,
