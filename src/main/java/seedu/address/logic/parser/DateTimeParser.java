@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.List;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,14 +25,14 @@ public class DateTimeParser {
      * List of accepted datetime formatters
      */
     private static final List<DateTimeFormatter> ALLOWED_FORMATTERS = List.of(
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),
-            DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"),
-            DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"),
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"),
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+            DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("uuuu/MM/dd HHmm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
     );
     private static final String OUTPUT_FORMAT = "MMM dd yyyy HH:mm";
 
