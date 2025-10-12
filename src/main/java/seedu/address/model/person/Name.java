@@ -29,8 +29,8 @@ public class Name {
      */
     public static final String VALIDATION_REGEX_AT_LEAST_ONE_ALPHANUMERIC = "(?=.*(\\p{L}|\\d)).*";
     public static final String VALIDATION_REGEX_NAME_CONSTRAINTS = "^[\\p{L}\\p{M}0-9 \\-'’./]+$";
-    public static final String VALIDATION_REGEX_NO_SPECIAL_CHAR_START = "^[ \\-'’./].*$";
-    public static final String VALIDATION_REGEX_NO_SPECIAL_CHAR_END = "^.*[ \\-'’./]$";
+    public static final String VALIDATION_REGEX_NO_SPECIAL_CHAR_START = "^[\\-'’./].*$";
+    public static final String VALIDATION_REGEX_NO_SPECIAL_CHAR_END = "^.*[\\-'’./]$";
     public static final String VALIDATION_REGEX_NO_CONSECUTIVE_SPECIAL_CHAR = ".*([ \\-'’./])\\1.*";
 
     public final String fullName;
