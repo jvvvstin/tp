@@ -67,7 +67,17 @@ public class DeleteMeetingCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
         }
 
+        // Removes meetings from the person's meeting list
         model.deleteMeetingFromPerson(personToEdit, meetingIndex.getZeroBased());
+
+        // Creates a new Person object with the updated meetings list
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(),
+                personToEdit.getMeetings());
+
+        // Replaces the old person with the new person in the model to refresh the GUI
+        model.setPerson(personToEdit, editedPerson);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, Messages.format(personToEdit)));
