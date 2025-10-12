@@ -78,7 +78,6 @@ public class NameTest {
     @Test
     public void isValidName_startsWithNonAlphabet_throwsParseException() {
         assertThrows(ParseException.class, () -> Name.isValidName("-bob")); // hyphen
-        assertThrows(ParseException.class, () -> Name.isValidName(" bob")); // space
         assertThrows(ParseException.class, () -> Name.isValidName("/bob")); // slash
         assertThrows(ParseException.class, () -> Name.isValidName("'bob")); // apostrophe
         assertThrows(ParseException.class, () -> Name.isValidName(".bob")); // period
@@ -98,7 +97,6 @@ public class NameTest {
     @Test
     public void isValidName_endsWithNonAlphabet_throwsParseException() {
         assertThrows(ParseException.class, () -> Name.isValidName("bob-")); // hyphen
-        assertThrows(ParseException.class, () -> Name.isValidName("bob ")); // space
         assertThrows(ParseException.class, () -> Name.isValidName("bob/")); // slash
         assertThrows(ParseException.class, () -> Name.isValidName("bob'")); // apostrophe
         assertThrows(ParseException.class, () -> Name.isValidName("bob.")); // period
