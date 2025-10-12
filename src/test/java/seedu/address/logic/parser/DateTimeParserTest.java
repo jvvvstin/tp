@@ -14,10 +14,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DateTimeParserTest {
     private static final String VALID_DATETIME_FORMAT_1 = "28/12/2025 14:00";
     private static final String VALID_DATETIME_FORMAT_2 = "12-01-2025 1400";
+    private static final String VALID_LEAP_YEAR_DATE = "29/02/2028 1400";
     private static final String INVALID_DATETIME_FORMAT_1 = "13/13/2025 14:00";
     private static final String INVALID_DATETIME_FORMAT_2 = "12/12/2025 25:69";
+    private static final String INVALID_DATETIME_FORMAT_3 = "31/04/2025 1400";
+    private static final String INVALID_LEAP_YEAR_DATE = "29/02/2025 1400";
     private static final String DATETIME_STUB_1 = "2025-12-28T14:00:00";
     private static final String DATETIME_STUB_2 = "2025-01-12T14:00:00";
+    private static final String DATETIME_STUB_3 = "2028-02-29T14:00:00";
     private static final LocalDateTime VALID_DATETIME_1 = LocalDateTime.parse(DATETIME_STUB_1);
     private static final LocalDateTime VALID_DATETIME_2 = LocalDateTime.parse(DATETIME_STUB_2);
     private static final String VALID_DATETIME_STRING_1 = "Dec 28 2025 14:00";
@@ -47,6 +51,10 @@ public class DateTimeParserTest {
         actualDateTime = DateTimeParser.parseDateTime(VALID_DATETIME_FORMAT_2);
         assertEquals(expectedDateTime, actualDateTime);
 
+        expectedDateTime = LocalDateTime.parse(DATETIME_STUB_3);
+        actualDateTime = DateTimeParser.parseDateTime(VALID_LEAP_YEAR_DATE);
+        assertEquals(expectedDateTime, actualDateTime);
+
         for (String validDatetimeFormat : VALID_DATETIME_FORMATS) {
             expectedDateTime = LocalDateTime.parse(DATETIME_STUB_2);
             actualDateTime = DateTimeParser.parseDateTime(validDatetimeFormat);
@@ -59,7 +67,14 @@ public class DateTimeParserTest {
         Exception ex = assertThrows(ParseException.class, () ->
                 DateTimeParser.parseDateTime(INVALID_DATETIME_FORMAT_1));
         assertEquals(MESSAGE_INVALID_DATETIME_FORMAT, ex.getMessage());
+
         ex = assertThrows(ParseException.class, () -> DateTimeParser.parseDateTime(INVALID_DATETIME_FORMAT_2));
+        assertEquals(MESSAGE_INVALID_DATETIME_FORMAT, ex.getMessage());
+
+        ex = assertThrows(ParseException.class, () -> DateTimeParser.parseDateTime(INVALID_DATETIME_FORMAT_3));
+        assertEquals(MESSAGE_INVALID_DATETIME_FORMAT, ex.getMessage());
+
+        ex = assertThrows(ParseException.class, () -> DateTimeParser.parseDateTime(INVALID_LEAP_YEAR_DATE));
         assertEquals(MESSAGE_INVALID_DATETIME_FORMAT, ex.getMessage());
     }
 
