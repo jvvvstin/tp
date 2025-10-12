@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -36,6 +38,18 @@ public class AddCommandIntegrationTest {
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 expectedModel);
+    }
+
+    @Test
+    public void addCommand_validName_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n/Jean-Luc p/91234567 e/test@example.com a/123 Street");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("Jean-Luc", addedPerson.getName().toString());
     }
 
     @Test
