@@ -1,10 +1,13 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class NameTest {
 
@@ -20,22 +23,138 @@ public class NameTest {
     }
 
     @Test
-    public void isValidName() {
-        // null name
+    public void isValidName_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
+    }
 
-        // invalid name
-        assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+    @Test
+    public void isValidName_blankName_throwsParseException() {
+        assertThrows(ParseException.class, () -> Name.isValidName("")); // empty string
+        assertThrows(ParseException.class, () -> Name.isValidName(" ")); // spaces only
+    }
 
+    @Test
+    public void isValidName_blankName_throwsBlankNameParseException() {
+        try {
+            String blankName = "";
+            Name.isValidName(blankName);
+        } catch (ParseException e) {
+            assertEquals(Name.MESSAGE_CONSTRAINTS_NO_BLANK_NAME, e.getMessage());
+        }
+    }
+
+    @Test
+    public void isValidName_onlyNonValidCharacter_throwsParseException() {
+        String nonValidCharacter = "^";
+        assertThrows(ParseException.class, () -> Name.isValidName(nonValidCharacter));
+    }
+
+    @Test
+    public void isValidName_onlyNonValidCharacter_throwsAtLeastOneAlphanumericParseException() {
+        try {
+            String nonValidCharacter = "^";
+            Name.isValidName(nonValidCharacter);
+        } catch (ParseException e) {
+            assertEquals(Name.MESSAGE_CONSTRAINTS_AT_LEAST_ONE_ALPHANUMERIC, e.getMessage());
+        }
+    }
+
+    @Test
+    public void isValidName_containsNonValidCharacter_throwsParseException() {
+        String containsNonValidCharacter = "bobby^";
+        assertThrows(ParseException.class, () -> Name.isValidName(containsNonValidCharacter));
+    }
+
+    @Test
+    public void isValidName_containsNonValidCharacter_throwsMessageConstraintsParseException() {
+        try {
+            String containsNonValidCharacter = "bobby^";
+            Name.isValidName(containsNonValidCharacter);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    @Test
+    public void isValidName_startsWithNonAlphabet_throwsParseException() {
+        assertThrows(ParseException.class, () -> Name.isValidName("-bob")); // hyphen
+        assertThrows(ParseException.class, () -> Name.isValidName("/bob")); // slash
+        assertThrows(ParseException.class, () -> Name.isValidName("'bob")); // apostrophe
+        assertThrows(ParseException.class, () -> Name.isValidName(".bob")); // period
+        assertThrows(ParseException.class, () -> Name.isValidName("’bob")); // curly apostrophe
+    }
+
+    @Test
+    public void isValidName_startsWithNonAlphabet_throwsInvalidStartEndParseException() {
+        try {
+            String startsWithNonAlphabet = "-bobby";
+            Name.isValidName(startsWithNonAlphabet);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_INVALID_START_END);
+        }
+    }
+
+    @Test
+    public void isValidName_endsWithNonAlphabet_throwsParseException() {
+        assertThrows(ParseException.class, () -> Name.isValidName("bob-")); // hyphen
+        assertThrows(ParseException.class, () -> Name.isValidName("bob/")); // slash
+        assertThrows(ParseException.class, () -> Name.isValidName("bob'")); // apostrophe
+        assertThrows(ParseException.class, () -> Name.isValidName("bob.")); // period
+        assertThrows(ParseException.class, () -> Name.isValidName("bob’")); // curly apostrophe
+    }
+
+    @Test
+    public void isValidName_endsWithNonAlphabet_throwsInvalidStartEndParseException() {
+        try {
+            String endsWithNonAlphabet = "bobby ";
+            Name.isValidName(endsWithNonAlphabet);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_INVALID_START_END);
+        }
+    }
+
+    @Test
+    public void isValidName_consecutiveSpecialCharacter_throwsParseException() {
+        assertThrows(ParseException.class, () -> Name.isValidName("bob--by")); // hyphen
+        assertThrows(ParseException.class, () -> Name.isValidName("bob  by")); // space
+        assertThrows(ParseException.class, () -> Name.isValidName("bob//by")); // slash
+        assertThrows(ParseException.class, () -> Name.isValidName("bob''by")); // apostrophe
+        assertThrows(ParseException.class, () -> Name.isValidName("bob...by")); // period
+        assertThrows(ParseException.class, () -> Name.isValidName("bob’’by")); // curly apostrophe
+    }
+
+    @Test
+    public void isValidName_consecutiveSpecialCharacter_throwsNoConsecutiveParseException() {
+        try {
+            String consecutiveSpecialCharacter = "bob----------by";
+            Name.isValidName(consecutiveSpecialCharacter);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Name.MESSAGE_CONSTRAINTS_NO_CONSECUTIVE_SPECIAL_CHAR);
+        }
+    }
+
+    @Test
+    public void isValidName() {
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        try {
+            assertTrue(Name.isValidName("peter jack")); // alphabets only
+            assertTrue(Name.isValidName("12345")); // numbers only
+            assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
+            assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+            assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+            assertTrue(Name.isValidName("Jean-Luc Picard")); // hyphens
+            assertTrue(Name.isValidName("O'Connor")); // apostrophes
+            assertTrue(Name.isValidName("Dr. John A. Smith")); // periods
+            assertTrue(Name.isValidName("Anna/Marie")); // slashes
+            assertTrue(Name.isValidName("José Ángel")); // accented characters
+            assertTrue(Name.isValidName("D'Artagnan-Smith Jr.")); // mixed special characters
+            assertTrue(Name.isValidName("Łukasz Żółć")); // non-ASCII alphabets
+            assertTrue(Name.isValidName("A")); // single character
+            assertTrue(Name.isValidName("7")); // single digit
+            assertTrue(Name.isValidName("Élise-Marie O’Neill/Smith Jr.")); // multiple valid special characters
+        } catch (ParseException e) {
+            // This block should not be reached
+        }
     }
 
     @Test
