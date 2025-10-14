@@ -24,8 +24,13 @@ public class Email {
             + "separated by periods.\n"
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
-            + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
+            + "    - have each domain label start and end with alphanumeric characters\n\n"
+            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n"
+            + "Labels can be made up of any characters and has no restrictions.\n\n"
+            + "Multiple emails are allowed but most adhere to the following conditions: \n"
+            + "1. For 1 email only, the label is optional so: EMAIL or EMAIL (LABEL).\n"
+            + "2. For multiple emails, the label is compulsory so: EMAIL1 (LABEL1) EMAIL2 (LABEL2) ... " +
+            "EMAILN (LABELN).\n";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
