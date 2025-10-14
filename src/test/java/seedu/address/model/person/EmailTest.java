@@ -51,6 +51,18 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("peterjack@example.c(Work)")); // missing space in between label
+        assertFalse(Email.isValidEmail("test@gmail.com e1234567@u.nus.edu")); // Multiple emails missing labels
+        assertFalse(Email.isValidEmail("test@gmail.com (test) (work)")); // Another email missing
+        assertFalse(Email.isValidEmail("test@gmail.com (main) " +
+                "e1234567@u.nus.edu (main)")); // Duplicate labels
+        assertFalse(Email.isValidEmail("test@gmail.com (main) " +
+                "test@gmail.com (school)")); // Duplicate emails
+        assertFalse(Email.isValidEmail("test@gmail.com ()")); // Empty label
+        assertFalse(Email.isValidEmail("test@gmail.com (  )")); // Label with spaces only
+        assertFalse(Email.isValidEmail("test@gmail.com (--)")); // Label with hyphen only
+        assertFalse(Email.isValidEmail("test@gmail.com ( -- - )")); // Label with spaces and hyphens only
+        assertFalse(Email.isValidEmail("test@gmail.com (Test / No)")); // Label other characters
 
         // valid email
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
@@ -64,6 +76,12 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(Email.isValidEmail(" e1234567@u.nus.edu ")); // Trailing spaces are allowed
+        assertTrue(Email.isValidEmail("e1234567@u.nus.edu (school)")); // Label allowed with 1 email
+        assertTrue(Email.isValidEmail("test@gmail.com (main) " +
+                "e1234567@u.nus.edu (school)")); // Multiple emails with labels allowed
+        assertTrue(Email.isValidEmail("test@gmail.com (main) " +
+                "e1234567@u.nus.edu (school-work)")); // Label allowed with space inside
     }
 
     @Test

@@ -24,8 +24,16 @@ public class Email {
             + "separated by periods.\n"
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
-            + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
+            + "    - have each domain label start and end with alphanumeric characters\n\n"
+            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n"
+            + "Labels can be made up of alphanumerical characters, spaces, and hyphens. "
+            + "It must adhere to the following constraints:\n"
+            + "1. The label cannot be made up of only spaces and/or hyphens only."
+            + "\n\n"
+            + "Multiple emails are allowed but most adhere to the following conditions: \n"
+            + "1. For 1 email only, the label is optional so: EMAIL or EMAIL (LABEL).\n"
+            + "2. For multiple emails, the label is compulsory so: EMAIL1 (LABEL1) EMAIL2 (LABEL2) ... " +
+            "EMAILN (LABELN).\n";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
@@ -35,7 +43,8 @@ public class Email {
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String EMAIL_VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
-    public static final String LABEL_VALIDATION_REGEX = "\\(" + ALPHANUMERIC_NO_UNDERSCORE + "\\)";
+    private static final String ALPHANUMERIC_SPACE_HYPHEN = "(?=.*[a-zA-Z0-9])[a-zA-Z0-9 -]+";
+    public static final String LABEL_VALIDATION_REGEX = "\\(" + ALPHANUMERIC_SPACE_HYPHEN + "\\)";
 
     public final String value;
 
