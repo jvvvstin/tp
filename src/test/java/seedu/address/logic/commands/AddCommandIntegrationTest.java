@@ -44,12 +44,51 @@ public class AddCommandIntegrationTest {
     public void addCommand_validName_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n/Jean-Luc p/91234567 e/test@example.com a/123 Street");
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com a=123 Street");
         command.execute(model);
 
         int addedPersonIndex = model.getFilteredPersonList().size() - 1;
         Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
         assertEquals("Jean-Luc", addedPerson.getName().toString());
+    }
+
+    @Test
+    public void addCommand_oneValidEmail_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com a=123 Street t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("test@example.com", addedPerson.getEmail().toString());
+    }
+
+    @Test
+    public void addCommand_oneValidEmailWithLabel_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) " +
+                "a=123 Street t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("test@example.com (main)", addedPerson.getEmail().toString());
+    }
+
+    @Test
+    public void addCommand_multipleValidEmail_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) " +
+                "john@work.com (work) a=123 Street t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("test@example.com (main) john@work.com (work)",
+                addedPerson.getEmail().toString());
     }
 
     @Test
