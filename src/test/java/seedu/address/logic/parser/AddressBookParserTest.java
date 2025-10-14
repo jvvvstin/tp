@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -112,7 +113,7 @@ public class AddressBookParserTest {
     public void parseCommand_deleteMeeting() throws Exception {
         DeleteMeetingCommand command = (DeleteMeetingCommand) parser.parseCommand(
                 DeleteMeetingCommand.COMMAND_WORD + " "
-                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_PERSON_INDEX + INDEX_FIRST_PERSON.getOneBased() + " "
                         + PREFIX_MEETING_INDEX + INDEX_FIRST_MEETING.getOneBased());
         assertEquals(new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING), command);
     }

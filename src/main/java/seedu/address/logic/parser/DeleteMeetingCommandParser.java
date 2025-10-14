@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteMeetingCommand;
@@ -27,23 +28,31 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
             throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK);
         }
 
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEETING_INDEX);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_PERSON_INDEX, PREFIX_MEETING_INDEX);
 
-        // Checks if person Index is blank
-        if (argumentMultimap.getPreamble().isEmpty()) {
+        String personIndexString = argumentMultimap.getValue(PREFIX_PERSON_INDEX).orElse("");
+        String meetingIndexString = argumentMultimap.getValue(PREFIX_MEETING_INDEX).orElse("");
+
+        // Check if no prefixes are present
+        if (personIndexString.isEmpty() && meetingIndexString.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
+        }
+
+        // Checks if personIndex is blank
+        if (personIndexString.isEmpty()) {
             throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX);
         }
 
         // Checks if personIndex is valid
         Index personIndex;
         try {
-            personIndex = ParserUtil.parseIndex(argumentMultimap.getPreamble());
+            personIndex = ParserUtil.parseIndex(personIndexString);
         } catch (ParseException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE),
                     ive);
         }
 
-        String meetingIndexString = argumentMultimap.getValue(PREFIX_MEETING_INDEX).orElse("");
 
         //Checks if meeting Index is blank
         if (meetingIndexString.isEmpty()) {

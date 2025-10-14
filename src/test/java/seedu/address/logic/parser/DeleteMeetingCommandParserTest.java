@@ -15,7 +15,7 @@ public class DeleteMeetingCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteMeetingCommand() {
-        assertParseSuccess(parser, "1 i=1", new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING));
+        assertParseSuccess(parser, " p=1 i=1", new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING));
     }
 
     @Test
@@ -37,19 +37,17 @@ public class DeleteMeetingCommandParserTest {
 
     @Test
     public void parse_invalidPersonIndexArgs_throwsParseException() {
-        assertParseFailure(parser, "a i=1", String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteMeetingCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a i=1", String.format(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX));
     }
 
     @Test
     public void parse_emptyMeetingIndexArgs_throwsParseException() {
-        assertParseFailure(parser, "1 i=", DeleteMeetingCommand.MESSAGE_INVALID_BLANK_MEETING_INDEX);
+        assertParseFailure(parser, " p=1 i=", DeleteMeetingCommand.MESSAGE_INVALID_BLANK_MEETING_INDEX);
     }
 
     @Test
     public void parse_invalidMeetingIndexArgs_throwsParseException() {
-        assertParseFailure(parser, "1 i=b", String.format(
+        assertParseFailure(parser, " p=1 i=b", String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteMeetingCommand.MESSAGE_USAGE));
     }
