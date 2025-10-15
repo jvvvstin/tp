@@ -89,6 +89,7 @@ public class Email {
      * @return A boolean indicating if the parameters and labels of an Email is valid.
      */
     private static boolean isEmailsAndLabelsValid(List<String> list) {
+        // If true we are checking if the email is valid, if it is false we are checking if label is valid.
         boolean checkEmail = true;
 
         Set<String> set = new HashSet<>();
@@ -107,6 +108,8 @@ public class Email {
             }
 
             set.add(currString);
+
+            // Toggle between checking address and label
             checkEmail = !checkEmail;
         }
 

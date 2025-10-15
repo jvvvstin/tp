@@ -71,6 +71,7 @@ public class Address {
      * @return A boolean indicating if the parameters and labels of an Address is valid.
      */
     private static boolean isAddressesAndLabelsValid(List<String> list) {
+        // If true we are checking if the address is valid, if it is false we are checking if label is valid.
         boolean checkAddress = true;
 
         Set<String> set = new HashSet<>();
@@ -89,6 +90,8 @@ public class Address {
             }
 
             set.add(currString);
+
+            // Toggle between checking address and label
             checkAddress = !checkAddress;
         }
 
