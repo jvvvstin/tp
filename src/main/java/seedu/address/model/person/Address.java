@@ -64,7 +64,7 @@ public class Address {
      * </p><br><p>
      * 1) If there is only one address we accept either: ADDRESS or ADDRESS (LABEL)
      * </p><p>
-     * 2) If there is more than one email every email most be accompanied by a label like: ADDRESS1 (LABEL1)
+     * 2) If there is more than one email every email must be accompanied by a label like: ADDRESS1 (LABEL1)
      * ADDRESS2 (LABEL2) ...
      * </p>
      * @param list The {@code List<String>} of the parameters and labels of an Address.
