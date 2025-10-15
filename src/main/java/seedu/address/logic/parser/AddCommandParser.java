@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -36,11 +37,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_MAIN_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_MAIN_PHONE).get());
-        OtherPhones otherPhones = ParserUtil.parseOtherPhones(argMultimap.getValue(PREFIX_OTHER_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         List<Meeting> meetings = new ArrayList<>();
+        OtherPhones otherPhones = ParserUtil.parseOtherPhones(
+                argMultimap.getValue(PREFIX_OTHER_PHONE).orElse(""));
 
         Person person = new Person(name, phone, otherPhones, email, address, tagList, meetings);
 

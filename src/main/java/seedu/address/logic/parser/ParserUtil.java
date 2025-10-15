@@ -73,11 +73,10 @@ public class ParserUtil {
 
     public static OtherPhones parseOtherPhones(String otherPhones) throws ParseException {
         requireNonNull(otherPhones);
-        String trimmedPhone = otherPhones.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        if (!otherPhones.equals("") && !OtherPhones.isValidPhone(otherPhones)) {
+            throw new ParseException(OtherPhones.MESSAGE_CONSTRAINTS);
         }
-        return new OtherPhones(trimmedPhone);
+        return new OtherPhones(otherPhones);
     }
 
     /**
