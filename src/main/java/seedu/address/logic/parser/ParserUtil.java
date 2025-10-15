@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.OtherPhones;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -68,6 +69,15 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    public static OtherPhones parseOtherPhones(String otherPhones) throws ParseException {
+        requireNonNull(otherPhones);
+        String trimmedPhone = otherPhones.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new OtherPhones(trimmedPhone);
     }
 
     /**

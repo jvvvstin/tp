@@ -72,7 +72,8 @@ public class DeleteMeetingCommand extends Command {
 
         // Creates a new Person object with the updated meetings list
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(),
+                personToEdit.getOtherPhones(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(),
                 personToEdit.getMeetings());
 
         // Replaces the old person with the new person in the model to refresh the GUI

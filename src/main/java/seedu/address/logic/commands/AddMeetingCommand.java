@@ -78,7 +78,9 @@ public class AddMeetingCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         List<Meeting> editedMeetings = new ArrayList<>(personToEdit.getMeetings());
         editedMeetings.add(meeting);
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getOtherPhones(),
+                personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedMeetings);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

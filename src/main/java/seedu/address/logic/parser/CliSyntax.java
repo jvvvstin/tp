@@ -7,7 +7,8 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n=");
-    public static final Prefix PREFIX_PHONE = new Prefix("p=");
+    public static final Prefix PREFIX_MAIN_PHONE = new Prefix("mn=");
+    public static final Prefix PREFIX_OTHER_PHONE = new Prefix("on=");
     public static final Prefix PREFIX_EMAIL = new Prefix("e=");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a=");
     public static final Prefix PREFIX_TAG = new Prefix("t=");
