@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
     // Common label regex used for other identity/data fields
+    // Can contain any alphanumerical characters, space, hyphen. But cannot be made up of space/hyphen only.
     private static final String ALPHANUMERIC_SPACE_HYPHEN = "(?=.*[a-zA-Z0-9])[a-zA-Z0-9 -]+";
     public static final String LABEL_VALIDATION_REGEX = "\\(" + ALPHANUMERIC_SPACE_HYPHEN + "\\)";
 

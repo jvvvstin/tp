@@ -33,7 +33,7 @@ public class Email {
             + "Multiple emails are allowed but most adhere to the following conditions: \n"
             + "1. For 1 email only, the label is optional so: EMAIL or EMAIL (LABEL).\n"
             + "2. For multiple emails, the label is compulsory so: EMAIL1 (LABEL1) EMAIL2 (LABEL2) ... "
-            + "EMAILN (LABELN).\n";
+            + "EMAILN (LABELN).";
 
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
