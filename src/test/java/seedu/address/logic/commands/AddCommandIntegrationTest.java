@@ -68,8 +68,8 @@ public class AddCommandIntegrationTest {
     public void addCommand_oneValidEmailWithLabel_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) " +
-                "a=123 Street t=Friend");
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) "
+                + "a=123 Street t=Friend");
         command.execute(model);
 
         int addedPersonIndex = model.getFilteredPersonList().size() - 1;
@@ -81,8 +81,8 @@ public class AddCommandIntegrationTest {
     public void addCommand_multipleValidEmail_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) " +
-                "john@work.com (work) a=123 Street t=Friend");
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) "
+                + "john@work.com (work) a=123 Street t=Friend");
         command.execute(model);
 
         int addedPersonIndex = model.getFilteredPersonList().size() - 1;
