@@ -53,7 +53,7 @@ public class Address {
             return false;
         }
 
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+        return isAddressesAndLabelsValid(paramsAndLabels);
     }
 
     /**
