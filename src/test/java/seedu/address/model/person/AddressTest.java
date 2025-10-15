@@ -27,19 +27,17 @@ public class AddressTest {
         // invalid addresses
         assertFalse(Address.isValidAddress("")); // empty string
         assertFalse(Address.isValidAddress(" ")); // spaces only
-        assertFalse(Email.isValidEmail("Kent Ridge (home) (school)")); // Another address missing
-        assertFalse(Email.isValidEmail("Kent Ridge (home) "
+        assertFalse(Address.isValidAddress("Kent Ridge (home) (school)")); // Another address missing
+        assertFalse(Address.isValidAddress("Kent Ridge (home) "
                 + "Jurong (home)")); // Duplicate labels
-        assertFalse(Email.isValidEmail("Kent Ridge (home) "
-                + "Kent Ridge (school)")); // Duplicate addresses
-        assertFalse(Email.isValidEmail("test@gmail.com (main) "
-                + "test@gmail.com (school)")); // Duplicate emails
-        assertFalse(Email.isValidEmail("Kent Ridge ()")); // Empty label
-        assertFalse(Email.isValidEmail("Kent Ridge (  )")); // Label with spaces only
-        assertFalse(Email.isValidEmail("Kent Ridge (--)")); // Label with hyphen only
-        assertFalse(Email.isValidEmail("Kent Ridge ( -- - )")); // Label with spaces and hyphens only
-        assertFalse(Email.isValidEmail("Kent Ridge (Test / No)")); // Label other characters
-        assertFalse(Email.isValidEmail("Kent Ridge (School) Jurong East(Home)")); // Label together with address
+        assertFalse(Address.isValidAddress("Kent Ridge (home) "
+                + "Kent Ridge (school)")); // Duplicate address
+        assertFalse(Address.isValidAddress("Kent Ridge ()")); // Empty label
+        assertFalse(Address.isValidAddress("Kent Ridge (  )")); // Label with spaces only
+        assertFalse(Address.isValidAddress("Kent Ridge (--)")); // Label with hyphen only
+        assertFalse(Address.isValidAddress("Kent Ridge ( -- - )")); // Label with spaces and hyphens only
+        assertFalse(Address.isValidAddress("Kent Ridge (Test / No)")); // Label other characters
+        assertFalse(Address.isValidAddress("Kent Ridge (School) Jurong East(Home)")); // Label together with address
 
         // valid addresses
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
