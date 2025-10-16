@@ -18,6 +18,15 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    // Label message used for other identity/data fields
+    public static final String LABEL_MESSAGE =
+            "Labels can be made up of alphanumerical characters, spaces, and hyphens. "
+                    + "It must adhere to the following constraints:\n"
+                    + "1. The label cannot be made up of only spaces and/or hyphens only.";
+    // Common label regex used for other identity/data fields
+    // Can contain any alphanumerical characters, space, hyphen. But cannot be made up of space/hyphen only.
+    private static final String ALPHANUMERIC_SPACE_HYPHEN = "(?=.*[a-zA-Z0-9])[a-zA-Z0-9 -]+";
+    public static final String LABEL_VALIDATION_REGEX = "\\(" + ALPHANUMERIC_SPACE_HYPHEN + "\\)";
 
     // Identity fields
     private final Name name;

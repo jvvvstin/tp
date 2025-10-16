@@ -54,10 +54,10 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@example.c(Work)")); // missing space in between label
         assertFalse(Email.isValidEmail("test@gmail.com e1234567@u.nus.edu")); // Multiple emails missing labels
         assertFalse(Email.isValidEmail("test@gmail.com (test) (work)")); // Another email missing
-        assertFalse(Email.isValidEmail("test@gmail.com (main) " +
-                "e1234567@u.nus.edu (main)")); // Duplicate labels
-        assertFalse(Email.isValidEmail("test@gmail.com (main) " +
-                "test@gmail.com (school)")); // Duplicate emails
+        assertFalse(Email.isValidEmail("test@gmail.com (main) "
+                + "e1234567@u.nus.edu (main)")); // Duplicate labels
+        assertFalse(Email.isValidEmail("test@gmail.com (main) "
+                + "test@gmail.com (school)")); // Duplicate emails
         assertFalse(Email.isValidEmail("test@gmail.com ()")); // Empty label
         assertFalse(Email.isValidEmail("test@gmail.com (  )")); // Label with spaces only
         assertFalse(Email.isValidEmail("test@gmail.com (--)")); // Label with hyphen only
@@ -78,10 +78,10 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
         assertTrue(Email.isValidEmail(" e1234567@u.nus.edu ")); // Trailing spaces are allowed
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu (school)")); // Label allowed with 1 email
-        assertTrue(Email.isValidEmail("test@gmail.com (main) " +
-                "e1234567@u.nus.edu (school)")); // Multiple emails with labels allowed
-        assertTrue(Email.isValidEmail("test@gmail.com (main) " +
-                "e1234567@u.nus.edu (school-work)")); // Label allowed with space inside
+        assertTrue(Email.isValidEmail("test@gmail.com (main) "
+                + "e1234567@u.nus.edu (school)")); // Multiple emails with labels allowed
+        assertTrue(Email.isValidEmail("test@gmail.com (main) "
+                + "e1234567@u.nus.edu (school-work)")); // Label allowed with space inside
     }
 
     @Test

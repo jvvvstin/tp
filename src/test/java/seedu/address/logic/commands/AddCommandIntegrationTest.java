@@ -68,8 +68,8 @@ public class AddCommandIntegrationTest {
     public void addCommand_oneValidEmailWithLabel_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) " +
-                "a=123 Street t=Friend");
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) "
+                + "a=123 Street t=Friend");
         command.execute(model);
 
         int addedPersonIndex = model.getFilteredPersonList().size() - 1;
@@ -81,14 +81,54 @@ public class AddCommandIntegrationTest {
     public void addCommand_multipleValidEmail_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) " +
-                "john@work.com (work) a=123 Street t=Friend");
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) "
+                + "john@work.com (work) a=123 Street t=Friend");
         command.execute(model);
 
         int addedPersonIndex = model.getFilteredPersonList().size() - 1;
         Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
         assertEquals("test@example.com (main) john@work.com (work)",
                 addedPerson.getEmail().toString());
+    }
+
+    @Test
+    public void addCommand_oneValidAddress_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+                + "a=Kent Ridge Road, #01-23 t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("Kent Ridge Road, #01-23", addedPerson.getAddress().toString());
+    }
+
+    @Test
+    public void addCommand_oneValidAddressWithLabel_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+                + "a=Kent Ridge Road, #01-23 (School) t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("Kent Ridge Road, #01-23 (School)", addedPerson.getAddress().toString());
+    }
+
+    @Test
+    public void addCommand_multipleValidAddressWithLabel_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+                + "a=Kent Ridge Road, #01-23 (School) Istana (House) t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("Kent Ridge Road, #01-23 (School) Istana (House)",
+                addedPerson.getAddress().toString());
     }
 
     @Test
