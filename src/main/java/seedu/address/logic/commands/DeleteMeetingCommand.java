@@ -26,7 +26,7 @@ public class DeleteMeetingCommand extends Command {
             + PREFIX_MEETING_INDEX + "MEETING_INDEX (must be a positive integer)\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Deletes the meeting for the person identified by the index number used in the displayed person list"
+            + ": Deletes the meeting for the person identified by the index number used in the displayed person list"
             + " and the index number of the meeting in the person's meeting list. \n"
             + MESSAGE_FORMAT
             + "Example: " + COMMAND_WORD + " " + PREFIX_PERSON_INDEX + "1 " + PREFIX_MEETING_INDEX + "1";
