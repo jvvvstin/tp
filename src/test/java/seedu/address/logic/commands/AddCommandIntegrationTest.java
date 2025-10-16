@@ -92,6 +92,46 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
+    public void addCommand_oneValidAddress_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+                + "a=Kent Ridge Road, #01-23 t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("Kent Ridge Road, #01-23", addedPerson.getAddress().toString());
+    }
+
+    @Test
+    public void addCommand_oneValidAddressWithLabel_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+                + "a=Kent Ridge Road, #01-23 (School) t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("Kent Ridge Road, #01-23 (School)", addedPerson.getAddress().toString());
+    }
+
+    @Test
+    public void addCommand_multipleValidAddressWithLabel_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+                + "a=Kent Ridge Road, #01-23 (School) Istana (House) t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("Kent Ridge Road, #01-23 (School) Istana (House)",
+                addedPerson.getAddress().toString());
+    }
+
+    @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model,
