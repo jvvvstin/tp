@@ -44,7 +44,7 @@ public class AddCommandIntegrationTest {
     public void addCommand_validName_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com a=123 Street");
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com a=123 Street");
         command.execute(model);
 
         int addedPersonIndex = model.getFilteredPersonList().size() - 1;
@@ -56,7 +56,7 @@ public class AddCommandIntegrationTest {
     public void addCommand_oneValidEmail_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com a=123 Street t=Friend");
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com a=123 Street t=Friend");
         command.execute(model);
 
         int addedPersonIndex = model.getFilteredPersonList().size() - 1;
@@ -68,7 +68,7 @@ public class AddCommandIntegrationTest {
     public void addCommand_oneValidEmailWithLabel_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) "
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com (main) "
                 + "a=123 Street t=Friend");
         command.execute(model);
 
@@ -81,7 +81,7 @@ public class AddCommandIntegrationTest {
     public void addCommand_multipleValidEmail_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com (main) "
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com (main) "
                 + "john@work.com (work) a=123 Street t=Friend");
         command.execute(model);
 
@@ -95,7 +95,7 @@ public class AddCommandIntegrationTest {
     public void addCommand_oneValidAddress_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com "
                 + "a=Kent Ridge Road, #01-23 t=Friend");
         command.execute(model);
 
@@ -108,7 +108,7 @@ public class AddCommandIntegrationTest {
     public void addCommand_oneValidAddressWithLabel_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com "
                 + "a=Kent Ridge Road, #01-23 (School) t=Friend");
         command.execute(model);
 
@@ -121,7 +121,7 @@ public class AddCommandIntegrationTest {
     public void addCommand_multipleValidAddressWithLabel_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc p=91234567 e=test@example.com "
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com "
                 + "a=Kent Ridge Road, #01-23 (School) Istana (House) t=Friend");
         command.execute(model);
 
@@ -136,6 +136,20 @@ public class AddCommandIntegrationTest {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void addCommand_otherNumbers_personAddedToModel() throws Exception {
+        AddCommandParser parser = new AddCommandParser();
+
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 on=9999 e=test@example.com (main) "
+                + "john@work.com (work) a=123 Street t=Friend");
+        command.execute(model);
+
+        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
+        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        assertEquals("9999",
+                addedPerson.getOtherPhones().toString());
     }
 
 }
