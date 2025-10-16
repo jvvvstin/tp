@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -21,14 +22,14 @@ public class DeleteMeetingCommand extends Command {
     public static final String COMMAND_WORD = "deletemeeting";
 
     public static final String MESSAGE_FORMAT = "Parameters:\n"
-            + "INDEX (must be a positive integer)\n"
+            + PREFIX_PERSON_INDEX + "INDEX (must be a positive integer)\n"
             + PREFIX_MEETING_INDEX + "MEETING_INDEX (must be a positive integer)\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Deletes the meeting for the person identified by the index number used in the displayed person list"
             + " and the index number of the meeting in the person's meeting list. \n"
             + MESSAGE_FORMAT
-            + "Example: " + COMMAND_WORD + " 1" + PREFIX_MEETING_INDEX + "1";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PERSON_INDEX + "1 " + PREFIX_MEETING_INDEX + "1";
 
     public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "The meeting index provided is invalid";
     public static final String MESSAGE_INVALID_BLANK = "Please provide arguments after the command word.\n"
