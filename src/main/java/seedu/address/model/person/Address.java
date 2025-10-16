@@ -47,7 +47,7 @@ public class Address {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        List<String> paramsAndLabels = parseParametersAndLabels(test);
+        List<String> paramsAndLabels = parseParametersAndLabels(test, false);
 
         if (paramsAndLabels.isEmpty()) {
             return false;

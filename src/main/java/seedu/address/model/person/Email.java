@@ -65,7 +65,7 @@ public class Email {
      * @return A boolean indicating if the email is valid or not.
      */
     public static boolean isValidEmail(String test) {
-        List<String> paramsAndLabels = parseParametersAndLabels(test);
+        List<String> paramsAndLabels = parseParametersAndLabels(test, false);
 
         if (paramsAndLabels.isEmpty()) {
             return false;

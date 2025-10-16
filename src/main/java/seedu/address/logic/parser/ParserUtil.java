@@ -120,9 +120,10 @@ public class ParserUtil {
      * For example: some parameter (label) some parameter2 (label2).
      *
      * @param text The text that we are trying to split into parameters and labels.
+     * @param isLabelAlwaysCompulsory Indicates if for 1 parameter if the label is compulsory.
      * @return A list of parameters and labels or empty list if incorrect format.
      */
-    public static List<String> parseParametersAndLabels(String text) {
+    public static List<String> parseParametersAndLabels(String text, boolean isLabelAlwaysCompulsory) {
         text = text.trim();
         List<String> parametersAndLabels = new ArrayList<>();
         int textLength = text.length();
@@ -158,7 +159,7 @@ public class ParserUtil {
             extractParameter = !extractParameter;
         }
 
-        if (isListIncorrectSize(parametersAndLabels)) {
+        if (isListIncorrectSize(parametersAndLabels, isLabelAlwaysCompulsory)) {
             return new ArrayList<>();
         }
 
@@ -226,14 +227,20 @@ public class ParserUtil {
      * Checks if the total number of parameters and labels extracted have the correct size.
      *
      * @param list The list containing parameters and labels.
+     * @param isLabelAlwaysCompulsory Indicates if for 1 parameter if the label is compulsory.
      * @return A boolean indicating if the list has the correct size
      */
-    private static boolean isListIncorrectSize(List<String> list) {
+    private static boolean isListIncorrectSize(List<String> list, boolean isLabelAlwaysCompulsory) {
+        int listMinSize = 2;
+
+        if (isLabelAlwaysCompulsory) {
+            listMinSize = 1;
+        }
         if (list.isEmpty()) {
             return true;
         }
 
-        return list.size() >= 2 && list.size() % 2 == 1;
+        return list.size() >= listMinSize && list.size() % 2 == 1;
     }
 
     /**
