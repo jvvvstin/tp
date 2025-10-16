@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -8,8 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class OtherPhones {
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at " +
-                    "least 3 digits long and numbers should be separared by a tag e.g. 9999 (work) 8888 (office)";
+            "Phone numbers should only contain numbers, and it should be at "
+                   + "least 3 digits long and numbers should be separared by a tag e.g. 9999 (work) 8888 (office)";
 
     // Single phone number pattern
     private static final String SINGLE_PHONE_REGEX =
@@ -26,7 +25,7 @@ public class OtherPhones {
      * @param phones Valid phone numbers with a tag each or a single phone number
      */
     public OtherPhones(String phones) {
-        if (phones != null && !phones.equals("")){
+        if (phones != null && !phones.equals("")) {
             phones = phones.trim();
             checkArgument(isValidPhone(phones), MESSAGE_CONSTRAINTS);
         }
