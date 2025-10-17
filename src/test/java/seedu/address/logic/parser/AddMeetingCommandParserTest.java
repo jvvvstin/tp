@@ -69,18 +69,18 @@ public class AddMeetingCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
 
         // missing m= prefix
-        String userInput = " " + PREFIX_PERSON_INDEX + targetIndex.getOneBased() + " " + PREFIX_VENUE + nonEmptyVenue + " " + PREFIX_WHEN
-                + nonEmptyWhen;
+        String userInput = " " + PREFIX_PERSON_INDEX + targetIndex.getOneBased() + " " + PREFIX_VENUE + nonEmptyVenue
+                + " " + PREFIX_WHEN + nonEmptyWhen;
         assertParseFailure(parser, userInput, expectedMessage);
 
         // missing v= prefix
-        userInput = " " + PREFIX_PERSON_INDEX + targetIndex.getOneBased() + " " + PREFIX_MEETING + nonEmptyMeeting + " " + PREFIX_WHEN
-                + nonEmptyWhen;
+        userInput = " " + PREFIX_PERSON_INDEX + targetIndex.getOneBased() + " " + PREFIX_MEETING + nonEmptyMeeting
+                + " " + PREFIX_WHEN + nonEmptyWhen;
         assertParseFailure(parser, userInput, expectedMessage);
 
         // missing w= prefix
-        userInput = " " + PREFIX_PERSON_INDEX + targetIndex.getOneBased() + " " + PREFIX_MEETING + nonEmptyMeeting + " " + PREFIX_VENUE
-                + nonEmptyVenue;
+        userInput = " " + PREFIX_PERSON_INDEX + targetIndex.getOneBased() + " " + PREFIX_MEETING + nonEmptyMeeting
+                + " " + PREFIX_VENUE + nonEmptyVenue;
         assertParseFailure(parser, userInput, expectedMessage);
 
         // no parameters
