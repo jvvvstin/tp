@@ -39,6 +39,9 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final List<Meeting> meetings = new ArrayList<>();
 
+    // Characteristic fields
+    private boolean isFlagged = false;
+
     /**
      * Every field must be present and not null.
      */
@@ -74,6 +77,10 @@ public class Person {
         return address;
     }
 
+    public boolean getIsFlagged() {
+        return isFlagged;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -107,8 +114,15 @@ public class Person {
         meetings.remove(index);
     }
 
+    /**
+     * Returns the number of meetings the person has.
+     */
     public int getMeetingCount() {
         return meetings.size();
+    }
+
+    public void setFlagged(boolean isFlagged) {
+        this.isFlagged = isFlagged;
     }
 
     /**
@@ -132,7 +146,8 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && meetings.equals(otherPerson.meetings);
+                && meetings.equals(otherPerson.meetings)
+                && isFlagged == otherPerson.isFlagged;
     }
 
     @Override
@@ -149,6 +164,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("isFlagged", isFlagged)
                 .toString();
     }
 
