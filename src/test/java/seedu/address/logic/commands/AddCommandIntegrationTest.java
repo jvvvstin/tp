@@ -47,8 +47,8 @@ public class AddCommandIntegrationTest {
         AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com a=123 Street");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("Jean-Luc", addedPerson.getName().toString());
     }
 
@@ -59,8 +59,8 @@ public class AddCommandIntegrationTest {
         AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 e=test@example.com a=123 Street t=Friend");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("test@example.com", addedPerson.getEmail().toString());
     }
 
@@ -72,8 +72,8 @@ public class AddCommandIntegrationTest {
                 + "a=123 Street t=Friend");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("test@example.com (main)", addedPerson.getEmail().toString());
     }
 
@@ -85,8 +85,8 @@ public class AddCommandIntegrationTest {
                 + "john@work.com (work) a=123 Street t=Friend");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("test@example.com (main) john@work.com (work)",
                 addedPerson.getEmail().toString());
     }
@@ -99,8 +99,8 @@ public class AddCommandIntegrationTest {
                 + "a=Kent Ridge Road, #01-23 t=Friend");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("Kent Ridge Road, #01-23", addedPerson.getAddress().toString());
     }
 
@@ -112,8 +112,8 @@ public class AddCommandIntegrationTest {
                 + "a=Kent Ridge Road, #01-23 (School) t=Friend");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("Kent Ridge Road, #01-23 (School)", addedPerson.getAddress().toString());
     }
 
@@ -125,8 +125,8 @@ public class AddCommandIntegrationTest {
                 + "a=Kent Ridge Road, #01-23 (School) Istana (House) t=Friend");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("Kent Ridge Road, #01-23 (School) Istana (House)",
                 addedPerson.getAddress().toString());
     }
@@ -146,8 +146,8 @@ public class AddCommandIntegrationTest {
                 + "john@work.com (work) a=123 Street t=Friend");
         command.execute(model);
 
-        int addedPersonIndex = model.getFilteredPersonList().size() - 1;
-        Person addedPerson = model.getFilteredPersonList().get(addedPersonIndex);
+        int addedPersonIndex = model.getPersonList().size() - 1;
+        Person addedPerson = model.getPersonList().get(addedPersonIndex);
         assertEquals("9999",
                 addedPerson.getOtherPhones().toString());
     }

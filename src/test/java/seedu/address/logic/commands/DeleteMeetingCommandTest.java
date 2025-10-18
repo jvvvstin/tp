@@ -47,7 +47,7 @@ public class DeleteMeetingCommandTest {
         } catch (ParseException ignored) {
             // This exception is expected and can be safely ignored
         }
-        Person firstPerson = model.getFilteredPersonList()
+        Person firstPerson = model.getPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
                 .withMeetings(firstMeetingStub, secondMeetingStub2)
@@ -57,7 +57,7 @@ public class DeleteMeetingCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_MEETING);
@@ -73,7 +73,7 @@ public class DeleteMeetingCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getPersonList().size() + 1);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(outOfBoundIndex, INDEX_FIRST_MEETING);
 
         assertCommandFailure(deleteMeetingCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -81,7 +81,7 @@ public class DeleteMeetingCommandTest {
 
     @Test
     public void execute_invalidIndexMeeting_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList()
+        Index outOfBoundIndex = Index.fromOneBased(model.getPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()).getMeetingCount() + 1);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, outOfBoundIndex);
 
