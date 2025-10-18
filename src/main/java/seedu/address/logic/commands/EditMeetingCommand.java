@@ -80,7 +80,7 @@ public class EditMeetingCommand extends Command {
         List<Meeting> lastMeetingsList = personToEdit.getMeetings();
 
         if (meetingIndex.getZeroBased() >= personToEdit.getMeetingCount()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
         }
 
         Meeting meetingToEdit = lastMeetingsList.get(meetingIndex.getZeroBased());
@@ -110,6 +110,22 @@ public class EditMeetingCommand extends Command {
         When updatedWhen = editMeetingDescriptor.getWhen().orElse(meetingToEdit.getWhen());
 
         return new Meeting(updatedMeetingName, updatedVenue, updatedWhen);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof EditMeetingCommand)) {
+            return false;
+        }
+
+        EditMeetingCommand e = (EditMeetingCommand) other;
+        return personIndex.equals(e.personIndex)
+                && meetingIndex.equals(e.meetingIndex)
+                && editMeetingDescriptor.equals(e.editMeetingDescriptor);
     }
 
     /**

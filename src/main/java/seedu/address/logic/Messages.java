@@ -20,6 +20,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_DATETIME_FORMAT = "Invalid datetime format. "
             + "Accepted formats: dd/MM/yyyy HH[:]mm, yyyy-MM-dd HH[:]mm";
+    public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "The meeting index provided is invalid";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
