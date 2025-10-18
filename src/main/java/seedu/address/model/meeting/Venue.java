@@ -38,6 +38,9 @@ public class Venue {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isBlank() {
+        return value == null || value.isBlank();
+    }
 
     @Override
     public String toString() {

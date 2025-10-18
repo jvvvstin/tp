@@ -37,6 +37,9 @@ public class MeetingName {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isBlank() {
+        return meetingName == null || meetingName.isBlank();
+    }
 
     @Override
     public String toString() {
