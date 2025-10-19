@@ -1,10 +1,27 @@
 package seedu.address.model.person;
 
-public class FlagStatus {
-    public static final Boolean DEFAULT_FLAG_STATUS = false;
+public class FlagStatus implements Comparable<FlagStatus> {
+    public static final FlagStatus DEFAULT_FLAG_STATUS = new FlagStatus(false);
     private Boolean isFlagged;
 
     public FlagStatus(Boolean isFlagged) {
         this.isFlagged = isFlagged;
+    }
+
+    @Override
+    public int compareTo(FlagStatus other) {
+        return Boolean.compare(!this.isFlagged, !other.isFlagged);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof FlagStatus)) {
+            return false;
+        }
+        FlagStatus otherFlagStatus = (FlagStatus) other;
+        return this.isFlagged.equals(otherFlagStatus.isFlagged);
     }
 }
