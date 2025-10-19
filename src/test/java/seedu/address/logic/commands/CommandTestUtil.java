@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.EditMeetingCommand.EditMeetingDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAIN_PHONE;
@@ -18,7 +19,6 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -70,8 +70,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_MEETING_NAME = " " + PREFIX_MEETING + "Financial $haring"; // '$' not allowed in
-                                                                                                  // meeting name
+    // '$' not allowed in meeting name
+    public static final String INVALID_MEETING_NAME = " " + PREFIX_MEETING + "Financial $haring";
     public static final String INVALID_MEETING_VENUE = " " + PREFIX_VENUE + "$tarbuck$"; // '$' not allowed in venue
     public static final String INVALID_MEETING_WHEN = " " + PREFIX_WHEN + "2025-13-13 1400"; // 13 is not a valid month
 
@@ -81,8 +81,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
-    public static EditMeetingCommand.EditMeetingDescriptor MEETING_AMY = null;
-    public static EditMeetingCommand.EditMeetingDescriptor MEETING_BOB = null;
+    public static final EditMeetingDescriptor MEETING_AMY;
+    public static final EditMeetingDescriptor MEETING_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -91,14 +91,11 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        try {
-            MEETING_AMY = new EditMeetingDescriptorBuilder().withMeetingName(VALID_MEETING_AMY).withVenue(VALID_VENUE_AMY)
-                    .withWhen(VALID_WHEN_AMY).build();
-            MEETING_BOB = new EditMeetingDescriptorBuilder().withMeetingName(VALID_MEETING_BOB).withVenue(VALID_VENUE_BOB)
-                    .withWhen(VALID_WHEN_BOB).build();
-        } catch (ParseException ignored) {
+        MEETING_AMY = new EditMeetingDescriptorBuilder().withMeetingName(VALID_MEETING_AMY)
+                .withVenue(VALID_VENUE_AMY).withWhen(VALID_WHEN_AMY).build();
+        MEETING_BOB = new EditMeetingDescriptorBuilder().withMeetingName(VALID_MEETING_BOB)
+                .withVenue(VALID_VENUE_BOB).withWhen(VALID_WHEN_BOB).build();
 
-        }
     }
 
     /**

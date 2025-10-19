@@ -51,8 +51,12 @@ public class EditMeetingDescriptorBuilder {
     /**
      * Sets the {@code when} of the {@code EditMeetingDescriptor} that we are building/
      */
-    public EditMeetingDescriptorBuilder withWhen(String when) throws ParseException {
-        descriptor.setWhen(new When(when));
+    public EditMeetingDescriptorBuilder withWhen(String when) {
+        try {
+            descriptor.setWhen(new When(when));
+        } catch (ParseException e) {
+            // This exception can be safely ignored.
+        }
         return this;
     }
 

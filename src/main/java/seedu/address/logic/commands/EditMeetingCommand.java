@@ -17,7 +17,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingName;
@@ -25,6 +24,9 @@ import seedu.address.model.meeting.Venue;
 import seedu.address.model.meeting.When;
 import seedu.address.model.person.Person;
 
+/**
+ * Edits the details of an existing meeting of a person in the address book.
+ */
 public class EditMeetingCommand extends Command {
     public static final String COMMAND_WORD = "editmt";
 
@@ -57,6 +59,13 @@ public class EditMeetingCommand extends Command {
     private final Index meetingIndex;
     private final EditMeetingDescriptor editMeetingDescriptor;
 
+    /**
+     * Constructs an {@code EditMeetingCommand} object based on the person and meeting specified and the fields to be
+     * edited.
+     * @param personIndex index of the person in the filtered person list to edit
+     * @param meetingIndex index of the meeting for the person to edit
+     * @param editMeetingDescriptor details of the meeting to be edited
+     */
     public EditMeetingCommand(Index personIndex, Index meetingIndex, EditMeetingDescriptor editMeetingDescriptor) {
         requireNonNull(personIndex);
         requireNonNull(meetingIndex);
@@ -102,6 +111,10 @@ public class EditMeetingCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_MEETING_SUCCESS, Messages.format(personToEdit)));
     }
 
+    /**
+     * Creates and returns a {@code Meeting} with the details of {@code meetingToEdit}
+     * edited with {@code editMeetingDescriptor}.
+     */
     private static Meeting createEditedMeeting(Meeting meetingToEdit, EditMeetingDescriptor editMeetingDescriptor) {
         assert meetingToEdit != null;
 
@@ -139,6 +152,10 @@ public class EditMeetingCommand extends Command {
 
         public EditMeetingDescriptor() {}
 
+        /**
+         * Copy constructor.
+         * Constructs an {@code EditMeetingDescriptor} object based on the meeting details to be edited.
+         */
         public EditMeetingDescriptor(EditMeetingDescriptor toCopy) {
             setMeetingName(toCopy.meetingName);
             setVenue(toCopy.venue);

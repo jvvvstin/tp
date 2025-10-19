@@ -20,6 +20,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code EditMeetingCommand}
+     * and returns an @{code EditMeetingCommand} object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public EditMeetingCommand parse(String args) throws ParseException {
         requireNonNull(args);
 

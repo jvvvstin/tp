@@ -12,9 +12,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -103,7 +100,7 @@ public class PersonTest {
     @Test
     public void editMeeting_validIndex_success() {
         Person person = null;
-        Meeting updatedMeeting  = null;
+        Meeting updatedMeeting = null;
         try {
             person = new PersonBuilder(ALICE)
                     .withMeetings(
@@ -113,7 +110,7 @@ public class PersonTest {
                     .build();
             updatedMeeting = new Meeting("Updated sharing", "Junction 8", "2026-01-10 1300");
         } catch (ParseException ignored) {
-
+            // this exception can be ignored
         }
         person.editMeeting(0, updatedMeeting);
         assertEquals(updatedMeeting, person.getMeetings().get(0));

@@ -112,6 +112,11 @@ public class Person {
         return meetings.size();
     }
 
+    /**
+     * Edits a meeting from the person's meeting list.
+     * @param meetingToEdit the index of the meeting to be edited.
+     * @param meeting the updated meeting to replace the old meeting.
+     */
     public void editMeeting(int meetingToEdit, Meeting meeting) {
         assert meetingToEdit >= 0;
         assert meetingToEdit < meetings.size();

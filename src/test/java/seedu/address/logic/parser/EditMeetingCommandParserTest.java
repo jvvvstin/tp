@@ -39,19 +39,19 @@ import seedu.address.model.meeting.When;
 import seedu.address.testutil.EditMeetingDescriptorBuilder;
 
 public class EditMeetingCommandParserTest {
-    private EditMeetingCommandParser parser = new EditMeetingCommandParser();
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditMeetingCommand.MESSAGE_USAGE);
 
-    Index personIndex = INDEX_FIRST_PERSON;
-    Index meetingIndex = INDEX_FIRST_MEETING;
+    private EditMeetingCommandParser parser = new EditMeetingCommandParser();
+
+    private Index meetingIndex = INDEX_FIRST_MEETING;
+    private Index personIndex = INDEX_FIRST_PERSON;
 
     @Test
     public void parse_missingParts_failure() {
         // no person index specified
-        String userInput = " " + PREFIX_MEETING_INDEX + meetingIndex.getOneBased() + MEETING_NAME_AMY + MEETING_VENUE_AMY
-                + MEETING_WHEN_AMY;
+        String userInput = " " + PREFIX_MEETING_INDEX + meetingIndex.getOneBased() + MEETING_NAME_AMY
+                + MEETING_VENUE_AMY + MEETING_WHEN_AMY;
 
         assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
 
@@ -171,14 +171,14 @@ public class EditMeetingCommandParserTest {
 
         assertParseFailure(parser, userInput, Venue.MESSAGE_CONSTRAINTS);
 
-        userInput= " " + PREFIX_PERSON_INDEX + personIndex.getOneBased() + " " + PREFIX_MEETING_INDEX
+        userInput = " " + PREFIX_PERSON_INDEX + personIndex.getOneBased() + " " + PREFIX_MEETING_INDEX
                 + meetingIndex.getOneBased() + MEETING_NAME_AMY + MEETING_VENUE_AMY + INVALID_MEETING_WHEN;
 
         assertParseFailure(parser, userInput, When.MESSAGE_CONSTRAINTS);
     }
 
     @Test
-    public void parse_multipleRepeatedFields_Failure() throws ParseException {
+    public void parse_multipleRepeatedFields_failure() throws ParseException {
         String userInput = " " + PREFIX_PERSON_INDEX + personIndex.getOneBased() + " " + PREFIX_MEETING_INDEX
                 + meetingIndex.getOneBased() + INVALID_MEETING_NAME + MEETING_NAME_AMY;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEETING));
