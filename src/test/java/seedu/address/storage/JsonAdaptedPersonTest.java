@@ -12,8 +12,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.FlagCommandTest;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FlagStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -133,6 +135,15 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_OTHER_PHONES,
                         VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_MEETINGS, VALID_FLAG_STATUS);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullFlagStatus_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_OTHER_PHONES,
+                        VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_MEETINGS, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, FlagStatus.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }
