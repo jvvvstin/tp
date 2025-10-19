@@ -50,15 +50,15 @@ public class FlagCommand extends Command {
 
         Person personToFlag = lastShownList.get(targetIndex.getZeroBased());
 
+        // check if person is already flagged
+        if (personToFlag.getFlagStatus().isFlagged) {
+            throw new CommandException(MESSAGE_ALREADY_FLAGGED);
+        }
+
         // create an edited person descriptor with flagged status set to true
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         editPersonDescriptor.setFlagStatus(new FlagStatus(true));
         Person flaggedPerson = createEditedPerson(personToFlag, editPersonDescriptor);
-
-        // check if person is already flagged
-        if (personToFlag.isSamePerson(flaggedPerson) && model.hasPerson(flaggedPerson)) {
-            throw new CommandException(MESSAGE_ALREADY_FLAGGED);
-        }
 
         model.setPerson(personToFlag, flaggedPerson);
         model.updatePersonListFilter(PREDICATE_SHOW_ALL_PERSONS);
