@@ -71,7 +71,7 @@ public class PersonListTest {
     }
 
     @Test
-    public void flagCommand_validFlag_retainsOrder() {
+    public void getPersonList_withFlaggedStatus_orderPreserved() {
 
         Person firstPerson = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person secondPerson = model.getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
@@ -90,8 +90,6 @@ public class PersonListTest {
 
         // Get the sorted person list
         ObservableList<Person> sortedPersonList = model.getPersonList();
-
-        System.out.println(model.getPersonList());
 
         // Check that the flagged persons are at the top in the original order
         assertEquals(sortedPersonList.get(INDEX_FIRST_PERSON.getZeroBased()), firstPersonFlagged);
