@@ -38,7 +38,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Meeting> meetings = new ArrayList<>();
-    private final FlagStatus isFlagged;
+    private final FlagStatus flagStatus;
 
     /**
      * Every field must be present and not null.
@@ -54,7 +54,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.meetings.addAll(meetings);
-        this.isFlagged = isFlagged;
+        this.flagStatus = isFlagged;
     }
 
     public Name getName() {
@@ -77,8 +77,8 @@ public class Person {
         return address;
     }
 
-    public FlagStatus getIsFlagged() {
-        return isFlagged;
+    public FlagStatus getFlagStatus() {
+        return flagStatus;
     }
 
     /**
@@ -143,13 +143,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && meetings.equals(otherPerson.meetings)
-                && isFlagged == otherPerson.isFlagged;
+                && flagStatus.equals(otherPerson.flagStatus);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags,flagStatus);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("meetings", meetings)
-                .add("isFlagged", isFlagged)
+                .add("isFlagged", flagStatus)
                 .toString();
     }
 

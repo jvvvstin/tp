@@ -2,8 +2,8 @@ package seedu.address.list;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
-import java.util.logging.Filter;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,7 +26,7 @@ public class PersonList {
 
     public ObservableList<Person> getPersonList() {
         return new SortedList<>(filteredPersons,
-                (p1, p2) -> Boolean.compare(!p1.getIsFlagged(), !p2.getIsFlagged())
+                Comparator.comparing(Person::getFlagStatus)
         );
     }
 

@@ -82,7 +82,7 @@ public class AddMeetingCommand extends Command {
                 personToEdit.getOtherPhones(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(),
-                editedMeetings, personToEdit.getIsFlagged());
+                editedMeetings, personToEdit.getFlagStatus());
         model.setPerson(personToEdit, editedPerson);
         model.updatePersonListFilter(PREDICATE_SHOW_ALL_PERSONS);
 

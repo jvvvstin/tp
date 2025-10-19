@@ -1,10 +1,13 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 public class FlagStatus implements Comparable<FlagStatus> {
     public static final FlagStatus DEFAULT_FLAG_STATUS = new FlagStatus(false);
-    private Boolean isFlagged;
+    public final Boolean isFlagged;
 
     public FlagStatus(Boolean isFlagged) {
+        requireNonNull(isFlagged);
         this.isFlagged = isFlagged;
     }
 
@@ -23,5 +26,15 @@ public class FlagStatus implements Comparable<FlagStatus> {
         }
         FlagStatus otherFlagStatus = (FlagStatus) other;
         return this.isFlagged.equals(otherFlagStatus.isFlagged);
+    }
+
+    @Override
+    public String toString() {
+        return isFlagged ? "Flagged" : "Not Flagged";
+    }
+
+    @Override
+    public int hashCode() {
+        return isFlagged.hashCode();
     }
 }

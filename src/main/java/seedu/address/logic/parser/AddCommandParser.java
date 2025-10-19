@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAIN_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.person.FlagStatus.DEFAULT_FLAG_STATUS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         OtherPhones otherPhones = ParserUtil.parseOtherPhones(
                 argMultimap.getValue(PREFIX_OTHER_PHONE).orElse(""));
 
-        Person person = new Person(name, phone, otherPhones, email, address, tagList, meetings, false);
+        Person person = new Person(name, phone, otherPhones, email, address, tagList, meetings, DEFAULT_FLAG_STATUS);
 
         return new AddCommand(person);
     }

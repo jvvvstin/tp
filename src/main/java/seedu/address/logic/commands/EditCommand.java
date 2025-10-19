@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FlagStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OtherPhones;
 import seedu.address.model.person.Person;
@@ -106,10 +107,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         List<Meeting> updatedMeetings = personToEdit.getMeetings();
-        Boolean isFlagged = editPersonDescriptor.getIsFlagged().orElse(personToEdit.getIsFlagged());
+        FlagStatus flagStatus = editPersonDescriptor.getFlagStatus().orElse(personToEdit.getFlagStatus());
 
         Person person = new Person(updatedName, updatedPhone,
-                updatedOtherPhones, updatedEmail, updatedAddress, updatedTags, updatedMeetings, isFlagged);
+                updatedOtherPhones, updatedEmail, updatedAddress, updatedTags, updatedMeetings, flagStatus);
 
         return person;
     }
@@ -149,7 +150,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Boolean isFlagged;
+        private FlagStatus flagStatus;
 
         public EditPersonDescriptor() {}
 
@@ -164,14 +165,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setIsFlagged(toCopy.isFlagged);
+            setFlagStatus(toCopy.flagStatus);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, otherPhones, email, address, tags, isFlagged);
+            return CollectionUtil.isAnyNonNull(name, phone, otherPhones, email, address, tags, flagStatus);
         }
 
         public void setName(Name name) {
@@ -232,12 +233,12 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setIsFlagged(Boolean isFlagged) {
-            this.isFlagged = isFlagged;
+        public void setFlagStatus(FlagStatus flagStatus) {
+            this.flagStatus = flagStatus;
         }
 
-        public Optional<Boolean> getIsFlagged() {
-            return Optional.ofNullable(isFlagged);
+        public Optional<FlagStatus> getFlagStatus() {
+            return Optional.ofNullable(flagStatus);
         }
 
         @Override
@@ -257,7 +258,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(isFlagged, otherEditPersonDescriptor.isFlagged);
+                    && Objects.equals(flagStatus, otherEditPersonDescriptor.flagStatus);
         }
 
         @Override
@@ -268,7 +269,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
-                    .add("isFlagged", isFlagged)
+                    .add("isFlagged", flagStatus)
                     .toString();
         }
     }
