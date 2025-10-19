@@ -39,7 +39,7 @@ public class FlagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        assert(targetIndex.getOneBased() >= 0);
+        assert(targetIndex.getZeroBased() >= 0);
 
         List<Person> lastShownList = model.getPersonList();
 
@@ -61,7 +61,6 @@ public class FlagCommand extends Command {
         Person flaggedPerson = createEditedPerson(personToFlag, editPersonDescriptor);
 
         model.setPerson(personToFlag, flaggedPerson);
-        model.updatePersonListFilter(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(flaggedPerson)));
     }
 
