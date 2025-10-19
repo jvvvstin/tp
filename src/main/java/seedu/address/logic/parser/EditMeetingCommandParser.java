@@ -37,8 +37,10 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_PERSON_INDEX, PREFIX_MEETING_INDEX, PREFIX_MEETING,
                         PREFIX_VENUE, PREFIX_WHEN);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_INDEX, PREFIX_MEETING_INDEX)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_INDEX, PREFIX_MEETING_INDEX)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditMeetingCommand.MESSAGE_USAGE));
+        }
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditMeetingCommand.MESSAGE_USAGE));
         }
 
