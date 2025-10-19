@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  * Adds a meeting to an existing person in the address book.
  */
 public class AddMeetingCommand extends Command {
-    public static final String COMMAND_WORD = "addmeeting";
+    public static final String COMMAND_WORD = "addmt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting for the person identified "
             + "by the index number used in the last person listing. "
