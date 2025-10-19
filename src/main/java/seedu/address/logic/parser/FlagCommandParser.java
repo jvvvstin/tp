@@ -12,15 +12,12 @@ public class FlagCommandParser implements Parser<FlagCommand> {
     @Override
     public FlagCommand parse(String args) throws ParseException {
         try {
-            // check if args is empty
-            if (args.trim().isEmpty()) {
-                throw new ParseException(MESSAGE_INVALID_BLANK);
-            }
 
             // try to parse the index
             Index index = ParserUtil.parseIndex(args);
 
             assert(index.getZeroBased() >= 0);
+
             return new FlagCommand(index);
         } catch (ParseException e) {
             throw new ParseException(
