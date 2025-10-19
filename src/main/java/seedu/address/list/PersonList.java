@@ -3,6 +3,7 @@ package seedu.address.list;
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
+import java.util.logging.Filter;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -11,15 +12,11 @@ import seedu.address.model.person.Person;
 
 public class PersonList {
     private final FilteredList<Person> filteredPersons;
-    private final SortedList<Person> sortedPersons;
 
     public PersonList(ObservableList<Person> persons) {
         requireNonNull(persons);
 
         this.filteredPersons = new FilteredList<>(persons);
-        this.sortedPersons = new SortedList<>(filteredPersons,
-                (p1, p2) -> Boolean.compare(!p1.getIsFlagged(), !p2.getIsFlagged())
-        );
     }
 
     public void updatePersonListFilter(Predicate<Person> predicate) {
@@ -28,7 +25,9 @@ public class PersonList {
     }
 
     public ObservableList<Person> getPersonList() {
-        return sortedPersons;
+        return new SortedList<>(filteredPersons,
+                (p1, p2) -> Boolean.compare(!p1.getIsFlagged(), !p2.getIsFlagged())
+        );
     }
 
     @Override
@@ -42,7 +41,7 @@ public class PersonList {
         }
 
         PersonList otherPersonList = (PersonList) other;
-        return sortedPersons.equals(otherPersonList.sortedPersons);
+        return getPersonList().equals(otherPersonList.getPersonList());
     }
 
 

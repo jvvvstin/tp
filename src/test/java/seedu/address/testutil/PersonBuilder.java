@@ -25,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_OTHER_PHONE = "92317869";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Boolean DEFAULT_FLAG = false;
 
     private Name name;
     private Phone phone;
@@ -33,6 +34,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private List<Meeting> meetings;
+    private Boolean isFlagged;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,6 +47,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         meetings = new ArrayList<>();
+        isFlagged = DEFAULT_FLAG;
     }
 
     /**
@@ -58,6 +61,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         meetings = new ArrayList<>(personToCopy.getMeetings());
+        isFlagged = personToCopy.getIsFlagged();
     }
 
     /**
@@ -116,8 +120,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isFlagged} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIsFlagged(Boolean isFlagged) {
+        this.isFlagged = isFlagged;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, otherPhones, email, address, tags, meetings);
+        return new Person(name, phone, otherPhones, email, address, tags, meetings, isFlagged);
     }
 
 }

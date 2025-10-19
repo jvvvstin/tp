@@ -123,7 +123,7 @@ class JsonAdaptedPerson {
         final OtherPhones modelOtherPhones = new OtherPhones(otherPhones);
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final List<Meeting> modelMeetings = new ArrayList<>(personMeetings);
-        return new Person(modelName, modelPhone, modelOtherPhones, modelEmail, modelAddress, modelTags, modelMeetings);
+        return new Person(modelName, modelPhone, modelOtherPhones, modelEmail, modelAddress, modelTags, modelMeetings, false);
     }
 
 }

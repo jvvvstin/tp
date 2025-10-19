@@ -106,9 +106,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         List<Meeting> updatedMeetings = personToEdit.getMeetings();
+        Boolean isFlagged = editPersonDescriptor.getIsFlagged().orElse(personToEdit.getIsFlagged());
 
-        return new Person(updatedName, updatedPhone,
-                updatedOtherPhones, updatedEmail, updatedAddress, updatedTags, updatedMeetings);
+        Person person = new Person(updatedName, updatedPhone,
+                updatedOtherPhones, updatedEmail, updatedAddress, updatedTags, updatedMeetings, isFlagged);
+
+        return person;
     }
 
     @Override
@@ -146,6 +149,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Boolean isFlagged;
 
         public EditPersonDescriptor() {}
 
@@ -160,6 +164,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setIsFlagged(toCopy.isFlagged);
         }
 
         /**
@@ -227,6 +232,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setIsFlagged(Boolean isFlagged) {
+            this.isFlagged = isFlagged;
+        }
+
+        public Optional<Boolean> getIsFlagged() {
+            return Optional.ofNullable(isFlagged);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -243,7 +256,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(isFlagged, otherEditPersonDescriptor.isFlagged);
         }
 
         @Override
@@ -254,6 +268,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("isFlagged", isFlagged)
                     .toString();
         }
     }

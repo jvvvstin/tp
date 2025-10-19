@@ -81,7 +81,8 @@ public class AddMeetingCommand extends Command {
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getOtherPhones(),
                 personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), editedMeetings);
+                personToEdit.getAddress(), personToEdit.getTags(),
+                editedMeetings, personToEdit.getIsFlagged());
         model.setPerson(personToEdit, editedPerson);
         model.updatePersonListFilter(PREDICATE_SHOW_ALL_PERSONS);
 

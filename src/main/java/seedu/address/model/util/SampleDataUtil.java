@@ -23,6 +23,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     public static final List<Meeting> EMPTY_MEETING_LIST = Collections.emptyList();
+    public static final Boolean NOT_FLAGGED = false;
 
     public static Person[] getSamplePersons() {
         return new Person[] {
@@ -31,37 +32,37 @@ public class SampleDataUtil {
                     new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"),
-                EMPTY_MEETING_LIST),
+                EMPTY_MEETING_LIST, NOT_FLAGGED),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                     new OtherPhones("93458679"),
                     new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     getTagSet("colleagues", "friends"),
-                    EMPTY_MEETING_LIST),
+                    EMPTY_MEETING_LIST, NOT_FLAGGED),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     new OtherPhones("93756821"),
                     new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     getTagSet("neighbours"),
-                    EMPTY_MEETING_LIST),
+                    EMPTY_MEETING_LIST, NOT_FLAGGED),
             new Person(new Name("David Li"), new Phone("91031282"),
                     new OtherPhones("97568321"),
                     new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"),
-                EMPTY_MEETING_LIST),
+                EMPTY_MEETING_LIST, NOT_FLAGGED),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                     new OtherPhones("93687543"),
                     new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"),
-                EMPTY_MEETING_LIST),
+                EMPTY_MEETING_LIST, NOT_FLAGGED),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
                     new OtherPhones("93756878"),
                     new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"),
-                EMPTY_MEETING_LIST)
+                EMPTY_MEETING_LIST, NOT_FLAGGED)
         };
     }
 

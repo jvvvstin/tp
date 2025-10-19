@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         OtherPhones otherPhones = ParserUtil.parseOtherPhones(
                 argMultimap.getValue(PREFIX_OTHER_PHONE).orElse(""));
 
-        Person person = new Person(name, phone, otherPhones, email, address, tagList, meetings);
+        Person person = new Person(name, phone, otherPhones, email, address, tagList, meetings, false);
 
         return new AddCommand(person);
     }

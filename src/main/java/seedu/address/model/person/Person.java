@@ -40,14 +40,15 @@ public class Person {
     private final List<Meeting> meetings = new ArrayList<>();
 
     // Characteristic fields
-    private boolean isFlagged = false;
+    private Boolean isFlagged;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, OtherPhones otherPhones,
-                  Email email, Address address, Set<Tag> tags, List<Meeting> meetings) {
-        requireAllNonNull(name, phone, email, address, tags, meetings);
+                  Email email, Address address, Set<Tag> tags,
+                  List<Meeting> meetings, Boolean isFlagged) {
+        requireAllNonNull(name, phone, email, address, tags, meetings,isFlagged);
         this.name = name;
         this.phone = phone;
         this.otherPhones = otherPhones;
@@ -55,6 +56,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.meetings.addAll(meetings);
+        this.isFlagged = isFlagged;
     }
 
     public Name getName() {
@@ -77,7 +79,7 @@ public class Person {
         return address;
     }
 
-    public boolean getIsFlagged() {
+    public Boolean getIsFlagged() {
         return isFlagged;
     }
 
@@ -121,7 +123,7 @@ public class Person {
         return meetings.size();
     }
 
-    public void setFlagged(boolean isFlagged) {
+    public void setFlagged(Boolean isFlagged) {
         this.isFlagged = isFlagged;
     }
 
@@ -164,6 +166,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("meetings", meetings)
                 .add("isFlagged", isFlagged)
                 .toString();
     }
