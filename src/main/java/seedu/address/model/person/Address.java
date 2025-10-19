@@ -19,7 +19,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
-    private static final Logger logger = LogsCenter.getLogger(Email.class);
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank\n"
             + LABEL_MESSAGE
             + "\n\n"
@@ -27,13 +26,12 @@ public class Address {
             + "1. For 1 address only, the label is optional so: ADDRESS or ADDRESS (LABEL).\n"
             + "2. For multiple emails, the label is compulsory so: ADDRESS1 (LABEL1) ADDRESS2 (LABEL2) ... "
             + "ADDRESSN (LABELN).";
-
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
-
+    private static final Logger logger = LogsCenter.getLogger(Email.class);
     public final String value;
 
     /**
