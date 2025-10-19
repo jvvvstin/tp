@@ -12,8 +12,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -31,8 +36,6 @@ public class PersonTest {
 
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
-
-
 
         // same name, all other attributes different -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
@@ -95,6 +98,44 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void editMeeting_validIndex_success() {
+        Person person = null;
+        Meeting updatedMeeting  = null;
+        try {
+            person = new PersonBuilder(ALICE)
+                    .withMeetings(
+                            new Meeting("Financial sharing", "AMK Hub", "2025-10-18 1400"),
+                            new Meeting("Policy revision", "Her house", "2025-12-12 1200")
+                    )
+                    .build();
+            updatedMeeting = new Meeting("Updated sharing", "Junction 8", "2026-01-10 1300");
+        } catch (ParseException ignored) {
+
+        }
+        person.editMeeting(0, updatedMeeting);
+        assertEquals(updatedMeeting, person.getMeetings().get(0));
+
+        person.editMeeting(1, updatedMeeting);
+        assertEquals(updatedMeeting, person.getMeetings().get(1));
+    }
+
+    @Test
+    public void editMeeting_negativeIndex_fail() {
+        assertThrows(AssertionError.class, () -> {
+            ALICE.editMeeting(-1, new Meeting("Updated sharing", "Junction 8",
+                    "2026-01-10 1300"));
+        });
+    }
+
+    @Test
+    public void editMeeting_indexOutOfBounds_fail() {
+        assertThrows(AssertionError.class, () -> {
+            ALICE.editMeeting(2, new Meeting("Updated sharing", "Junction 8",
+                    "2026-01-10 1300"));
+        });
     }
 
     @Test

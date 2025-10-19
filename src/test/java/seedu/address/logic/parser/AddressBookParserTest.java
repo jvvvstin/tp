@@ -26,6 +26,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditMeetingCommand;
+import seedu.address.logic.commands.EditMeetingCommand.EditMeetingDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -107,6 +109,24 @@ public class AddressBookParserTest {
                 + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MEETING + meetingName
                 + " " + PREFIX_VENUE + venue + " " + PREFIX_WHEN + datetime);
         assertEquals(new AddMeetingCommand(INDEX_FIRST_PERSON, meeting), command);
+    }
+
+    @Test
+    public void parseCommand_editMeeting() throws Exception {
+        final String updatedMeetingName = "Some meeting";
+        final String updatedVenue = "Some venue";
+        final String updatedDatetime = "2025-10-11 1400";
+        final Meeting updatedMeeting = new Meeting(updatedMeetingName, updatedVenue, updatedDatetime);
+        EditMeetingDescriptor descriptor = new EditMeetingDescriptor();
+        descriptor.setMeetingName(updatedMeeting.getMeetingName());
+        descriptor.setVenue(updatedMeeting.getVenue());
+        descriptor.setWhen(updatedMeeting.getWhen());
+        EditMeetingCommand command = (EditMeetingCommand) parser.parseCommand(EditMeetingCommand.COMMAND_WORD
+                + " " + PREFIX_PERSON_INDEX + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PREFIX_MEETING_INDEX + INDEX_FIRST_MEETING.getOneBased()
+                + " " + PREFIX_MEETING + updatedMeetingName + " " + PREFIX_VENUE + updatedVenue
+                + " " + PREFIX_WHEN + updatedDatetime);
+        assertEquals(new EditMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING, descriptor), command);
     }
 
     @Test
