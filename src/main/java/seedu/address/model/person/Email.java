@@ -9,13 +9,17 @@ import static seedu.address.model.person.Person.LABEL_VALIDATION_REGEX;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
-
+    private static final Logger logger = LogsCenter.getLogger(Email.class);
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -54,7 +58,13 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+
+        try {
+            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        } catch (ParseException e) {
+            logger.warning("ParseException thrown for Email constructor for: " + email);
+        }
+
         value = email;
     }
 
@@ -64,8 +74,15 @@ public class Email {
      * @param test The {@code String email} test if it is valid.
      * @return A boolean indicating if the email is valid or not.
      */
-    public static boolean isValidEmail(String test) {
-        List<String> paramsAndLabels = parseParametersAndLabels(test, false);
+    public static boolean isValidEmail(String test) throws ParseException {
+        String trimmedEmail = test.trim();
+
+        if (trimmedEmail.isEmpty()) {
+            return false;
+        }
+
+        List<String> paramsAndLabels = parseParametersAndLabels(Email.class.getName().toLowerCase(),
+                test, false);
 
         if (paramsAndLabels.isEmpty()) {
             return false;

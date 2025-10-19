@@ -9,13 +9,17 @@ import static seedu.address.model.person.Person.LABEL_VALIDATION_REGEX;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
-
+    private static final Logger logger = LogsCenter.getLogger(Email.class);
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank\n"
             + LABEL_MESSAGE
             + "\n\n"
@@ -39,15 +43,28 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+
+        try {
+            checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        } catch (ParseException e) {
+            logger.warning("ParseException thrown for Address constructor for: " + address);
+        }
+
         value = address;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAddress(String test) {
-        List<String> paramsAndLabels = parseParametersAndLabels(test, false);
+    public static boolean isValidAddress(String test) throws ParseException {
+        String trimmedAddress = test.trim();
+
+        if (trimmedAddress.isEmpty()) {
+            return false;
+        }
+
+        List<String> paramsAndLabels = parseParametersAndLabels(Address.class.getName().toLowerCase(),
+                test, false);
 
         if (paramsAndLabels.isEmpty()) {
             return false;
