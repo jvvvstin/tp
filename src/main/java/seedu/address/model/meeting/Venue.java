@@ -16,7 +16,7 @@ public class Venue {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(?=.*[\\p{L}\\d])[\\p{L}\\p{M}\\d ,.'()#\\-/]+$";
+    public static final String VALIDATION_REGEX = "^(?=.*[\\p{L}\\d])[\\p{L}\\p{M}\\d ,.'()#&\\-/]+$";
 
     public final String value;
 
@@ -54,11 +54,11 @@ public class Venue {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.meeting.Venue)) {
+        if (!(other instanceof Venue)) {
             return false;
         }
 
-        seedu.address.model.meeting.Venue otherVenue = (seedu.address.model.meeting.Venue) other;
+        Venue otherVenue = (Venue) other;
         return value.equals(otherVenue.value);
     }
 

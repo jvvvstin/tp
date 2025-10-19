@@ -82,11 +82,11 @@ public class When {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.meeting.When)) {
+        if (!(other instanceof When)) {
             return false;
         }
 
-        seedu.address.model.meeting.When otherWhen = (seedu.address.model.meeting.When) other;
+        When otherWhen = (When) other;
         return value.equals(otherWhen.value);
     }
 

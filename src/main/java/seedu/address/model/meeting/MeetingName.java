@@ -15,7 +15,7 @@ public class MeetingName {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(?=.*\\p{L}|\\d)[\\p{L}\\p{M}0-9 ]+$";
+    public static final String VALIDATION_REGEX = "^(?=.*\\p{L}|\\d)[\\p{L}\\p{M}0-9 '\\s]+$";
 
     public final String meetingName;
 
@@ -53,7 +53,7 @@ public class MeetingName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.meeting.MeetingName)) {
+        if (!(other instanceof MeetingName)) {
             return false;
         }
 
