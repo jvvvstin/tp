@@ -47,9 +47,9 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Meeting
-Meeting --> MeetingName
-Meeting --> Venue
-Meeting --> When
+Meeting *--> MeetingName
+Meeting *--> Venue
+Meeting *--> When
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
