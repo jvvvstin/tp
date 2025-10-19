@@ -96,7 +96,16 @@
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-padding: 0 0 0 0;
+}
+
+.list-cell #cardPane.flagged {
+    -fx-border-color: transparent transparent transparent #4A90E2;
+    -fx-border-width: 0 0 0 3;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }
 
 .list-cell:filled:even {
@@ -114,6 +123,7 @@
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
     -fx-border-width: 1;
+    -fx-border-radius: 10;
 }
 
 .list-cell .label {
@@ -310,6 +320,7 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #commandTypeLabel {

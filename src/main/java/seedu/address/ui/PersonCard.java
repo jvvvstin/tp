@@ -1,12 +1,18 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import seedu.address.MainApp;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,6 +21,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String FLAG_IMAGE_PATH = "/images/flag.png";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -44,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane meetings;
+    @FXML
+    private Circle flag;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,5 +71,24 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getMeetings().stream()
                 .forEach(meeting -> meetings.getChildren().add(new Label(meeting.toString())));
+
+        updateFlagImage();
+        toggleFlagUI(person);
     }
+
+    public void updateFlagImage() {
+        Image image = new Image(MainApp.class.getResourceAsStream(FLAG_IMAGE_PATH));
+        flag.setFill(new ImagePattern(image));
+    }
+
+    public void toggleFlagUI(Person person) {
+        if (person.getFlagStatus().isFlagged) {
+            flag.setVisible(true);
+            cardPane.getStyleClass().add("flagged");
+        } else {
+            flag.setVisible(false);
+            cardPane.getStyleClass().removeAll("flagged");
+        }
+    }
+
 }
