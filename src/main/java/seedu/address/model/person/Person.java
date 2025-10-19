@@ -38,16 +38,14 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Meeting> meetings = new ArrayList<>();
-
-    // Characteristic fields
-    private Boolean isFlagged;
+    private final FlagStatus isFlagged;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, OtherPhones otherPhones,
                   Email email, Address address, Set<Tag> tags,
-                  List<Meeting> meetings, Boolean isFlagged) {
+                  List<Meeting> meetings, FlagStatus isFlagged) {
         requireAllNonNull(name, phone, email, address, tags, meetings,isFlagged);
         this.name = name;
         this.phone = phone;
@@ -79,7 +77,7 @@ public class Person {
         return address;
     }
 
-    public Boolean getIsFlagged() {
+    public FlagStatus getIsFlagged() {
         return isFlagged;
     }
 
@@ -121,10 +119,6 @@ public class Person {
      */
     public int getMeetingCount() {
         return meetings.size();
-    }
-
-    public void setFlagged(Boolean isFlagged) {
-        this.isFlagged = isFlagged;
     }
 
     /**
