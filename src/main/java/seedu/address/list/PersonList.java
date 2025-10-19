@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -11,6 +12,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.model.person.Person;
 
 public class PersonList {
+    private static final Logger logger = Logger.getLogger(PersonList.class.getName());
     private final FilteredList<Person> filteredPersons;
 
     public PersonList(ObservableList<Person> persons) {
@@ -25,9 +27,13 @@ public class PersonList {
     }
 
     public ObservableList<Person> getPersonList() {
-        return new SortedList<>(filteredPersons,
+        logger.info(filteredPersons.stream().map(p -> p.getName()).toList().toString());
+        ObservableList<Person> result = new SortedList<>(filteredPersons,
                 Comparator.comparing(Person::getFlagStatus)
+                        .thenComparing(p -> filteredPersons.getSource().indexOf(p))
         );
+        logger.info(result.stream().map(p -> p.getName()).toList().toString());
+        return result;
     }
 
     @Override
