@@ -2,9 +2,13 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddressTest {
 
@@ -24,32 +28,40 @@ public class AddressTest {
         // null address
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
 
-        // invalid addresses
-        assertFalse(Address.isValidAddress("")); // empty string
-        assertFalse(Address.isValidAddress(" ")); // spaces only
-        assertFalse(Address.isValidAddress("Kent Ridge (home) (school)")); // Another address missing
-        assertFalse(Address.isValidAddress("Kent Ridge (home) "
-                + "Jurong (home)")); // Duplicate labels
-        assertFalse(Address.isValidAddress("Kent Ridge (home) "
-                + "Kent Ridge (school)")); // Duplicate address
-        assertFalse(Address.isValidAddress("Kent Ridge ()")); // Empty label
-        assertFalse(Address.isValidAddress("Kent Ridge (  )")); // Label with spaces only
-        assertFalse(Address.isValidAddress("Kent Ridge (--)")); // Label with hyphen only
-        assertFalse(Address.isValidAddress("Kent Ridge ( -- - )")); // Label with spaces and hyphens only
-        assertFalse(Address.isValidAddress("Kent Ridge (Test / No)")); // Label other characters
-        assertFalse(Address.isValidAddress("Kent Ridge (School) Jurong East(Home)")); // Label together with address
+        assertThrows(ParseException.class, () ->
+                Address.isValidAddress("Kent Ridge (School) Jurong East(Home)")); // Label together with address
 
-        // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355 (House)")); // 1 Address with label
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355 (House) "
-                + "Jurong Town, #09-355 (School) Blk 123, O Road, #01-355 (Work)")); // Multiple Address with label
-        assertTrue(Address.isValidAddress(" Blk 456, Den Road, "
-                + "#01-355 (House) ")); // Trailing spaces allowed
-        assertTrue(Address.isValidAddress(" Blk 456, Den Road, "
-                + "#01-355 (House 2) ")); // Space allowed in label
+        assertThrows(ParseException.class, () ->
+                Address.isValidAddress("Kent Ridge (home) (school)")); // Another address missing
+
+        try {
+            // invalid addresses
+            assertFalse(Address.isValidAddress("")); // empty string
+            assertFalse(Address.isValidAddress(" ")); // spaces only
+            assertFalse(Address.isValidAddress("Kent Ridge (home) "
+                    + "Jurong (home)")); // Duplicate labels
+            assertFalse(Address.isValidAddress("Kent Ridge (home) "
+                    + "Kent Ridge (school)")); // Duplicate address
+            assertFalse(Address.isValidAddress("Kent Ridge ()")); // Empty label
+            assertFalse(Address.isValidAddress("Kent Ridge (  )")); // Label with spaces only
+            assertFalse(Address.isValidAddress("Kent Ridge (--)")); // Label with hyphen only
+            assertFalse(Address.isValidAddress("Kent Ridge ( -- - )")); // Label with spaces and hyphens only
+            assertFalse(Address.isValidAddress("Kent Ridge (Test / No)")); // Label other characters
+
+            // valid addresses
+            assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
+            assertTrue(Address.isValidAddress("-")); // one character
+            assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+            assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355 (House)")); // 1 Address with label
+            assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355 (House) "
+                    + "Jurong Town, #09-355 (School) Blk 123, O Road, #01-355 (Work)")); // Multiple Address with label
+            assertTrue(Address.isValidAddress(" Blk 456, Den Road, "
+                    + "#01-355 (House) ")); // Trailing spaces allowed
+            assertTrue(Address.isValidAddress(" Blk 456, Den Road, "
+                    + "#01-355 (House 2) ")); // Space allowed in label
+        } catch (ParseException e) {
+            fail();
+        }
     }
 
     @Test
@@ -58,6 +70,7 @@ public class AddressTest {
 
         // same values -> returns true
         assertTrue(address.equals(new Address("Valid Address")));
+
 
         // same object -> returns true
         assertTrue(address.equals(address));
