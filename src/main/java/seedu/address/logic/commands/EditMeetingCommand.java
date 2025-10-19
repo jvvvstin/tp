@@ -26,7 +26,7 @@ import seedu.address.model.meeting.When;
 import seedu.address.model.person.Person;
 
 public class EditMeetingCommand extends Command {
-    public static final String COMMAND_WORD = "editmeeting";
+    public static final String COMMAND_WORD = "editmt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meeting identified for the "
             + "person identified by the index number used in the displayed person list. "
