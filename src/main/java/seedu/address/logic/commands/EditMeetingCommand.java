@@ -101,7 +101,7 @@ public class EditMeetingCommand extends Command {
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getOtherPhones(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(),
-                personToEdit.getMeetings());
+                personToEdit.getMeetings(), personToEdit.getFlagStatus());
 
         // Replaces the old person with the new person in the model to refresh the GUI
         model.setPerson(personToEdit, editedPerson);
