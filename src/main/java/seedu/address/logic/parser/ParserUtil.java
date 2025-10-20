@@ -123,7 +123,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String text} into an {@code List<String>} of parameters and labels.
      * For example: some parameter (label) some parameter2 (label2).
-     *
+     * @param parameterName Name of the parameter.
      * @param text The text that we are trying to split into parameters and labels.
      * @param isLabelAlwaysCompulsory Indicates if for 1 parameter if the label is compulsory.
      * @return A list of parameters and labels or empty list if incorrect format.
@@ -132,7 +132,7 @@ public class ParserUtil {
             String text, boolean isLabelAlwaysCompulsory) throws ParseException {
         text = text.trim();
         List<String> parametersAndLabels = extractParametersAndLabels(parameterName, text);
-        isListIncorrectSize(parameterName, parametersAndLabels, isLabelAlwaysCompulsory);
+        checkForIncorrectListSize(parameterName, parametersAndLabels, isLabelAlwaysCompulsory);
 
         assert !parametersAndLabels.isEmpty() : "Issue with extractParametersAndLabels: the list returned is empty";
 
@@ -145,7 +145,7 @@ public class ParserUtil {
 
     /**
      * Extracts parameters and labels from a {@code String text}.
-     *
+     * @param parameterName Name of the parameter.
      * @param text The text that we are trying to extract parameters and labels from.
      * @return The list which contains the extracted parameters and labels.
      */
@@ -164,12 +164,23 @@ public class ParserUtil {
             String currString = text.substring(i, end);
             list.add(currString);
             i = end + 1;
+            // Switch between extracting parameter and label
             extractParameter = !extractParameter;
         }
 
         return list;
     }
 
+    /**
+     * Deals with getting the end index of the current parameter or label from a {@code String text}.
+     * @param parameterName Name of the parameter.
+     * @param text The text that we are trying to get the end index of the current parameter or label from.
+     * @param textLength The length of the text.
+     * @param currIndex The current start index of the parameter or label.
+     * @param extractParameter Boolean which indicates if we are extracting a parameter or label, true means
+     *     we are extracting a parameter and false means we are extracting a label.
+     * @return The list which contains the extracted parameters and labels.
+     */
     private static int getEndIndexOfParameterOrLabel(String parameterName, String text, int textLength,
             int currIndex, boolean extractParameter) throws ParseException {
         int end = 0;
@@ -193,11 +204,10 @@ public class ParserUtil {
 
     /**
      * Checks for spacing issues like missing/extra spaces between the parameter and label.
-     *
+     * @param parameterName Name of the parameter.
      * @param parameterStartIndex The start index of our current parameter.
      * @param openBracketIndex The index of the first open bracket after {@code parameterStartIndex}.
      * @param text The string that we are checking on.
-     * @return A boolean indicating if there are spacing issues.
      */
     private static void checkForParameterSpacingIssue(String parameterName, int parameterStartIndex,
             int openBracketIndex, String text) throws ParseException {
@@ -238,10 +248,9 @@ public class ParserUtil {
 
     /**
      * Checks for spacing issues like missing/extra spaces between the label and parameter.
-     *
+     * @param parameterName Name of the parameter.
      * @param closeBracketIndex The index of the first close bracket after.
      * @param text The string that we are checking on.
-     * @return A boolean indicating if there are spacing issues.
      */
     private static void checkForLabelSpacingIssue(String parameterName, int closeBracketIndex,
             String text, int textLength) throws ParseException {
@@ -279,12 +288,11 @@ public class ParserUtil {
 
     /**
      * Checks if the total number of parameters and labels extracted have the correct size.
-     *
+     * @param parameterName Name of the parameter.
      * @param list The list containing parameters and labels.
      * @param isLabelAlwaysCompulsory Indicates if for 1 parameter if the label is compulsory.
-     * @return A boolean indicating if the list has the correct size
      */
-    private static void isListIncorrectSize(String parameterName, List<String> list,
+    private static void checkForIncorrectListSize(String parameterName, List<String> list,
             boolean isLabelAlwaysCompulsory) throws ParseException {
         String exceptionMessage;
         int listMinSize = 2;
