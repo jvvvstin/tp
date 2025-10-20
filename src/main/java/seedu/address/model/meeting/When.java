@@ -65,10 +65,20 @@ public class When {
         return true;
     }
 
+    /**
+     * Returns true if the value is not empty
+     */
+    public boolean isEmpty() {
+        return value == null;
+    }
 
     @Override
     public String toString() {
         return DateTimeParser.format(value);
+    }
+
+    public LocalDateTime getWhen() {
+        return value;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class MeetingTest {
 
         assertTrue(meeting.equals(meeting));
 
-        Meeting sameMeeting = new Meeting(meeting.meetingName, meeting.venue, meeting.when);
+        Meeting sameMeeting = new Meeting(meeting.getMeetingName(), meeting.getVenue(), meeting.getWhen());
         assertTrue(meeting.equals(sameMeeting));
 
         assertFalse(meeting.equals(1));
@@ -36,5 +36,11 @@ public class MeetingTest {
         Meeting differentMeeting = new Meeting("another meeting", "another venue",
                 "2025-12-12 1800");
         assertFalse(meeting.equals(differentMeeting));
+    }
+
+    @Test
+    public void isMeetingNameBlank() throws ParseException {
+        Meeting meeting = new Meeting("meeting", "venue", "2025-10-11 1400");
+        assertFalse(meeting.isMeetingNameBlank());
     }
 }
