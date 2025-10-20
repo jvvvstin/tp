@@ -89,7 +89,7 @@ public class PersonListTest {
     }
 
     @Test
-    public void Equals() {
+    public void equals() {
         PersonList firstPersonList = new PersonList(model.getAddressBook().getPersonList());
         PersonList secondPersonList = new PersonList(model.getAddressBook().getPersonList());
 
