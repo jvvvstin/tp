@@ -351,7 +351,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests user to try again
   
@@ -389,7 +389,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests user to try again
 
@@ -427,7 +427,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  The system detects an error in the list command.
+* 1a. The system detects an error in the list command.
 
     * 1a1. FAContactsPro requests for the correct command.
 
@@ -471,7 +471,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -509,7 +509,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -547,7 +547,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -585,7 +585,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -623,7 +623,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -671,7 +671,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -719,7 +719,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -757,7 +757,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -784,7 +784,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -811,7 +811,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -821,7 +821,7 @@ Use case ends.
 
       Use case resumes from Step 2.
 
-* 1b.  FAContactsPro is unable to retrieve the specified contact from storage
+* 1b. FAContactsPro is unable to retrieve the specified contact from storage
 
     * 1b1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -848,7 +848,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -858,7 +858,7 @@ Use case ends.
 
       Use case resumes from Step 2.
 
-* 1b.  FAContactsPro is unable to retrieve the specified contact from storage
+* 1b. FAContactsPro is unable to retrieve the specified contact from storage
 
     * 1b1. FAContactsPro app displays an error message and requests the user to try again.
 
@@ -885,23 +885,117 @@ Use case ends.
 
 **Extensions**
 
-* 1a.  FAContacts pro detects an error in the command entered.
+* 1a. FAContacts pro detects an error in the command entered.
 
     * 1a1. FAContactsPro app displays an error message and requests the user to try again.
 
-    * 1a2. User enters a new command to  view all upcoming meetings with client
+    * 1a2. User enters a new command to view all upcoming meetings with client.
 
       Steps 1a1-1a2 are repeated until the command entered is correct.
 
       Use case resumes from Step 2.
 
-* 1b.  FAContactsPro is unable to retrieve the specified contact/meetings from storage
+* 1b. FAContactsPro is unable to retrieve the specified contact/meetings from storage.
 
     * 1b1. FAContactsPro app displays an error message and requests the user to try again.
 
-    * 1b2. User enters a new command to add custom note to contact
+    * 1b2. User enters a new command to view all upcoming meetings with client.
 
       Steps 1b1-1b2 are repeated until the system is able to retrieve the contact/meetings from storage without any errors.
+
+      Use case resumes from Step 2.
+
+**System: FAContactsPro**
+
+**Use case: UC16 - Add new meeting for a specified contact**
+
+**Actor: User**
+
+**MSS**
+
+1. User types in command to add a new meeting for a specified contact
+
+2. FAContactsPro app successfully adds a new meeting for the specified contact
+
+Use case ends.
+
+
+**Extensions**
+
+* 1a. FAContacts pro detects an error in the command entered.
+
+    * 1a1. FAContactsPro app displays an error message and requests the user to try again.
+
+    * 1a2. User enters a new command to add a new meeting for a contact.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from Step 2.
+
+* 1b. FAContactsPro is unable to retrieve the specified contact/meetings from storage.
+
+    * 1b1. FAContactsPro app displays an error message and requests the user to try again.
+
+    * 1b2. User enters a new command to add a new meeting for a contact.
+
+      Steps 1b1-1b2 are repeated until the system is able to retrieve the contact/meetings from storage without any errors.
+
+      Use case resumes from Step 2.
+
+* 1c. FAContactsPro is unable to update the contacts in the storage.
+
+    * 1c1. FAContactsPro requests for the user to key in the add new meeting command again.
+
+    * 1c2. The user types in the new command.
+
+      Steps 1c1 - 1c2 is repeated until the system is able to update the data from the storage without any errors.
+
+      Use case resumes from Step 2.
+
+**System: FAContactsPro**
+
+**Use case: UC17 - Edit an existing meeting for a specified contact**
+
+**Actor: User**
+
+**MSS**
+
+1. User types in command to edit an existing meeting for a specified contact.
+
+2. FAContactsPro app successfully updates the meeting for the specified contact.
+
+Use case ends.
+
+
+**Extensions**
+
+* 1a. FAContacts pro detects an error in the command entered.
+
+    * 1a1. FAContactsPro app displays an error message and requests the user to try again.
+
+    * 1a2. User enters a new command to add a new meeting for a contact.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from Step 2.
+
+* 1b. FAContactsPro is unable to retrieve the specified contact/meetings from storage.
+
+    * 1b1. FAContactsPro app displays an error message and requests the user to try again.
+
+    * 1b2. User enters a new command to add a new meeting for a contact.
+
+      Steps 1b1-1b2 are repeated until the system is able to retrieve the contact/meetings from storage without any errors.
+
+      Use case resumes from Step 2.
+
+* 1c. FAContactsPro is unable to update the contacts in the storage.
+
+    * 1c1. FAContactsPro requests for the user to key in the add new meeting command again.
+
+    * 1c2. The user types in the new command.
+
+      Steps 1c1 - 1c2 is repeated until the system is able to update the data from the storage without any errors.
 
       Use case resumes from Step 2.
 
