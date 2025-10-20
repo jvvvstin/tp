@@ -1,6 +1,7 @@
 package seedu.address.list;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
@@ -87,4 +88,18 @@ public class PersonListTest {
         assertEquals(sortedPersonList.get(INDEX_SIXTH_PERSON.getZeroBased()), sixthPerson);
     }
 
+    @Test
+    public void Equals() {
+        PersonList firstPersonList = new PersonList(model.getAddressBook().getPersonList());
+        PersonList secondPersonList = new PersonList(model.getAddressBook().getPersonList());
+
+        // same object -> returns true
+        assertEquals(firstPersonList, firstPersonList);
+
+        // different types -> returns false
+        assertFalse(firstPersonList.equals(1));
+
+        // same values -> returns true
+        assertEquals(firstPersonList, secondPersonList);
+    }
 }
