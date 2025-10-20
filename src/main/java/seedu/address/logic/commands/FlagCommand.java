@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -27,6 +29,8 @@ public class FlagCommand extends Command {
 
     public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Flagged Person: %1$s";
     public static final String MESSAGE_ALREADY_FLAGGED = "This person is already flagged.";
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     private final Index targetIndex;
 
@@ -66,6 +70,13 @@ public class FlagCommand extends Command {
         Person flaggedPerson = createEditedPerson(personToFlag, editPersonDescriptor);
 
         model.setPerson(personToFlag, flaggedPerson);
+
+        // log the flagging transition
+        logger.info(String.format("%s was flagged (%b -> %b)",
+                flaggedPerson.getName().toString(),
+                personToFlag.getFlagStatus().isFlagged,
+                flaggedPerson.getFlagStatus().isFlagged));
+
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(flaggedPerson)));
     }
 
