@@ -1,13 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETING_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.MEETING_NAME_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteMeetingCommand;
 
 public class DeleteMeetingCommandParserTest {
@@ -33,6 +40,23 @@ public class DeleteMeetingCommandParserTest {
         assertParseFailure(parser, "a", String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteMeetingCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_duplicatePrefixes_throwsParseException() {
+        // Duplicate person index prefix
+        String dupPersonIndexInput = " " + PREFIX_PERSON_INDEX + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PREFIX_MEETING_INDEX + INDEX_FIRST_MEETING.getOneBased()
+                + " " + PREFIX_PERSON_INDEX + INDEX_FIRST_PERSON.getOneBased();
+        assertParseFailure(parser, dupPersonIndexInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_INDEX));
+
+        // Duplicate meeting index prefix
+        String dupMeetingIndexInput = " " + PREFIX_MEETING_INDEX + INDEX_SECOND_MEETING.getOneBased()
+                + " " + PREFIX_PERSON_INDEX + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PREFIX_MEETING_INDEX + INDEX_FIRST_MEETING.getOneBased();
+        assertParseFailure(parser, dupMeetingIndexInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEETING_INDEX));
     }
 
     @Test
