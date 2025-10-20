@@ -19,17 +19,17 @@ import seedu.address.model.person.Person;
 /**
  * Flags a person identified using it's displayed index from the address book.
  */
-public class FlagCommand extends Command {
-    public static final String COMMAND_WORD = "flag";
+public class UnflagCommand extends Command {
+    public static final String COMMAND_WORD = "unflag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Flags the person identified by the index number used in the displayed person list.\n"
+            + ": Unflags the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Flagged Person: %1$s";
-    public static final String MESSAGE_ALREADY_FLAGGED = "This person is already flagged.";
-    private static final Boolean FLAGGED_STATUS = true;
+    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Unflagged Person: %1$s";
+    public static final String MESSAGE_ALREADY_FLAGGED = "This person is already unflagged.";
+    private static final Boolean UNFLAGGED_STATUS = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -38,7 +38,7 @@ public class FlagCommand extends Command {
     /**
      * Creates a FlagCommand to flag the person at the specified {@code targetIndex}.
      */
-    public FlagCommand(Index targetIndex) {
+    public UnflagCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         assert(targetIndex.getZeroBased() >= 0);
 
@@ -58,27 +58,28 @@ public class FlagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToFlag = lastShownList.get(targetIndex.getZeroBased());
+        Person personToUnflag = lastShownList.get(targetIndex.getZeroBased());
 
-        // check if person is already flagged
-        if (personToFlag.getFlagStatus().isFlagged) {
+        // check if person is already unflagged
+        if (!personToUnflag.getFlagStatus().isFlagged) {
             throw new CommandException(MESSAGE_ALREADY_FLAGGED);
         }
 
-        // create an edited person descriptor with flagged status set to true
+        // create an edited person descriptor with flag status set to false
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        editPersonDescriptor.setFlagStatus(new FlagStatus(FLAGGED_STATUS));
-        Person flaggedPerson = createEditedPerson(personToFlag, editPersonDescriptor);
+        editPersonDescriptor.setFlagStatus(new FlagStatus(UNFLAGGED_STATUS));
+        Person unflaggedPerson = createEditedPerson(personToUnflag, editPersonDescriptor);
 
-        model.setPerson(personToFlag, flaggedPerson);
+        model.setPerson(personToUnflag, unflaggedPerson);
 
-        // log the flagging transition to ensure flagging took place
+        // log the unflagging transition to ensure unflagging took place
         logger.info(String.format("%s was flagged (%b -> %b)",
-                flaggedPerson.getName().toString(),
-                personToFlag.getFlagStatus().isFlagged,
-                flaggedPerson.getFlagStatus().isFlagged));
+                unflaggedPerson.getName().toString(),
+                personToUnflag.getFlagStatus().isFlagged,
+                unflaggedPerson.getFlagStatus().isFlagged));
 
-        return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(flaggedPerson)));
+        return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS,
+                Messages.format(unflaggedPerson)));
     }
 
     @Override
@@ -87,12 +88,12 @@ public class FlagCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof FlagCommand)) {
+        if (!(other instanceof UnflagCommand)) {
             return false;
         }
 
-        FlagCommand otherFlagPersonCommand = (FlagCommand) other;
-        return targetIndex.equals(otherFlagPersonCommand.targetIndex);
+        UnflagCommand otherUnflagPersonCommand = (UnflagCommand) other;
+        return targetIndex.equals(otherUnflagPersonCommand.targetIndex);
     }
 
     @Override
@@ -102,3 +103,4 @@ public class FlagCommand extends Command {
                 .toString();
     }
 }
+
