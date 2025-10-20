@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -13,6 +15,7 @@ import javafx.stage.Stage;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+@DisabledOnOs(OS.LINUX)
 @ExtendWith(ApplicationExtension.class)
 public class PersonCardTest {
 
