@@ -73,6 +73,14 @@ public class PersonCard extends UiPart<Region> {
         toggleFlagUI(person);
     }
 
+    public HBox getCardPane() {
+        return cardPane;
+    }
+
+    public Circle getFlag() {
+        return flag;
+    }
+
     /**
      * Toggles the flag UI based on the person's flag status.
      */
