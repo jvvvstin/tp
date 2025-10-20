@@ -17,7 +17,7 @@ import seedu.address.model.person.FlagStatus;
 import seedu.address.model.person.Person;
 
 /**
- * Flags a person identified using it's displayed index from the address book.
+ * Unflags a person identified using it's displayed index from the address book.
  */
 public class UnflagCommand extends Command {
     public static final String COMMAND_WORD = "unflag";
@@ -36,7 +36,7 @@ public class UnflagCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates a FlagCommand to flag the person at the specified {@code targetIndex}.
+     * Creates an UnflagCommand to unflag the person at the specified {@code targetIndex}.
      */
     public UnflagCommand(Index targetIndex) {
         requireNonNull(targetIndex);
