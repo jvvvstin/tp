@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<HBox id="cardPane" fx:id="cardPane" prefHeight="145.0" prefWidth="443.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" alignment="CENTER_LEFT" prefHeight="145.0" prefWidth="443.0" spacing="10.0"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane prefHeight="125.0" prefWidth="457.0" HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -40,9 +41,11 @@
          <RowConstraints />
       </rowConstraints>
   </GridPane>
-   <Circle fx:id="flag" visible="false" fill="#ffd236" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE">
+
+  <Region HBox.hgrow="ALWAYS" />
+
+  <Circle fx:id="flag" fill="#ffd236" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false">
       <HBox.margin>
-         <Insets right="25.0" top="30.0" />
-      </HBox.margin>
-   </Circle>
+         <Insets right="25.0" />
+      </HBox.margin></Circle>
 </HBox>
