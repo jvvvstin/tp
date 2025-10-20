@@ -9,13 +9,16 @@ import static seedu.address.model.person.Person.LABEL_VALIDATION_REGEX;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
-
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank\n"
             + LABEL_MESSAGE
             + "\n\n"
@@ -23,13 +26,12 @@ public class Address {
             + "1. For 1 address only, the label is optional so: ADDRESS or ADDRESS (LABEL).\n"
             + "2. For multiple emails, the label is compulsory so: ADDRESS1 (LABEL1) ADDRESS2 (LABEL2) ... "
             + "ADDRESSN (LABELN).";
-
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
-
+    private static final Logger logger = LogsCenter.getLogger(Address.class);
     public final String value;
 
     /**
@@ -39,15 +41,28 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+
+        try {
+            checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        } catch (ParseException e) {
+            logger.warning("ParseException thrown for Address constructor for: " + address);
+        }
+
         value = address;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAddress(String test) {
-        List<String> paramsAndLabels = parseParametersAndLabels(test);
+    public static boolean isValidAddress(String test) throws ParseException {
+        String trimmedAddress = test.trim();
+
+        if (trimmedAddress.isEmpty()) {
+            return false;
+        }
+
+        List<String> paramsAndLabels = parseParametersAndLabels(Address.class.getName().toLowerCase(),
+                test, false);
 
         if (paramsAndLabels.isEmpty()) {
             return false;
