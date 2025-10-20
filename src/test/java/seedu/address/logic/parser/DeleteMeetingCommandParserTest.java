@@ -72,4 +72,11 @@ public class DeleteMeetingCommandParserTest {
                 MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteMeetingCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_extraPrefix_throwsParseException() {
+        assertParseFailure(parser, " p=1 i=b c=1", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMeetingCommand.MESSAGE_USAGE));
+    }
 }
