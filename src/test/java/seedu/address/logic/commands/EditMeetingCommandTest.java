@@ -44,7 +44,7 @@ public class EditMeetingCommandTest {
         venue = new Venue(VENUE_STUB);
         when = new When(WHEN_STUB);
 
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withMeetings(
                 new Meeting(meetingName, venue, when)).build();
         model.setPerson(firstPerson, editedPerson);
@@ -52,7 +52,7 @@ public class EditMeetingCommandTest {
 
     @Test
     public void execute_editMeetingUnfilteredList_success() throws Exception {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         MeetingName updatedMeetingName = new MeetingName(MEETING_NAME_STUB_2);
         Person editedPerson = new PersonBuilder(firstPerson).withMeetings(
                 new Meeting(updatedMeetingName, venue, when)).build();
@@ -76,7 +76,7 @@ public class EditMeetingCommandTest {
     public void execute_editMeetingFilteredList_success() throws Exception {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         MeetingName updatedMeetingName = new MeetingName(MEETING_NAME_STUB_2);
         Person editedPerson = new PersonBuilder(firstPerson).withMeetings(
                 new Meeting(updatedMeetingName, venue, when)).build();
@@ -98,7 +98,7 @@ public class EditMeetingCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() throws Exception {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getPersonList().size() + 1);
 
         MeetingName updatedMeetingName = new MeetingName(MEETING_NAME_STUB_2);
 
@@ -129,7 +129,7 @@ public class EditMeetingCommandTest {
 
     @Test
     public void execute_invalidMeetingIndexUnfilteredList_failure() throws Exception {
-        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(person.getMeetingCount() + 1);
 
         MeetingName updatedMeetingName = new MeetingName(MEETING_NAME_STUB_2);
@@ -146,7 +146,7 @@ public class EditMeetingCommandTest {
     @Test
     public void execute_invalidMeetingIndexFilteredList_failure() throws Exception {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(person.getMeetingCount() + 1);
 
         MeetingName updatedMeetingName = new MeetingName(MEETING_NAME_STUB_2);
