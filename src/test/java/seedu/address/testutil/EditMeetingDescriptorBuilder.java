@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import seedu.address.logic.commands.EditMeetingCommand.EditMeetingDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Meeting;
@@ -56,6 +58,7 @@ public class EditMeetingDescriptorBuilder {
             descriptor.setWhen(new When(when));
         } catch (ParseException e) {
             // This exception can be safely ignored.
+            fail();
         }
         return this;
     }
