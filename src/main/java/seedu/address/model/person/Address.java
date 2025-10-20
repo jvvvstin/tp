@@ -31,7 +31,7 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
-    private static final Logger logger = LogsCenter.getLogger(Email.class);
+    private static final Logger logger = LogsCenter.getLogger(Address.class);
     public final String value;
 
     /**
