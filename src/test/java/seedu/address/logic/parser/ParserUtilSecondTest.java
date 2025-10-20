@@ -139,6 +139,13 @@ public class ParserUtilSecondTest {
     }
 
     @Test
+    public void parseParametersAndLabels_missingSpaces6_throwsParseException() {
+        String input = "TEST PARAMETER 1 (L a b e l 1) TEST PARAMETER 2 (L a b e l 2)a";
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseParametersAndLabels("Parameter", input, false));
+    }
+
+    @Test
     public void parseParametersAndLabels_incorrectFormat_throwsParseException() {
         String input = "TEST PARAMETER 1 (L a b e l 1) TEST PARAMETER 2";
         assertThrows(ParseException.class, () ->

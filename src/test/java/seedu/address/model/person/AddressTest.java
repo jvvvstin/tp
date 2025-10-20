@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -20,6 +21,12 @@ public class AddressTest {
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
         String invalidAddress = "";
         assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+    }
+
+    @Test
+    public void constructor_invalidAddressAndLabel_doesNotThrowParseException() {
+        String invalidAddress = "Kent Ridge Vale Street 55, #01-23(test)";
+        assertDoesNotThrow(() -> new Address(invalidAddress));
     }
 
     @Test
