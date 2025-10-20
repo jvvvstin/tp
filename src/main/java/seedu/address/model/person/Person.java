@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -120,6 +121,19 @@ public class Person {
      */
     public int getMeetingCount() {
         return meetings.size();
+    }
+
+    /**
+     * Edits a meeting from the person's meeting list.
+     * @param meetingToEdit the index of the meeting to be edited.
+     * @param meeting the updated meeting to replace the old meeting.
+     */
+    public void editMeeting(int meetingToEdit, Meeting meeting) {
+        assert meetingToEdit >= 0;
+        assert meetingToEdit < meetings.size();
+        requireNonNull(meeting);
+
+        meetings.set(meetingToEdit, meeting);
     }
 
     /**

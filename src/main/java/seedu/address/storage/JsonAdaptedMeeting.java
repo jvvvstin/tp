@@ -36,9 +36,9 @@ public class JsonAdaptedMeeting {
      * Converts a given {@code Meeting} into this class for Jackson use.
      */
     public JsonAdaptedMeeting(Meeting source) {
-        this.meetingName = source.meetingName.meetingName;
-        this.venue = source.venue.value;
-        this.when = source.when.value;
+        this.meetingName = source.getMeetingName().toString();
+        this.venue = source.getVenue().toString();
+        this.when = source.getDateTime();
     }
 
     /**

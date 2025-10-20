@@ -5,7 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.DateTimeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -15,6 +17,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class When {
     public static final String MESSAGE_CONSTRAINTS = MESSAGE_INVALID_DATETIME_FORMAT;
+
+    private static final Logger logger = LogsCenter.getLogger(When.class);
 
     public final LocalDateTime value;
 
@@ -27,6 +31,7 @@ public class When {
         requireNonNull(when);
         checkArgument(isValidWhen(when), MESSAGE_CONSTRAINTS);
         value = DateTimeParser.parseDateTime(when);
+        logger.info(String.format("Supplied: %s, Result: %s", when, value));
     }
 
     /**
@@ -45,7 +50,8 @@ public class When {
      */
     public static boolean isValidWhen(String test) {
         try {
-            DateTimeParser.parseDateTime(test);
+            LocalDateTime result = DateTimeParser.parseDateTime(test);
+            logger.info(String.format("Supplied: %s, Result: %s", test, result));
             return true;
         } catch (ParseException pe) {
             return false;
@@ -59,10 +65,20 @@ public class When {
         return true;
     }
 
+    /**
+     * Returns true if the value is not empty
+     */
+    public boolean isEmpty() {
+        return value == null;
+    }
 
     @Override
     public String toString() {
         return DateTimeParser.format(value);
+    }
+
+    public LocalDateTime getWhen() {
+        return value;
     }
 
     @Override
@@ -72,11 +88,11 @@ public class When {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.meeting.When)) {
+        if (!(other instanceof When)) {
             return false;
         }
 
-        seedu.address.model.meeting.When otherWhen = (seedu.address.model.meeting.When) other;
+        When otherWhen = (When) other;
         return value.equals(otherWhen.value);
     }
 

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -82,6 +83,13 @@ public interface Model {
      * The index must be valid.
      */
     void deleteMeetingFromPerson(Person target, int meetingToDelete);
+
+    /**
+     * Updates the meeting at index {@code meetingToEdit} from the given person's list of meetings.
+     * {@code target} must exist in the address book.
+     * The index must be valid.
+     */
+    void editMeeting(Person target, int meetingToEdit, Meeting editedMeeting);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getPersonList();

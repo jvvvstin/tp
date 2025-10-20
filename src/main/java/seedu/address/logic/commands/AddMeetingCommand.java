@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WHEN;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -20,16 +21,18 @@ import seedu.address.model.person.Person;
  * Adds a meeting to an existing person in the address book.
  */
 public class AddMeetingCommand extends Command {
-    public static final String COMMAND_WORD = "addmeeting";
+    public static final String COMMAND_WORD = "addmt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting for the person identified "
             + "by the index number used in the last person listing. "
             + "A new meeting would be added to the person's list of current meetings.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: "
+            + PREFIX_PERSON_INDEX + "INDEX (must be a positive integer) "
             + PREFIX_MEETING + "MEETING "
             + PREFIX_VENUE + "VENUE "
             + PREFIX_WHEN + "WHEN\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PERSON_INDEX + "1 "
             + PREFIX_MEETING + "Financial advice sharing "
             + PREFIX_VENUE + "AMK Hub "
             + PREFIX_WHEN + "2025-11-01 1600";
@@ -63,15 +66,15 @@ public class AddMeetingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (meeting.meetingName.meetingName.isBlank()) {
+        if (meeting.isMeetingNameBlank()) {
             throw new CommandException(MESSAGE_BLANK_MEETING_NAME);
         }
 
-        if (meeting.venue.value.isBlank()) {
+        if (meeting.isVenueBlank()) {
             throw new CommandException(MESSAGE_BLANK_VENUE);
         }
 
-        if (meeting.when.value == null) {
+        if (meeting.isWhenEmpty()) {
             throw new CommandException(MESSAGE_BLANK_DATETIME);
         }
 
@@ -90,10 +93,23 @@ public class AddMeetingCommand extends Command {
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(meeting.meetingName.meetingName.isBlank() || meeting.venue.value.isBlank()
-                || meeting.when.value == null)
-                ? MESSAGE_ADD_MEETING_SUCCESS : MESSAGE_ADD_MEETING_FAILURE;
-        return String.format(message, Messages.format(personToEdit));
+        String successMessage = String.format(MESSAGE_ADD_MEETING_SUCCESS, Messages.format(personToEdit));
+
+        String failureMessage = String.format(MESSAGE_ADD_MEETING_FAILURE, Messages.format(personToEdit));
+
+        if (meeting.isMeetingNameBlank()) {
+            return failureMessage;
+        }
+
+        if (meeting.isVenueBlank()) {
+            return failureMessage;
+        }
+
+        if (meeting.isWhenEmpty()) {
+            return failureMessage;
+        }
+
+        return successMessage;
     }
 
     @Override

@@ -81,4 +81,11 @@ shadowJar {
     archiveFileName = 'addressbook.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
+test {
+    enableAssertions = true
+}
 defaultTasks 'clean', 'test'

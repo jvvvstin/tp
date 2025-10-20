@@ -12,10 +12,10 @@ public class MeetingName {
             "Meeting names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the meeting name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(?=.*\\p{L}|\\d)[\\p{L}\\p{M}0-9 ]+$";
+    public static final String VALIDATION_REGEX = "^(?=.*\\p{L}|\\d)[\\p{L}\\p{M}0-9 '\\s]+$";
 
     public final String meetingName;
 
@@ -37,6 +37,9 @@ public class MeetingName {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isBlank() {
+        return meetingName == null || meetingName.isBlank();
+    }
 
     @Override
     public String toString() {
@@ -50,7 +53,7 @@ public class MeetingName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.meeting.MeetingName)) {
+        if (!(other instanceof MeetingName)) {
             return false;
         }
 

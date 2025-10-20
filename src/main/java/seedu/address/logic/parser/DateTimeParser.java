@@ -8,7 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -35,6 +37,9 @@ public class DateTimeParser {
             DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
     );
     private static final String OUTPUT_FORMAT = "MMM dd yyyy HH:mm";
+    private static final String LOGGER_INVALID_FORMAT = "Invalid date time format: %1$s";
+
+    private static final Logger logger = LogsCenter.getLogger(DateTimeParser.class);
 
     /**
      * Parses a {@code String} representation of a datetime into a {@link LocalDateTime} object.
@@ -51,6 +56,7 @@ public class DateTimeParser {
                 // This exception is expected and can be safely ignored
             }
         }
+        logger.info(String.format(LOGGER_INVALID_FORMAT, dateTime));
         throw new ParseException(MESSAGE_INVALID_DATETIME_FORMAT);
     }
 
