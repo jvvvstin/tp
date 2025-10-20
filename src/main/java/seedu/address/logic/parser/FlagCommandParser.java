@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.DeleteMeetingCommand.MESSAGE_INVALID_BLANK;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FlagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new FlagCommand object
+ */
 public class FlagCommandParser implements Parser<FlagCommand> {
 
     @Override

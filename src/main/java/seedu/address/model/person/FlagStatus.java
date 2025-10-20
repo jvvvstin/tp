@@ -2,10 +2,19 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a Person's flag status in the address book.
+ * Guarantees: immutable.
+ */
 public class FlagStatus implements Comparable<FlagStatus> {
     public static final FlagStatus DEFAULT_FLAG_STATUS = new FlagStatus(false);
     public final Boolean isFlagged;
 
+    /**
+     * Constructs a {@code FlagStatus}.
+     *
+     * @param isFlagged A boolean indicating if the person is flagged.
+     */
     public FlagStatus(Boolean isFlagged) {
         requireNonNull(isFlagged);
         this.isFlagged = isFlagged;

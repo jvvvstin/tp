@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import static seedu.address.model.person.FlagStatus.DEFAULT_FLAG_STATUS;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -128,14 +126,16 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (flagStatus == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, FlagStatus.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    FlagStatus.class.getSimpleName()));
         }
         final FlagStatus modelFlagStatus = new FlagStatus(flagStatus);
 
         final OtherPhones modelOtherPhones = new OtherPhones(otherPhones);
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final List<Meeting> modelMeetings = new ArrayList<>(personMeetings);
-        return new Person(modelName, modelPhone, modelOtherPhones, modelEmail, modelAddress, modelTags, modelMeetings, modelFlagStatus);
+        return new Person(modelName, modelPhone, modelOtherPhones, modelEmail,
+                modelAddress, modelTags, modelMeetings, modelFlagStatus);
     }
 
 }

@@ -46,7 +46,8 @@ public class Person {
     public Person(Name name, Phone phone, OtherPhones otherPhones,
                   Email email, Address address, Set<Tag> tags,
                   List<Meeting> meetings, FlagStatus isFlagged) {
-        requireAllNonNull(name, phone, email, address, tags, meetings,isFlagged);
+        requireAllNonNull(name, phone, email, address, tags,
+                meetings, isFlagged);
         this.name = name;
         this.phone = phone;
         this.otherPhones = otherPhones;
@@ -149,7 +150,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags,flagStatus);
+        return Objects.hash(name, phone, email, address, tags, flagStatus);
     }
 
     @Override

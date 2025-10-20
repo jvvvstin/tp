@@ -8,12 +8,15 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.FlagStatus;
 import seedu.address.model.person.Person;
 
+/**
+ * Flags a person identified using it's displayed index from the address book.
+ */
 public class FlagCommand extends Command {
     public static final String COMMAND_WORD = "flag";
 
@@ -27,6 +30,9 @@ public class FlagCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a FlagCommand to flag the person at the specified {@code targetIndex}.
+     */
     public FlagCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         assert(targetIndex.getZeroBased() >= 0);

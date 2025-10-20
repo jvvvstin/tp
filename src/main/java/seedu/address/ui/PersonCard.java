@@ -1,12 +1,10 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -72,17 +70,16 @@ public class PersonCard extends UiPart<Region> {
         person.getMeetings().stream()
                 .forEach(meeting -> meetings.getChildren().add(new Label(meeting.toString())));
 
-        updateFlagImage();
         toggleFlagUI(person);
     }
 
-    public void updateFlagImage() {
-        Image image = new Image(MainApp.class.getResourceAsStream(FLAG_IMAGE_PATH));
-        flag.setFill(new ImagePattern(image));
-    }
-
+    /**
+     * Toggles the flag UI based on the person's flag status.
+     */
     public void toggleFlagUI(Person person) {
         if (person.getFlagStatus().isFlagged) {
+            Image image = new Image(MainApp.class.getResourceAsStream(FLAG_IMAGE_PATH));
+            flag.setFill(new ImagePattern(image));
             flag.setVisible(true);
             cardPane.getStyleClass().add("flagged");
         } else {
