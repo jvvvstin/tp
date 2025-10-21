@@ -30,6 +30,8 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
+        assert nameKeywords.length > 0 : "Keywords for findmt is empty!";
+
         return new FindMeetingCommand(new MeetingNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
