@@ -28,7 +28,7 @@ public class DeleteMeetingCommandParserTest {
     }
 
     @Test
-    public void parse_emptyPersonIndexArgs_throwsParseException() {
+    public void parse_noPersonIndex_throwsParseException() {
         assertParseFailure(parser, " i=1", String.format(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX));
     }
 
@@ -54,6 +54,11 @@ public class DeleteMeetingCommandParserTest {
                 + " " + PREFIX_MEETING_INDEX + INDEX_FIRST_MEETING.getOneBased();
         assertParseFailure(parser, dupMeetingIndexInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEETING_INDEX));
+    }
+
+    @Test
+    public void parse_emptyPersonIndexArgs_throwsParseException() {
+        assertParseFailure(parser, " p=     i=1", String.format(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX));
     }
 
     @Test
