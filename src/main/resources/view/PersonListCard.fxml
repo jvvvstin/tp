@@ -9,8 +9,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+
+<HBox id="cardPane" fx:id="cardPane" alignment="CENTER_LEFT"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -33,10 +36,20 @@
       <Label fx:id="otherphones" styleClass="cell_small_label" text="\$otherphones" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-         <FlowPane fx:id="meetings" prefWidth="130.0" />
+      <FlowPane fx:id="meetings" prefWidth="130.0" />
     </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
+    <rowConstraints>
+      <RowConstraints />
+    </rowConstraints>
   </GridPane>
+
+  <Circle fx:id="flag" fill="#ffd236" radius="15.0" stroke="TRANSPARENT"
+          strokeType="INSIDE" visible="false">
+    <HBox.margin>
+      <Insets right="25.0" />
+    </HBox.margin></Circle>
+
 </HBox>
+
+
+

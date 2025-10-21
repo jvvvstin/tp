@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -58,9 +59,9 @@ public class FindMeetingCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         MeetingNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindMeetingCommand command = new FindMeetingCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updatePersonListFilter(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getPersonList());
     }
 
     @Test
@@ -68,9 +69,9 @@ public class FindMeetingCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         MeetingNameContainsKeywordsPredicate predicate = preparePredicate("zoom google teams");
         FindMeetingCommand command = new FindMeetingCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updatePersonListFilter(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getPersonList());
     }
 
     @Test
