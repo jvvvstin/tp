@@ -83,6 +83,10 @@ public class Person {
         return flagStatus;
     }
 
+    public boolean isFlagged() {
+        return flagStatus.isFlagged();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
