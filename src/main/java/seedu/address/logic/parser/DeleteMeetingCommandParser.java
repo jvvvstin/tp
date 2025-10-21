@@ -34,15 +34,23 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
         String personIndexString = argumentMultimap.getValue(PREFIX_PERSON_INDEX).orElse("");
         String meetingIndexString = argumentMultimap.getValue(PREFIX_MEETING_INDEX).orElse("");
 
-        // Check if no prefixes are present
-        if (personIndexString.isEmpty() && meetingIndexString.isEmpty()) {
+        // Checks if no prefixes are present
+        if (personIndexString.isBlank() && meetingIndexString.isBlank()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
         }
 
         // Checks if personIndex is blank
-        if (personIndexString.isEmpty()) {
+        if (personIndexString.isBlank()) {
             throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX);
         }
+
+        // Checks if meeting Index is blank
+        if (meetingIndexString.isBlank()) {
+            throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_MEETING_INDEX);
+        }
+
+        // Verify that there are no duplicate prefixes
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_INDEX, PREFIX_MEETING_INDEX);
 
         // Checks if personIndex is valid
         Index personIndex;
@@ -51,12 +59,6 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
         } catch (ParseException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE),
                     ive);
-        }
-
-
-        //Checks if meeting Index is blank
-        if (meetingIndexString.isEmpty()) {
-            throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_MEETING_INDEX);
         }
 
         // Checks if meetingIndex is valid
