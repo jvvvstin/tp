@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class FlagStatus implements Comparable<FlagStatus> {
     public static final FlagStatus DEFAULT_FLAG_STATUS = new FlagStatus(false);
-    public final Boolean isFlagged;
+    private final Boolean isFlagged;
 
     /**
      * Constructs a {@code FlagStatus}.
@@ -18,6 +18,13 @@ public class FlagStatus implements Comparable<FlagStatus> {
     public FlagStatus(Boolean isFlagged) {
         requireNonNull(isFlagged);
         this.isFlagged = isFlagged;
+    }
+
+    /**
+     * Returns true if the person is flagged.
+     */
+    public Boolean isFlagged() {
+        return isFlagged;
     }
 
     @Override
