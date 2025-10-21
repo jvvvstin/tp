@@ -58,7 +58,8 @@ public class DeleteMeetingCommandParserTest {
 
     @Test
     public void parse_emptyPersonIndexArgs_throwsParseException() {
-        assertParseFailure(parser, " p=     i=1", String.format(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX));
+        assertParseFailure(parser, " p=     i=1",
+                String.format(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX));
     }
 
     @Test
