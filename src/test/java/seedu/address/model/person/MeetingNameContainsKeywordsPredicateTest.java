@@ -52,7 +52,7 @@ public class MeetingNameContainsKeywordsPredicateTest {
 
         Meeting meeting = null;
         try {
-             meeting = new Meeting("Annual townhall meeting", "Level 3 meeting room",
+            meeting = new Meeting("Annual townhall meeting", "Level 3 meeting room",
                     "21-10-2025 14:30");
         } catch (ParseException e) {
             fail();

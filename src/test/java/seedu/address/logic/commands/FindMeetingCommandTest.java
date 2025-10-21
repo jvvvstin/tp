@@ -1,5 +1,4 @@
 package seedu.address.logic.commands;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -76,10 +75,11 @@ public class FindMeetingCommandTest {
 
     @Test
     public void toStringMethod() {
-        MeetingNameContainsKeywordsPredicate predicate = new MeetingNameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindMeetingCommand FindMeetingCommand = new FindMeetingCommand(predicate);
+        MeetingNameContainsKeywordsPredicate predicate = new MeetingNameContainsKeywordsPredicate(
+                Arrays.asList("keyword"));
+        FindMeetingCommand findMeetingCommand = new FindMeetingCommand(predicate);
         String expected = FindMeetingCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, FindMeetingCommand.toString());
+        assertEquals(expected, findMeetingCommand.toString());
     }
 
     /**
@@ -89,3 +89,4 @@ public class FindMeetingCommandTest {
         return new MeetingNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
+

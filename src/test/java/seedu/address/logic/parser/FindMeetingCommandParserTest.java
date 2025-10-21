@@ -34,5 +34,4 @@ public class FindMeetingCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n meeting \n \t afternoon  \t", expectedFindCommand);
     }
-
 }

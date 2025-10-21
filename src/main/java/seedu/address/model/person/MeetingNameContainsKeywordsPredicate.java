@@ -7,16 +7,14 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.meeting.Meeting;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class MeetingNameContainsKeywordsPredicate implements Predicate<Person> {
+    private static final Logger logger = LogsCenter.getLogger(MeetingNameContainsKeywordsPredicate.class);
     private final List<String> keywords;
-    private static final Logger logger = LogsCenter.getLogger(MeetingNameContainsKeywordsPredicate .class);
-
     public MeetingNameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
