@@ -14,7 +14,7 @@ public class FlagCommandParserTest {
     private FlagCommandParser parser = new FlagCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsFlagCommand() {
         assertParseSuccess(parser, "1", new FlagCommand(INDEX_FIRST_PERSON));
     }
 
