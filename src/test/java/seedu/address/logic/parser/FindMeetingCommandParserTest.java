@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.FindMeetingCommandParser.FIND_MEETING_COMMAND_PARSER_EMPTY_ARGS_MESSAGE;
 
 import java.util.Arrays;
 
@@ -17,10 +18,8 @@ public class FindMeetingCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        String emptyArgMessage = "Your arguments should not be empty!\n";
-        String expectedExceptionMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                emptyArgMessage + FindMeetingCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, "     ", expectedExceptionMessage);
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FIND_MEETING_COMMAND_PARSER_EMPTY_ARGS_MESSAGE));
     }
 
     @Test

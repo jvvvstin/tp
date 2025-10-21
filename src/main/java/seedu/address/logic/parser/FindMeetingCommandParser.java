@@ -12,7 +12,8 @@ import seedu.address.model.person.MeetingNameContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindMeetingCommand object
  */
 public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
-
+    public static final String FIND_MEETING_COMMAND_PARSER_EMPTY_ARGS_MESSAGE =
+            "Your arguments should not be empty!\n" + FindMeetingCommand.MESSAGE_USAGE;
     /**
      * Parses the given {@code String} of arguments in the context of the FindMeetingCommand
      * and returns a FindMeetingCommand object for execution.
@@ -22,10 +23,8 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            String emptyArgMessage = "Your arguments should not be empty!\n";
-            String exceptionMessage = emptyArgMessage + FindMeetingCommand.MESSAGE_USAGE;
-
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, exceptionMessage));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FIND_MEETING_COMMAND_PARSER_EMPTY_ARGS_MESSAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
