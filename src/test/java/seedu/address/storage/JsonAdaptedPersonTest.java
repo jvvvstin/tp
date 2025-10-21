@@ -36,7 +36,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedMeeting> VALID_MEETINGS = BENSON.getMeetings().stream()
             .map(JsonAdaptedMeeting::new)
             .collect(Collectors.toList());
-    private static final Boolean VALID_FLAG_STATUS = BENSON.getFlagStatus().isFlagged;
+    private static final Boolean VALID_FLAG_STATUS = BENSON.isFlagged();
 
 
     @Test

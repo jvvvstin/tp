@@ -85,7 +85,7 @@ public class PersonCard extends UiPart<Region> {
      * Toggles the flag UI based on the person's flag status.
      */
     public void toggleFlagUI(Person person) {
-        if (person.getFlagStatus().isFlagged) {
+        if (person.isFlagged()) {
             Image image = new Image(MainApp.class.getResourceAsStream(FLAG_IMAGE_PATH));
             flag.setFill(new ImagePattern(image));
             flag.setVisible(true);

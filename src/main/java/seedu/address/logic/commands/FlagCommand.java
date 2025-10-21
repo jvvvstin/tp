@@ -61,7 +61,7 @@ public class FlagCommand extends Command {
         Person personToFlag = lastShownList.get(targetIndex.getZeroBased());
 
         // check if person is already flagged
-        if (personToFlag.getFlagStatus().isFlagged) {
+        if (personToFlag.isFlagged()) {
             throw new CommandException(MESSAGE_ALREADY_FLAGGED);
         }
 
@@ -75,8 +75,8 @@ public class FlagCommand extends Command {
         // log the flagging transition to ensure flagging took place
         logger.info(String.format("%s was flagged (%b -> %b)",
                 flaggedPerson.getName().toString(),
-                personToFlag.getFlagStatus().isFlagged,
-                flaggedPerson.getFlagStatus().isFlagged));
+                personToFlag.isFlagged(),
+                flaggedPerson.isFlagged()));
 
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(flaggedPerson)));
     }

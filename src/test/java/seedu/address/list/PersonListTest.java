@@ -48,7 +48,7 @@ public class PersonListTest {
         model.setPerson(unflaggedPerson, person);
 
         // Update the person list filter to show only flagged persons
-        model.updatePersonListFilter(p -> p.getFlagStatus().isFlagged);
+        model.updatePersonListFilter(p -> p.isFlagged());
 
         // Check that the person list only contains the single flagged person
         assertEquals(model.getPersonList().size(), 1);

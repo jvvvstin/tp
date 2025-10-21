@@ -75,7 +75,7 @@ class JsonAdaptedPerson {
         meetings.addAll(source.getMeetings().stream()
                 .map(JsonAdaptedMeeting::new)
                 .collect(Collectors.toList()));
-        flagStatus = source.getFlagStatus().isFlagged;
+        flagStatus = source.isFlagged();
     }
 
     /**

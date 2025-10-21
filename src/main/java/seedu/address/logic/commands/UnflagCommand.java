@@ -61,7 +61,7 @@ public class UnflagCommand extends Command {
         Person personToUnflag = lastShownList.get(targetIndex.getZeroBased());
 
         // check if person is already unflagged
-        if (!personToUnflag.getFlagStatus().isFlagged) {
+        if (!personToUnflag.isFlagged()) {
             throw new CommandException(MESSAGE_ALREADY_FLAGGED);
         }
 
@@ -75,8 +75,8 @@ public class UnflagCommand extends Command {
         // log the unflagging transition to ensure unflagging took place
         logger.info(String.format("%s was flagged (%b -> %b)",
                 unflaggedPerson.getName().toString(),
-                personToUnflag.getFlagStatus().isFlagged,
-                unflaggedPerson.getFlagStatus().isFlagged));
+                personToUnflag.isFlagged(),
+                unflaggedPerson.isFlagged()));
 
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS,
                 Messages.format(unflaggedPerson)));
