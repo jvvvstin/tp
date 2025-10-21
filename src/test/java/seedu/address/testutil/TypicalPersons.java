@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -34,14 +36,46 @@ public class TypicalPersons {
             .withOtherPhones("98765432")
             .withTags("owesMoney", "friends")
             .build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+
+    public static final Person CARL;
+    public static final Person ELLE;
+    public static final Person FIONA;
+
+    static {
+        try {
+            CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+                    .withEmail("heinz@example.com").withAddress("wall street")
+                    .withMeetings(new Meeting("Zoom meeting", "Online",
+                            "2020-11-12 1900")).build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static {
+        try {
+            ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+                    .withEmail("werner@example.com").withAddress("michegan ave")
+                    .withMeetings(new Meeting("Teams meeting", "Office",
+                            "2025-11-12 1500")).build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static {
+        try {
+            FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+                    .withEmail("lydia@example.com").withAddress("little tokyo")
+                    .withMeetings(new Meeting("Google meets meeting", "Hybrid",
+                            "2025-10-12 1900")).build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
