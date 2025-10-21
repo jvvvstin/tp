@@ -35,17 +35,17 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
         String meetingIndexString = argumentMultimap.getValue(PREFIX_MEETING_INDEX).orElse("");
 
         // Checks if no prefixes are present
-        if (personIndexString.isEmpty() && meetingIndexString.isEmpty()) {
+        if (personIndexString.isBlank() && meetingIndexString.isBlank()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
         }
 
         // Checks if personIndex is blank
-        if (personIndexString.isEmpty()) {
+        if (personIndexString.isBlank()) {
             throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_PERSON_INDEX);
         }
 
         // Checks if meeting Index is blank
-        if (meetingIndexString.isEmpty()) {
+        if (meetingIndexString.isBlank()) {
             throw new ParseException(DeleteMeetingCommand.MESSAGE_INVALID_BLANK_MEETING_INDEX);
         }
 
