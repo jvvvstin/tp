@@ -38,7 +38,7 @@ public class AddMeetingCommandTest {
         Venue venue = new Venue(MEETING_VENUE_STUB);
         When when = new When(MEETING_WHEN_STUB);
 
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withMeetings(
                 new Meeting(meetingName, venue, when)).build();
 
@@ -62,8 +62,8 @@ public class AddMeetingCommandTest {
         Venue venue = new Venue(MEETING_VENUE_STUB);
         When when = new When(MEETING_WHEN_STUB);
 
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+        Person firstPerson = model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(model.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withMeetings(new Meeting(meetingName, venue, when)).build();
 
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON,
@@ -80,7 +80,7 @@ public class AddMeetingCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() throws ParseException {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getPersonList().size() + 1);
 
         MeetingName meetingName = new MeetingName(MEETING_NAME_STUB);
         Venue venue = new Venue(MEETING_VENUE_STUB);

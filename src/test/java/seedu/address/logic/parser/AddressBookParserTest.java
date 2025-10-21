@@ -30,8 +30,10 @@ import seedu.address.logic.commands.EditMeetingCommand;
 import seedu.address.logic.commands.EditMeetingCommand.EditMeetingDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FlagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UnflagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -136,6 +138,22 @@ public class AddressBookParserTest {
                         + PREFIX_PERSON_INDEX + INDEX_FIRST_PERSON.getOneBased() + " "
                         + PREFIX_MEETING_INDEX + INDEX_FIRST_MEETING.getOneBased());
         assertEquals(new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING), command);
+    }
+
+    @Test
+    public void parseCommand_flag() throws Exception {
+        FlagCommand command = (FlagCommand) parser.parseCommand(
+                FlagCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new FlagCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_unflag() throws Exception {
+        UnflagCommand command = (UnflagCommand) parser.parseCommand(
+                UnflagCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnflagCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
