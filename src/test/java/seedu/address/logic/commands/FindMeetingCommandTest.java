@@ -55,20 +55,36 @@ public class FindMeetingCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         MeetingNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindMeetingCommand command = new FindMeetingCommand(predicate);
+
         expectedModel.updatePersonListFilter(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getPersonList());
+    }
+
+    @Test
+    public void execute_validKeywords_noPersonFound() {
+        MeetingNameContainsKeywordsPredicate predicate = preparePredicate("alpha bravo charlie");
+        FindMeetingCommand command = new FindMeetingCommand(predicate);
+
+        expectedModel.updatePersonListFilter(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getPersonList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         MeetingNameContainsKeywordsPredicate predicate = preparePredicate("zoom google teams");
         FindMeetingCommand command = new FindMeetingCommand(predicate);
+
         expectedModel.updatePersonListFilter(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getPersonList());
     }
@@ -79,6 +95,7 @@ public class FindMeetingCommandTest {
                 Arrays.asList("keyword"));
         FindMeetingCommand findMeetingCommand = new FindMeetingCommand(predicate);
         String expected = FindMeetingCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+
         assertEquals(expected, findMeetingCommand.toString());
     }
 

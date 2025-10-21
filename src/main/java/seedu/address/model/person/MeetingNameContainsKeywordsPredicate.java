@@ -15,6 +15,7 @@ import seedu.address.model.meeting.Meeting;
 public class MeetingNameContainsKeywordsPredicate implements Predicate<Person> {
     private static final Logger logger = LogsCenter.getLogger(MeetingNameContainsKeywordsPredicate.class);
     private final List<String> keywords;
+
     public MeetingNameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
