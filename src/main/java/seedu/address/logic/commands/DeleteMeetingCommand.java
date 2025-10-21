@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteMeetingCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletemeeting";
+    public static final String COMMAND_WORD = "deletemt";
 
     public static final String MESSAGE_FORMAT = "Parameters:\n"
             + PREFIX_PERSON_INDEX + "INDEX (must be a positive integer)\n"
