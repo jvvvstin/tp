@@ -20,6 +20,11 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
+    "meetings" : [ {
+      "meetingName" : "Zoom meeting",
+      "venue" : "Online",
+      "when" : "2020-11-12T19:00:00"
+    }],
     "flagStatus": false
   }, {
     "name" : "Daniel Meier",
@@ -34,6 +39,11 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
+    "meetings" : [{
+      "meetingName" : "Teams meeting",
+      "venue" : "Office",
+      "when" : "2025-11-12T15:00:00"
+    }],
     "flagStatus": false
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +51,11 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
+    "meetings" : [{
+      "meetingName" : "Google meets meeting",
+      "venue" : "Hybrid",
+      "when" : "2025-10-12T19:00:00"
+    }],
     "flagStatus": false
   }, {
     "name" : "George Best",
