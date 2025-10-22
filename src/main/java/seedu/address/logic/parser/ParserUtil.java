@@ -84,7 +84,7 @@ public class ParserUtil {
             throw new ParseException(OtherPhones.MESSAGE_CONSTRAINTS);
         }
 
-        if (OtherPhones.mainPhoneExists(otherPhones, mainPhone)){
+        if (OtherPhones.mainPhoneExists(otherPhones, mainPhone)) {
             throw new ParseException(OtherPhones.MESSAGE_DUPLICATE_CONSTRAINTS);
         }
         return new OtherPhones(otherPhones);

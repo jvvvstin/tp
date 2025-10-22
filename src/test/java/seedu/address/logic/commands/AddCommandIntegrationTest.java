@@ -156,7 +156,8 @@ public class AddCommandIntegrationTest {
     public void addCommand_multipleOtherNumbers_personAddedToModel() throws Exception {
         AddCommandParser parser = new AddCommandParser();
 
-        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 on=9999 (work) 99998 (test) e=test@example.com (main) "
+        AddCommand command = parser.parse(" n=Jean-Luc mn=91234567 "
+                + "on=9999 (work) 99998 (test) e=test@example.com (main) "
                 + "john@work.com (work) a=123 Street t=Friend");
         command.execute(model);
 

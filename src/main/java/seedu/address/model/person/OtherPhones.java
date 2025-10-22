@@ -1,7 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.parseParametersAndLabels;
+import static seedu.address.model.person.Person.LABEL_VALIDATION_REGEX;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,47 +10,41 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.parser.ParserUtil.parseParametersAndLabels;
-import static seedu.address.model.person.Person.LABEL_VALIDATION_REGEX;
-
+import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Represents a Peron's other numbers in the address books.
  */
 public class OtherPhones {
-    private static final Logger logger = LogsCenter.getLogger(OtherPhones.class);
+    public static final String MESSAGE_DUPLICATE_CONSTRAINTS =
+            "The main number already exists. Do not key in duplicate numbers";
+
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at "
                    + "least 3 digits long and numbers should be separared by a tag e.g. 9999 (work) 8888 (office)";
-
-    public static final String MESSAGE_DUPLICATE_CONSTRAINTS =
-            "The main number already exists. Do not key in duplicate numbers";
 
     // Single phone number pattern
     private static final String SINGLE_PHONE_REGEX =
             "^\\s*(?:\\+\\d{1,3}\\s*)?\\d{3,}(?:\\s*x\\d+)?\\s*$";
 
-    // Multiple tagged phone numbers pattern
-    private static final String MULTI_PHONE_REGEX =
-            "^\\s*(?:(?:\\+\\d{1,3}\\s*)?\\d{3,}(?:\\s*x\\d+)?\\s*\\([^()]+\\)\\s*)+$";
+    private static final Logger logger = LogsCenter.getLogger(OtherPhones.class);
 
     public final String numbers;
+
 
 
     /**
      * Constructs a {@code OtherPhones}
      * @param phones Valid phone numbers with a tag each or a single phone number
      */
-    public OtherPhones(String phones)  {
+    public OtherPhones(String phones) {
         if (phones != null && !phones.equals("")) {
             phones = phones.trim();
 
             try {
                 checkArgument(isValidPhone(phones), MESSAGE_CONSTRAINTS);
-            } catch (ParseException e){
+            } catch (ParseException e) {
                 logger.warning("ParseException thrown for phone constructor for: " + phones);
             }
-
         }
 
         this.numbers = phones;
@@ -66,7 +61,7 @@ public class OtherPhones {
             return true;
         }
         List<String> paramsAndLabels = parseParametersAndLabels(
-                OtherPhones.class.getName().toLowerCase(),test, false);
+                OtherPhones.class.getName().toLowerCase(), test, false);
         return isPhonesAndLabelsValid(paramsAndLabels);
     }
 
@@ -109,10 +104,10 @@ public class OtherPhones {
         return true;
     }
 
-
     /**
      * Returns true if otherPhones contains the main number
-     * @param mainPhone, otherPhones
+     * @param otherPhones A String that contains all the other phone numbers.
+     * @oaram mainPhone The main phone that is tied to the person.
      * @return boolean
      */
     public static boolean mainPhoneExists(String otherPhones, Phone mainPhone) throws ParseException {
@@ -123,13 +118,13 @@ public class OtherPhones {
 
         assert mainPhone != null : "Main Phone cannot be null: Main phone should have been created";
         List<String> paramsAndLabels = parseParametersAndLabels(
-                OtherPhones.class.getName().toLowerCase(),otherPhones, false);
+                OtherPhones.class.getName().toLowerCase(), otherPhones, false);
 
         for (String currPhone : paramsAndLabels) {
             if (!currPhone.matches(SINGLE_PHONE_REGEX)) {
                 continue;
             }
-            if (mainPhone.equals(new Phone(currPhone))){
+            if (mainPhone.equals(new Phone(currPhone))) {
                 return true;
             }
         }
