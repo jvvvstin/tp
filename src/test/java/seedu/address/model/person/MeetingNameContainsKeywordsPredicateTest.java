@@ -39,7 +39,7 @@ public class MeetingNameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different meeting name -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

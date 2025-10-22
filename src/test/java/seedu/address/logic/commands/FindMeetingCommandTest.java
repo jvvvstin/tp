@@ -49,7 +49,7 @@ public class FindMeetingCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different meeting name -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
