@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class OtherPhonesTest {
 
@@ -15,7 +16,7 @@ public class OtherPhonesTest {
     }
 
     @Test
-    public void isValidPhone() {
+    public void isValidPhone() throws ParseException {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
@@ -35,6 +36,21 @@ public class OtherPhonesTest {
         assertTrue(OtherPhones.isValidPhone("12429 (work) 99999 (office)")); // long phone numbers
     }
 
+    @Test
+    public void mainPhoneExist() throws ParseException {
+        Phone mainPhone = new Phone("999");
+
+        // invalid phone numbers
+        assertFalse(OtherPhones.mainPhoneExists("", mainPhone)); // empty string
+        assertFalse(OtherPhones.mainPhoneExists(" ", mainPhone)); // spaces only
+        assertFalse(OtherPhones.mainPhoneExists("9312 1534", mainPhone)); // spaces within digits
+        assertFalse(OtherPhones.mainPhoneExists("9312 1534 (work) 9999 (test)", mainPhone)); // each phone number must have a tag
+
+        // valid phone numbers
+        assertTrue(OtherPhones.mainPhoneExists("999", mainPhone)); // exactly 3 numbers
+        assertTrue(OtherPhones.mainPhoneExists("999 (test)", mainPhone));
+        assertTrue(OtherPhones.mainPhoneExists("998 (work) 999 (test)", mainPhone)); // long phone numbers
+    }
     @Test
     public void equals() {
         OtherPhones phone = new OtherPhones("999");
