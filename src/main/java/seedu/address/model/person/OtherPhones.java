@@ -71,7 +71,7 @@ public class OtherPhones {
      * Phones and labels must be distinct they cannot be repeated.
      * For it to be valid we accept:
      * </p><br><p>
-     * 1) If there is only one email we accept either: Phone or Phone (LABEL)
+     * 1) If there is only one phone we accept either: Phone or Phone (LABEL)
      * </p><p>
      * 2) If there is more than one Phone every Phone must be accompanied by a label like: Phone1 (LABEL1)
      * Phone2 (LABEL2) ...
