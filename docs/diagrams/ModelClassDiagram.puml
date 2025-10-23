@@ -53,7 +53,7 @@ Meeting *--> MeetingName
 Meeting *--> Venue
 Meeting *--> When
 OtherPhones *--> Number
-OtherPhones *--> PhoneTa
+OtherPhones *--> PhoneTag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
