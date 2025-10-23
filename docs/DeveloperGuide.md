@@ -999,6 +999,170 @@ Use case ends.
 
       Use case resumes from Step 2.
 
+**System: FAContactsPro**
+
+**Use case: UC18 – Delete a meeting linked to a specific contact**
+
+**Actor: User**
+
+**MSS**
+
+1. User types in a command to delete a meeting associated with a contact.
+
+2. FAContactsPro identifies the specified contact and meeting.
+
+3. FAContactsPro removes the meeting from the contact’s meeting list.
+
+4. FAContactsPro displays a success message confirming deletion.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. FAContactsPro detects an error in the command format.
+
+    * 1a1. FAContactsPro displays an error message.
+
+    * 1a2. User re-enters the command.
+
+      Steps 1a1 - 1a2 is repeated until the command format is valid.
+
+      Use case resumes from Step 2.
+
+* 1b. The specified contact index is invalid.
+
+    * 1b1. FAContactsPro displays an error message informing the user that the contact could not be found.
+
+    * 1b2. User enters the command again with a new contact index.
+
+      Steps 1b1 - 1b2 are repeated until the user enters a valid contact index.
+
+      Use case resumes from Step 2.
+
+* 1c. The specified meeting index is invalid for the contact.
+
+    * 1c1. FAContactsPro displays an error message indicating that the meeting cannot be found.
+
+    * 1c2. User enters the command again with a new meeting index.
+
+      Steps 1c1 - 1c2 are repeated until the user enters a valid meeting index.
+
+      Use case resumes from Step 2.
+
+* 1d. FAContactsPro encounters an error while updating storage.
+
+    * 1d1. FAContactsPro displays an error message prompting the user to retry.
+
+    * 1d2. User re-enters the command.
+
+      Steps 1d1 – 1d2 repeat until storage is successfully updated.
+
+      Use case resumes from Step 2.
+
+**System: FAContactsPro**
+
+**Use case: UC19 – Flag a contact as important**
+
+**Actor: User**
+
+**MSS**
+
+1. User types in a command to flag a contact.
+
+2. FAContactsPro marks the specified contact as flagged.
+
+3. FAContactsPro displays a success message confirming that the contact has been flagged.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. FAContactsPro detects an error in the command entered.
+
+    * 1a1. FAContactsPro displays an error message indicating the invalid command format.
+
+    * 1a2. User re-enters the command with the correct format.
+
+      Use case resumes from Step 2.
+
+* 1b. The specified contact index is invalid.
+
+    * 1b1. FAContactsPro displays an error message informing the user that the contact cannot be found.
+
+    * 1b2. User enters the command again with a new contact index.
+  
+      Steps 1b1 - 1b2 are repeated until the user enters a valid contact index.
+
+      Use case resumes from Step 2.
+
+* 1c. The selected contact is already flagged.
+
+    * 1c1. FAContactsPro displays a message stating that the contact is already flagged and takes no further action.
+
+      Use case ends.
+
+* 1d. FAContactsPro is unable to update the contact in storage.
+
+    * 1d1. FAContactsPro displays an error message prompting the user to retry.
+
+    * 1d2. User enters the command again.
+
+      Steps 1d1 – 1d2 repeat until the data is successfully updated.
+
+      Use case resumes from Step 2.
+
+**System: FAContactsPro**
+
+**Use case: UC20 – Unflag a contact**
+
+**Actor: User**
+
+**MSS**
+
+1. User types in a command to unflag a contact.
+
+2. FAContactsPro marks the specified contact as unflagged.
+
+3. FAContactsPro displays a success message confirming that the contact has been unflagged.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. FAContactsPro detects an error in the command entered.
+
+    * 1a1. FAContactsPro displays an error message indicating the invalid command format.
+
+    * 1a2. User re-enters the command with the correct format.
+
+      Use case resumes from Step 2.
+
+* 1b. The specified contact index is invalid.
+
+    * 1b1. FAContactsPro displays an error message informing the user that the contact cannot be found.
+
+    * 1b2. User enters the command again with a new contact index.
+
+      Steps 1b1 - 1b2 are repeated until the user enters a valid contact index.
+
+      Use case resumes from Step 2.
+
+* 1c. The selected contact is already unflagged.
+
+    * 1c1. FAContactsPro displays a message stating that the contact is already unflagged and takes no further action.
+
+      Use case ends.
+
+* 1d. FAContactsPro is unable to update the contact in storage.
+
+    * 1d1. FAContactsPro displays an error message prompting the user to retry.
+
+    * 1d2. User enters the command again.
+
+      Steps 1d1 – 1d2 repeat until the data is successfully updated.
+
+      Use case resumes from Step 2.
+
 ### Non-Functional Requirements
 
 1. **Data performance**: the system should be able to hold up to 10000 contacts
