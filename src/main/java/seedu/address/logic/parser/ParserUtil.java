@@ -78,10 +78,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code otherPhones} is invalid.
      */
-    public static OtherPhones parseOtherPhones(String otherPhones) throws ParseException {
+    public static OtherPhones parseOtherPhones(String otherPhones, Phone mainPhone) throws ParseException {
         requireNonNull(otherPhones);
         if (!otherPhones.equals("") && !OtherPhones.isValidPhone(otherPhones)) {
             throw new ParseException(OtherPhones.MESSAGE_CONSTRAINTS);
+        }
+
+        if (OtherPhones.mainPhoneExists(otherPhones, mainPhone)) {
+            throw new ParseException(OtherPhones.MESSAGE_DUPLICATE_CONSTRAINTS);
         }
         return new OtherPhones(otherPhones);
     }
