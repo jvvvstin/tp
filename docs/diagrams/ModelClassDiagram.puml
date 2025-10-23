@@ -49,6 +49,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Meeting
+Person *--> "1" FlagStatus
 Meeting *--> MeetingName
 Meeting *--> Venue
 Meeting *--> When
